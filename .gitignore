@@ -5,6 +5,8 @@ env/
 
 # local files and directories
 scripts/
+p.md
+PROMPT.md
 
 # Python
 __pycache__/

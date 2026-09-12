@@ -64,7 +64,6 @@ If ground truth appears to have leaked into the agent's reasoning — for instan
 **Replay without a network.** Your system must be able to reproduce a completed run with connectivity disabled.
 
 ## Questions judges ask
-
 - "What happens if I change this input?"
 - "Why should I trust this number?"
 - "What does it do when it's wrong, or when there's nothing to find?"

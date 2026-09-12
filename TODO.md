@@ -301,4 +301,147 @@ Keep the implementation modular so that the SAT blacklist dataset can later be r
 If an implementation detail can be reasonably determined from the existing project, make the decision yourself and continue.
 If there is a genuine architectural or product decision that cannot be determined from the existing codebase or requirements, ask me through the Claude Code terminal before proceeding.
 
-# TASK #2
+# TASK #2 — Build the Project Context
+
+I'm participating in the **HACKMTY 2026 Hackathon**. Our challenge is provided by **Infosys** and focuses on detecting financial fraud, suspicious financial behavior, anomalies, and potentially fraudulent activity within companies.
+
+Your task is to create or completely rewrite the root-level `CONTEXT.md` file so that it becomes the **single source of truth for the entire project**.
+
+## 1. Understand the Challenge
+
+First, read:
+
+`/public/material/challenge.md`
+
+Use this file as the **primary source of truth for the official challenge**.
+
+Extract and understand:
+
+* The problem statement
+* Challenge objectives
+* Expected solution
+* Business context
+* Technical requirements
+* Constraints
+* Evaluation criteria
+* Expected deliverables
+* Important terminology
+* Fraud-related concepts mentioned
+* Any requirements or recommendations from Infosys
+
+Do not invent requirements that are not present in the source material.
+
+## 2. Inspect All Project Material
+
+Recursively inspect and read **every relevant file** inside:
+
+`/public/material/`
+
+Do not only inspect filenames. Read and analyze their contents.
+
+This may include:
+
+* Markdown
+* CSV
+* JSON
+* TXT
+* XML
+* SQL
+* PDFs or extracted PDF content
+* Documentation
+* Datasets
+* Examples
+* Technical references
+* Challenge resources
+* Research material
+* Any other relevant files
+
+For each file, determine:
+
+1. What it contains
+2. Why it exists
+3. How it relates to the challenge
+4. Whether it contains requirements, datasets, examples, references, or implementation-relevant information
+5. What another AI agent or developer needs to know about it
+
+## 3. Understand the Existing Project
+
+After analyzing `/public/material/`, inspect the existing repository structure and relevant source files.
+
+Understand what has already been implemented and how it relates to the challenge.
+
+Do not modify implementation files as part of this task.
+
+## 4. Create `CONTEXT.md`
+
+Create or completely rewrite:
+
+`CONTEXT.md`
+
+The document should provide enough context that **another Claude Code session or AI coding agent can read only `CONTEXT.md` and quickly understand what this project is, what problem it solves, what resources are available, and how the current implementation approaches the challenge.**
+
+Structure it approximately as:
+
+# Project Context
+## Hackathon
+## Challenge Provider
+## Problem Statement
+## Challenge Objectives
+## Business Context
+## Fraud Detection Context
+## Expected Solution
+## Functional Requirements
+## Technical Requirements
+## Constraints
+## Evaluation Criteria
+## Expected Deliverables
+## Available Materials
+## Dataset / Data Sources
+## Important Domain Concepts
+## Existing Project Architecture
+## Current Implementation
+## Important Files and Directories
+## Key Technical Decisions
+## Assumptions
+## Open Questions
+## Current Project Status
+
+Add or reorganize sections when doing so improves clarity.
+
+## 5. Document the Materials
+
+Include a section describing the important files found under:
+
+`/public/material/`
+
+For each important file, document its path and a concise explanation of what information it provides and why it matters.
+
+Do not blindly copy entire files into `CONTEXT.md`. Summarize them while preserving important technical details, requirements, schemas, rules, thresholds, examples, and constraints.
+
+## 6. Preserve Traceability
+
+Whenever an important requirement or fact comes from the challenge material, mention the source file when useful.
+
+Example:
+
+`Source: /public/material/challenge.md`
+
+This should make it easy for future agents to verify information against the original material.
+
+## 7. Rules
+
+* Read the source material **before writing `CONTEXT.md`**.
+* Recursively inspect `/public/material/`.
+* Do not hallucinate missing requirements.
+* Clearly distinguish between **official challenge requirements**, **project decisions**, and **assumptions**.
+* Preserve important numbers, thresholds, formats, schemas, and constraints exactly.
+* Do not modify files other than `CONTEXT.md`.
+* Do not implement features during this task.
+* Prefer concise but complete documentation.
+* Avoid unnecessary repetition.
+* Make the document optimized for both **developers and AI coding agents**.
+* If information conflicts between files, document the conflict instead of silently choosing one version.
+* If something important is unclear, add it to `Open Questions`.
+
+Before finishing, verify that `CONTEXT.md` accurately represents both the **official Infosys challenge** and the **current state of the project**.
+

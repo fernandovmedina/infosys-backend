@@ -32,3 +32,11 @@ The investigator receives the public database only.
 
 The challenge materials under `public/material/` are format specifications.
 They are not generated output and must remain unchanged.
+
+## Agentic implementation
+
+The package-local [collaboration contract](AGENTS.md) assigns one builder to
+implementation, keeps quality/domain reviewers read-only, and protects the
+public/private evaluation boundary. Agents should start with the stated
+vertical slice and its invariants rather than attempting all scenario families
+in parallel.

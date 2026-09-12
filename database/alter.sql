@@ -1,0 +1,41 @@
+-- =============================================================================
+-- infosys-backend — schema migrations
+-- =============================================================================
+-- PURPOSE
+--
+-- database/database.sql describes the schema as it was first designed and is
+-- treated as immutable history. Every schema change made *after* that initial
+-- design lands here instead, appended in chronological order.
+--
+-- Keeping the two apart means a database created before a change and one
+-- created today converge on the same structure: database/exec.sql runs
+-- database.sql first and then this file. Editing database.sql in place would
+-- silently skip the change on databases that already exist.
+--
+-- RULES
+--
+--   1. Append only. Never edit or delete a migration that has already shipped;
+--      correct it with a new one at the end of the file.
+--   2. Never duplicate anything from database.sql here.
+--   3. Every statement must be idempotent (IF EXISTS / IF NOT EXISTS, or
+--      CREATE OR REPLACE) so the file can be replayed safely.
+--   4. Head each migration with the date and a one-line reason.
+--   5. Guard destructive changes (DROP COLUMN, type narrowing) with an explicit
+--      note about the deploy ordering they require.
+--
+-- FORMAT
+--
+--   -- 2026-10-01 — Track the SAT publication each snapshot came from.
+--   ALTER TABLE sat_blacklist_record
+--       ADD COLUMN IF NOT EXISTS snapshot_published_on date;
+--
+-- LIKELY NEAR-TERM MIGRATIONS
+--
+--   * A `sat_blacklist_snapshot` table, once the dataset is refreshed
+--     automatically, to record when each import ran and which file it read.
+--   * A partial index on `situacion` if status filtering becomes a hot path;
+--     it is not indexed today because the current endpoint never filters on it.
+--
+-- =============================================================================
+
+-- No migrations yet. The schema is still exactly as defined in database.sql.

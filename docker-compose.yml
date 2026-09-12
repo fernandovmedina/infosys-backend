@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: infosys-postgres
+    environment:
+      POSTGRES_USER: infosys
+      POSTGRES_PASSWORD: infosys
+      POSTGRES_DB: infosys
+    ports:
+      - "5433:5432"
+    volumes:
+      - infosys-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U infosys -d infosys"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  infosys-pgdata:

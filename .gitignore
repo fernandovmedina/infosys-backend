@@ -4,6 +4,7 @@ venv/
 env/
 
 # local files and directories
+scripts/
 
 # Python
 __pycache__/

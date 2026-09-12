@@ -1,0 +1,43 @@
+# virtual environments
+.venv/
+venv/
+env/
+
+# local files and directories
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# tools / caches
+.uv-cache/
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ideas and editors
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# logs and temporary files
+*.log
+tmp/

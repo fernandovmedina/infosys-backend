@@ -1,0 +1,4 @@
+# Retain this directory but do not commit generated SQLite estates, manifests,
+# private sidecars, or other local synthetic artifacts.
+*
+!.gitignore

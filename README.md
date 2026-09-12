@@ -6,6 +6,15 @@ Currently implements the **SAT blacklist check**: an endpoint that tells you
 whether one or many Mexican taxpayers appear in the SAT *Artículo 69-B del CFF*
 listing, searching by RFC, by company name, or both.
 
+It also contains the foundation for the **synthetic estate generator** used by
+the Forensic Auditor project. The generator is intentionally a separate,
+offline Python package: it will export challenge-compatible SQLite estates and
+must not require the API, PostgreSQL, a live SAT lookup, or network access.
+
+See [app/estate_generator/README.md](app/estate_generator/README.md) for its
+module boundaries and [evaluation/estate_generator/README.md](evaluation/estate_generator/README.md)
+for the separation between public estates and private evaluation material.
+
 ---
 
 ## Getting started

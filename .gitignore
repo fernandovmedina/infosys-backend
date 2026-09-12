@@ -44,3 +44,8 @@ htmlcov/
 # logs and temporary files
 *.log
 tmp/
+
+# Local, reproducible synthetic estates and their private evaluation sidecars.
+# Keep the directory itself so the generator has a conventional local target.
+generated/*
+!generated/.gitignore

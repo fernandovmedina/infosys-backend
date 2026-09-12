@@ -49,3 +49,7 @@ tmp/
 # Keep the directory itself so the generator has a conventional local target.
 generated/*
 !generated/.gitignore
+
+# file-backed DuckDB analysis databases
+*.duckdb
+*.duckdb.wal

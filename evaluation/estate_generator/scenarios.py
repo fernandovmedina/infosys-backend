@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import date, timedelta
 from random import Random
@@ -53,9 +54,22 @@ def build_scenario_run(
     *,
     all_five: bool = False,
     scheme_count: int | None = None,
+    scheme_types: Sequence[str] | None = None,
     decoy_count: int | None = None,
 ) -> ScenarioRun:
     """Build a variable private fixture and its public estate, offline and seeded."""
+    if all_five and (scheme_count is not None or scheme_types is not None):
+        raise ValueError("all_five cannot be combined with another scheme selection")
+    if scheme_count is not None and scheme_types is not None:
+        raise ValueError("scheme_count cannot be combined with scheme_types")
+    if scheme_types is not None:
+        selected = tuple(scheme_types)
+        if not selected or len(selected) > len(SCHEME_TYPES):
+            raise ValueError("scheme_types must contain 1..5 scheme types")
+        if len(set(selected)) != len(selected) or any(
+            scheme_type not in SCHEME_TYPES for scheme_type in selected
+        ):
+            raise ValueError(f"scheme_types must be unique values from {SCHEME_TYPES}")
     random = Random(config.seed ^ 0x5CE0A)
     builder = build_normal_builder(config)
     builder.add_efos_context(
@@ -69,7 +83,8 @@ def build_scenario_run(
         raise ValueError("scheme_count must be 0..5 and decoy_count must be 0..10")
     types = list(SCHEME_TYPES)
     random.shuffle(types)
-    selected = tuple(types) if all_five else tuple(types[:requested_schemes])
+    if scheme_types is None:
+        selected = tuple(types) if all_five else tuple(types[:requested_schemes])
     scenarios = [_add_scheme(builder, kind, index + 1) for index, kind in enumerate(selected)]
     decoys = [
         _add_decoy(builder, types[index % len(types)], index + 1)

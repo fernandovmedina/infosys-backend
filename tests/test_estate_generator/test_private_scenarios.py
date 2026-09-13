@@ -258,6 +258,52 @@ def test_variable_mix_allows_a_zero_scheme_zero_decoy_estate() -> None:
     assert run.decoys == []
 
 
+def test_explicit_scheme_selection_supports_named_subset_and_rejects_conflicts() -> None:
+    config = EstateGeneratorConfig(seed=12, normal_event_count=30)
+    run = build_scenario_run(
+        config,
+        scheme_types=("kickback", "round_tripping"),
+        decoy_count=0,
+    )
+
+    assert [item.scheme_type for item in run.scenarios] == ["kickback", "round_tripping"]
+    with pytest.raises(ValueError, match="unique values"):
+        build_scenario_run(config, scheme_types=("kickback", "kickback"), decoy_count=0)
+    with pytest.raises(ValueError, match="cannot be combined"):
+        build_scenario_run(config, all_five=True, scheme_types=("kickback",), decoy_count=0)
+
+
+def test_explicit_scheme_selection_cli_writes_only_requested_families(tmp_path: Path) -> None:
+    output_path = tmp_path / "subset.db"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "evaluation.estate_generator.cli",
+            "--seed",
+            "12",
+            "--output",
+            str(output_path),
+            "--schemes",
+            "kickback,round_tripping",
+            "--decoy-count",
+            "0",
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    truth_path = output_path.parent / "private" / "subset.ground_truth.json"
+    truth = json.loads(truth_path.read_text(encoding="utf-8"))
+    assert [item["type"] for item in truth["schemes"]] == [
+        "kickback",
+        "round_tripping",
+    ]
+    assert truth["decoys"] == []
+
+
 def test_private_fixture_requires_force_for_existing_output(tmp_path: Path) -> None:
     config = EstateGeneratorConfig(seed=4, normal_event_count=30)
     output_path = tmp_path / "estate.db"

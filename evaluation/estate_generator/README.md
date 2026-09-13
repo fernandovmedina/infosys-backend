@@ -17,7 +17,10 @@ uv run python -m evaluation.estate_generator.cli \
 ```
 
 Without `--all-five`, the default deterministic mix contains 0–5 schemes and
-0–10 decoys. `--scheme-count` and `--decoy-count` override that mix. The five
+0–10 decoys. `--scheme-count` and `--decoy-count` override that mix. To choose
+specific families, use `--scheme-type kickback --scheme-type round_tripping`
+or the equivalent `--schemes kickback,round_tripping`. These selection forms
+are mutually exclusive with `--all-five` and `--scheme-count`. The five
 supported scheme families are phantom vendor, kickback, round-tripping,
 threshold splitting, and revenue inflation. Each has an innocent, publicly
 explainable counterpart.

@@ -1,4 +1,4 @@
-FROM ghcr.io/astral-sh/uv:0.10-python3.14-bookworm AS uv
+FROM ghcr.io/astral-sh/uv:0.12.13 AS uv
 
 FROM python:3.14-slim-bookworm
 

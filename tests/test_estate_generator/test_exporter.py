@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 import sqlite3
 from datetime import datetime
 from pathlib import Path
@@ -104,6 +105,35 @@ def test_default_run_export_writes_each_schema_table_as_csv(tmp_path: Path) -> N
         assert tuple(lines[0].split(",")) == header
         if table != "efos_list":
             assert len(lines) > 1
+
+
+def test_csv_headers_match_published_estate_example(tmp_path: Path) -> None:
+    """Keep the generator aligned with the judges' CSV field-shape example."""
+    example_directory = (
+        Path(__file__).resolve().parents[2] / "public" / "material" / "estate_csv_example"
+    )
+    config = EstateGeneratorConfig(seed=16, normal_event_count=30)
+    run_directory, _ = export_run(
+        build_normal_estate(config),
+        seed=config.seed,
+        observation_profile=config.observation_profile,
+        root=tmp_path,
+        now=datetime(2026, 9, 12, 18, 30, 45),
+    )
+
+    for table in CSV_HEADERS:
+        with (example_directory / f"{table}.csv").open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            example_header = next(csv.reader(handle))
+        with (run_directory / f"{table}.csv").open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            generated_header = next(csv.reader(handle))
+            generated_rows = list(csv.reader(handle))
+
+        assert generated_header == example_header
+        assert all(len(row) == len(example_header) for row in generated_rows)
 
 
 def test_sqlite_run_export_writes_only_database(tmp_path: Path) -> None:

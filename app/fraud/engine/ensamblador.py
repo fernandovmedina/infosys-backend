@@ -260,7 +260,7 @@ class Ensamblador:
                     citas.agregar(
                         "invoices",
                         fac["uuid"],
-                        f"es la factura que pagó la transferencia {sig['evidence_id']} con la que inicia el ciclo",
+                        f"is the invoice paid by transfer {sig['evidence_id']}, which starts the cycle",
                     )
         for ent in cl.acusables:
             if ent.tipo == "rfc":
@@ -269,7 +269,7 @@ class Ensamblador:
                     citas.agregar(
                         "vendors",
                         ent.canonico,
-                        "identifica al proveedor señalado y la cuenta en la que cobra",
+                        "identifies the flagged vendor and the account it receives payments into",
                         solo_si_nuevo=True,
                     )
                 if self.estate.efos_por_rfc(ent.canonico):
@@ -280,7 +280,7 @@ class Ensamblador:
                         citas.agregar(
                             "invoices",
                             fac["uuid"],
-                            "otra factura emitida por el proveedor señalado",
+                            "another invoice issued by the flagged vendor",
                             solo_si_nuevo=True,
                         )
                     for v in vendors:
@@ -289,7 +289,7 @@ class Ensamblador:
                                 citas.agregar(
                                     "bank_txns",
                                     txn["txn_id"],
-                                    "pago a la cuenta registrada del proveedor señalado",
+                                    "payment to the registered account of the flagged vendor",
                                     solo_si_nuevo=True,
                                 )
             elif ent.tipo == "employee":
@@ -301,7 +301,7 @@ class Ensamblador:
                     citas.agregar(
                         "employees",
                         emp["emp_id"],
-                        "identifica al empleado señalado y su cuenta bancaria",
+                        "identifies the flagged employee and their bank account",
                         solo_si_nuevo=True,
                     )
                     if cl.esquema == "threshold_splitting":
@@ -315,8 +315,8 @@ class Ensamblador:
                         citas.agregar(
                             aut["tabla"],
                             aut["id"],
-                            f"muestra que {emp['name']} ({emp['role']}) solicita o aprueba "
-                            f"operaciones de compra de la empresa",
+                            f"shows that {emp['name']} ({emp['role']}) requests or approves "
+                            f"the company's purchasing transactions",
                             solo_si_nuevo=True,
                         )
         return citas
@@ -347,10 +347,10 @@ class Ensamblador:
                         "entity": format_entity_id(ent.canonico, ent.tipo),
                         "signal": "INFLATE_AND_CANCEL",
                         "reason": (
-                            f"La factura {fac['uuid']} de {self.etiqueta(ent)} por {pesos(fac['total'])} del "
-                            f"{fac['issue_date']} también está cancelada, pero sus {int(fac['renglones'])} asientos "
-                            f"contables se revirtieron y dejan ingreso, IVA y cuentas por cobrar en cero. "
-                            f"Es una cancelación bien registrada: no forma parte del inflado de ingresos ni del monto acusado."
+                            f"Invoice {fac['uuid']} from {self.etiqueta(ent)} for {pesos(fac['total'])}, dated "
+                            f"{fac['issue_date']}, is also cancelled, but its {int(fac['renglones'])} ledger entries "
+                            f"were reversed and leave revenue, IVA, and accounts receivable at zero. "
+                            f"This is a properly recorded cancellation: it is not part of the revenue inflation or the claimed amount."
                         ),
                         "tool_calls_made": ["rule_inflate_and_cancel"] + list(consultas),
                         "closed_by": "investigator",
@@ -363,10 +363,10 @@ class Ensamblador:
         for regla in cl.reglas:
             senales = [s for s in cl.senales if s["rule_id"] == regla]
             ids = sorted({str(s["evidence_id"]) for s in senales})
-            muestra = ", ".join(ids[:3]) + (f" y {len(ids) - 3} más" if len(ids) > 3 else "")
+            muestra = ", ".join(ids[:3]) + (f" and {len(ids) - 3} more" if len(ids) > 3 else "")
             montos = [s["monto"] for s in senales if s["monto"] is not None]
             monto = f", {pesos(sum(montos))}" if montos else ""
-            partes.append(f"{regla} en {muestra}{monto}")
+            partes.append(f"{regla} in {muestra}{monto}")
         return "; ".join(partes)
 
     @staticmethod
@@ -374,8 +374,8 @@ class Ensamblador:
         docs = []
         for ent, (ordenes, contratos) in respaldo.items():
             docs.append(
-                f"{format_entity_id(ent.canonico, ent.tipo)} tiene {len(ordenes)} orden(es) de compra "
-                f"({', '.join(o['po_id'] for o in ordenes[:3])}) y {len(contratos)} contrato(s) "
+                f"{format_entity_id(ent.canonico, ent.tipo)} has {len(ordenes)} purchase order(s) "
+                f"({', '.join(o['po_id'] for o in ordenes[:3])}) and {len(contratos)} contract(s) "
                 f"({', '.join(c['contract_id'] for c in contratos[:3])})"
             )
         return "; ".join(docs)
@@ -388,9 +388,9 @@ class Ensamblador:
             or cl.entidades
             or [None]
         )[0]
-        nombre = self.etiqueta(principal) if principal else "Sin entidad identificable"
+        nombre = self.etiqueta(principal) if principal else "No identifiable entity"
         otros = [self.etiqueta(e) for e in cl.acusables if e != principal]
-        con_otros = f" (junto con {', '.join(otros)})" if otros else ""
+        con_otros = f" (together with {', '.join(otros)})" if otros else ""
         detalle = self._detalle(cl)
         frases = [FRASE_FAMILIA[f] for f in cl.familias]
         esquema = NOMBRE_ESQUEMA[cl.esquema]
@@ -400,51 +400,51 @@ class Ensamblador:
                 FRASE_FAMILIA[f] for f in FAMILIAS_ESQUEMA[cl.esquema] if f not in cl.familias
             ]
             razon = (
-                f"{nombre}{con_otros} solo tiene una señal: {frases[0] if frases else 'derivada de otra regla'} ({detalle}). "
-                f"Para acusar {esquema} buscamos una segunda señal independiente "
-                f"(que {'; o que '.join(faltantes[:3])}) y ninguna regla la encontró."
+                f"{nombre}{con_otros} has only one signal: {frases[0] if frases else 'derived from another rule'} ({detalle}). "
+                f"To accuse {esquema}, we require a second independent signal "
+                f"(one that {'; or that '.join(faltantes[:3])}), and no rule found one."
             )
             if datos:
-                razon += f" Además, {self._texto_materialidad(datos)} que documentan la relación comercial."
+                razon += f" In addition, {self._texto_materialidad(datos)} documenting the commercial relationship."
         elif clave == "materialidad":
             razon = (
-                f"{nombre}{con_otros} disparó {detalle}, pero {self._texto_materialidad(datos)} que documentan "
-                f"una relación comercial real, y no comparte cuenta bancaria con otro proveedor."
+                f"{nombre}{con_otros} triggered {detalle}, but {self._texto_materialidad(datos)} documenting "
+                f"a real commercial relationship, and does not share a bank account with another vendor."
             )
         elif clave == "exhibits_insuficientes":
             ids = ", ".join(f"{e['source_table']}.{e['record_id']}" for e in datos) or "ninguno"
             razon = (
-                f"{nombre}{con_otros}: {detalle}. Solo hay {len(datos)} registro(s) citables ({ids}); "
-                f"se necesitan al menos {MIN_EXHIBITS} verificables para sostener una acusación."
+                f"{nombre}{con_otros}: {detalle}. There are only {len(datos)} citable record(s) ({ids}); "
+                f"at least {MIN_EXHIBITS} verifiable records are required to support an accusation."
             )
         elif clave == "sin_monto":
             ids = ", ".join(f"{e['source_table']}.{e['record_id']}" for e in datos)
             razon = (
-                f"{nombre}{con_otros}: {detalle}. Ninguno de los registros citables ({ids}) es una factura, "
-                f"pago, orden o contrato con monto, así que no hay daño en pesos que reclamar."
+                f"{nombre}{con_otros}: {detalle}. None of the citable records ({ids}) is an invoice, "
+                f"payment, order, or contract with an amount, so there is no monetary harm to claim."
             )
         elif clave == "entidad_sin_respaldo":
             faltantes_texto = "; ".join(
-                f"{self.etiqueta(item.entity)}: falta {item.requirement}" for item in datos
+                f"{self.etiqueta(item.entity)}: missing {item.requirement}" for item in datos
             )
             razon = (
-                f"{nombre}{con_otros}: {detalle}. Se revisaron los exhibits del candidato, "
-                f"pero no todos prueban la participación de cada entidad acusada ({faltantes_texto}). "
-                "La señal queda cerrada como pista para no atribuir una operación a alguien sin respaldo documental."
+                f"{nombre}{con_otros}: {detalle}. The candidate exhibits were reviewed, "
+                f"but they do not all prove each accused entity's involvement ({faltantes_texto}). "
+                "The signal is closed as a lead to avoid attributing a transaction without documentary support."
             )
         elif clave == "no_resuelta":
             cuentas = ", ".join(format_entity_id(e.canonico, e.tipo) for e in datos)
             razon = (
-                f"{detalle}. Las cuentas o personas involucradas ({cuentas}) no corresponden a ningún "
-                f"proveedor ni empleado del catálogo, así que no hay a quién acusar."
+                f"{detalle}. The accounts or people involved ({cuentas}) do not correspond to any "
+                f"vendor or employee in the catalogs, so there is no identifiable party to accuse."
             )
         elif clave == "solo_empresa":
             razon = (
-                f"{detalle}. Todas las cuentas y RFC involucrados son de la propia empresa "
-                f"({self.estate.empresa_rfc}), así que es un movimiento interno, no un esquema con terceros."
+                f"{detalle}. All accounts and RFCs involved belong to the audited company "
+                f"({self.estate.empresa_rfc}), so this is an internal movement, not a third-party scheme."
             )
         else:
-            raise ValueError(f"Motivo de descarte sin plantilla: {clave}")
+            raise ValueError(f"Decline reason without a template: {clave}")
 
         return {
             "entity": format_entity_id(principal.canonico, principal.tipo)

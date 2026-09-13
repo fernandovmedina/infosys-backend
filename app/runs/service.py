@@ -194,7 +194,7 @@ async def delete_run(pool: asyncpg.Pool, *, run_id: str, user_id: int) -> None:
         if run is None:
             raise RunNotFoundError()
         if not await repository.delete_run(conn, run_id=run_id, user_id=user_id):
-            raise InvalidRunStateError("No se puede eliminar una corrida en curso.")
+            raise InvalidRunStateError("A running investigation cannot be deleted.")
     await run_in_threadpool(_remove_datasets, [run_id])
 
 
@@ -213,13 +213,13 @@ async def start_run(pool: asyncpg.Pool, *, run_id: str, user_id: int) -> RunStat
     """
     run = await _get_owned_run(pool, run_id=run_id, user_id=user_id)
     if run["status"] not in ("ready", "failed"):
-        raise InvalidRunStateError(f"No se puede iniciar una corrida en estado {run['status']}.")
+        raise InvalidRunStateError(f"A run in state {run['status']} cannot be started.")
     if any(table["status"] == "error" for table in run["validation"]["tables"]):
         raise ValidationBlockedError()
     async with pool.acquire() as conn, conn.transaction():
         running = await repository.mark_running(conn, run_id=run_id, user_id=user_id)
     if running is None:  # another request started it in between
-        raise InvalidRunStateError("La corrida ya se está ejecutando.")
+        raise InvalidRunStateError("The run is already executing.")
     return _to_state(running)
 
 
@@ -283,7 +283,7 @@ async def execute_run(pool: asyncpg.Pool, *, run_id: str, seed: int) -> None:
         logger.exception("Fraud analysis of run %s crashed", run_id)
         error = {
             "code": "investigation_failed",
-            "message": "La investigación falló por un error interno.",
+            "message": "The investigation failed because of an internal error.",
             "details": None,
         }
 
@@ -312,7 +312,7 @@ async def execute_run(pool: asyncpg.Pool, *, run_id: str, seed: int) -> None:
         logger.exception("Could not store the fraud analysis of run %s", run_id)
         storage_error = {
             "code": "database_unavailable",
-            "message": "No se pudo guardar el resultado de la investigación.",
+            "message": "The investigation result could not be saved.",
             "details": None,
         }
         try:

@@ -51,7 +51,7 @@ def auditar_conexion(
 
     reglas = cargar_reglas()
     signals, fallos, resumen = ejecutar_reglas(con, reglas)
-    avisos = [f"El detector {nombre} falló y se omitió: {error}" for nombre, error in fallos]
+    avisos = [f"Detector {nombre} failed and was omitted: {error}" for nombre, error in fallos]
 
     estate = Estate(con)
     findings_internos, leads, calidad = ensamblar(estate, signals)

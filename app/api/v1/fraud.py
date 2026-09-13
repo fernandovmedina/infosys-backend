@@ -96,9 +96,9 @@ async def analyze(
             files[table] = destination
         if not files:
             raise FraudDatasetInvalidError(
-                "No se recibió ningún CSV del estate.",
+                "No estate CSV files were received.",
                 details=[
-                    {"file": f"{table}.csv", "column": None, "message": "falta el archivo"}
+                    {"file": f"{table}.csv", "column": None, "message": "file is missing"}
                     for table in TABLES
                 ],
             )

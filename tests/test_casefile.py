@@ -161,7 +161,7 @@ def test_search_finds_exhibits_and_entities(index: CaseIndex) -> None:
 def test_markdown_export_lists_findings_and_leads(index: CaseIndex) -> None:
     markdown = views.render_markdown(index)
     submission = index.analysis.submission
-    assert markdown.count("### Hallazgo #") == len(submission.findings)
+    assert markdown.count("### Finding #") == len(submission.findings)
     assert all(lead.entity in markdown for lead in submission.leads_not_pursued)
 
 

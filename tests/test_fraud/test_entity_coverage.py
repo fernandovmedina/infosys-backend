@@ -32,7 +32,7 @@ def test_vendor_profile_alone_does_not_prove_operational_involvement(
     )
 
     assert [failure.entity for failure in failures] == [entity]
-    assert "operación" in failures[0].requirement
+    assert "transaction" in failures[0].requirement
 
 
 def test_invoice_supports_vendor_by_exact_rfc(con: Any, insertar: Any) -> None:
@@ -69,7 +69,7 @@ def test_employee_requires_identity_and_action_exhibits(con: Any, insertar: Any)
 
     failures = validate_entity_coverage(estate, [entity], [profile])
     assert [failure.entity for failure in failures] == [entity]
-    assert "pago, aprobación o solicitud" in failures[0].requirement
+    assert "payment, approval, or request" in failures[0].requirement
 
     failures = validate_entity_coverage(
         estate,

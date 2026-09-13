@@ -24,8 +24,8 @@ def test_partial_settlements_and_cancelled_invoice_are_explainable() -> None:
     estate = generate_estate(EstateGeneratorConfig(seed=22, normal_event_count=30))
     payments_per_invoice: dict[str, int] = defaultdict(int)
     for transaction in estate.bank_transactions:
-        if transaction.reference.startswith("Pago factura "):
-            payments_per_invoice[transaction.reference.removeprefix("Pago factura ")] += 1
+        if transaction.reference.startswith("Invoice payment "):
+            payments_per_invoice[transaction.reference.removeprefix("Invoice payment ")] += 1
 
     assert any(count == 2 for count in payments_per_invoice.values())
     assert all(balance >= 0 for balance in estate.payable_balances.values())

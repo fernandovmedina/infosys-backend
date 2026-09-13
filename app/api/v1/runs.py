@@ -53,12 +53,12 @@ async def _read_uploads(files: list[UploadFile], max_bytes: int) -> list[Uploade
             if total > max_bytes:
                 raise UploadRejectedError(
                     "file_too_large",
-                    f"El dataset supera el máximo de {max_bytes // (1024 * 1024)} MB.",
+                    f"The dataset exceeds the {max_bytes // (1024 * 1024)} MB limit.",
                     details={"max_bytes": max_bytes},
                     status_code=status.HTTP_413_CONTENT_TOO_LARGE,
                 )
             chunks.append(chunk)
-        uploads.append(UploadedFile(upload.filename or "archivo", b"".join(chunks)))
+        uploads.append(UploadedFile(upload.filename or "file", b"".join(chunks)))
     return uploads
 
 

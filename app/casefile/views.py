@@ -74,19 +74,19 @@ SEARCH_ENTITY_LIMIT = 8
 SEARCH_LOG_LIMIT = 5
 
 TABLE_LABEL: dict[str, str] = {
-    "invoices": "Factura",
-    "bank_txns": "Transferencia",
-    "ledger": "Póliza",
-    "purchase_orders": "Orden de compra",
-    "contracts": "Contrato",
-    "vendors": "Proveedor",
-    "employees": "Empleado",
-    "efos_list": "Lista 69-B",
+    "invoices": "Invoice",
+    "bank_txns": "Bank transfer",
+    "ledger": "Ledger entry",
+    "purchase_orders": "Purchase order",
+    "contracts": "Contract",
+    "vendors": "Vendor",
+    "employees": "Employee",
+    "efos_list": "Article 69-B list",
 }
 STATUS_LABEL: dict[str, str] = {
-    "accused": "Acusado",
-    "declined": "Descartado",
-    "clear": "Sin señales",
+    "accused": "Accused",
+    "declined": "Cleared",
+    "clear": "No signals",
 }
 _DATED_TABLES = frozenset({"invoices", "bank_txns", "purchase_orders", "contracts", "ledger"})
 _STATUS_ORDER: dict[str, int] = {"accused": 0, "declined": 1, "clear": 2}
@@ -465,19 +465,19 @@ def headline(index: CaseIndex) -> str:
     findings, leads = submission.findings, submission.leads_not_pursued
     records = sum(len(rows) for rows in index.tables.values())
     declined = (
-        f"Revisamos {len(leads)} caso{'s' if len(leads) != 1 else ''} sospechoso"
-        f"{'s' if len(leads) != 1 else ''} y ninguno se sostuvo."
+        f"We reviewed {len(leads)} suspicious case{'s' if len(leads) != 1 else ''}; "
+        "none met the accusation threshold."
     )
     if not findings:
         if leads:
-            return f"No encontramos fraude en {records:,} registros. {declined}"
-        return f"No encontramos señales de fraude en {records:,} registros."
+            return f"We found no fraud in {records:,} records. {declined}"
+        return f"We found no fraud signals in {records:,} records."
     total = sum(f.peso_amount for f in findings)
-    parts = ", ".join(f"{_scheme_name(f)} por {_money(f.peso_amount)}" for f in findings)
-    noun = "hallazgo" if len(findings) == 1 else "hallazgos"
-    text = f"Encontramos {len(findings)} {noun} con una exposición de {_money(total)}: {parts}."
+    parts = ", ".join(f"{_scheme_name(f)} for {_money(f.peso_amount)}" for f in findings)
+    noun = "finding" if len(findings) == 1 else "findings"
+    text = f"We found {len(findings)} {noun} with exposure of {_money(total)}: {parts}."
     if leads:
-        text += f" Además, {declined[0].lower()}{declined[1:]}"
+        text += f" Additionally, {declined[0].lower()}{declined[1:]}"
     return text
 
 
@@ -485,33 +485,33 @@ def _method_and_limits(index: CaseIndex) -> MethodAndLimits:
     analysis = index.analysis
     specs = {spec.name: spec for spec in TABLE_SPECS}
     out_of_scope = [
-        "Solo se ven las cuentas bancarias de la empresa: "
-        "los movimientos entre terceros no aparecen.",
-        "Las señales de calidad de datos se reportan aparte y nunca acusan por sí solas.",
+        "Only the company's bank accounts are visible; movements between third parties are not.",
+        "Data-quality signals are reported separately and never accuse on their own.",
     ]
     for table in index.run.tables:
         if table.get("missing"):
             loss = specs[table["name"]].capability_loss
-            out_of_scope.append(f"Sin la tabla {table['name']}: {loss}.")
+            out_of_scope.append(f"Without table {table['name']}: {loss}.")
     out_of_scope.extend(analysis.warnings)
     return MethodAndLimits(
         architecture=(
-            f"Motor determinista, sin modelos de lenguaje: {analysis.rules_evaluated} detectores "
-            "basados en reglas fiscales y contables revisan las 8 tablas y emiten señales con el "
-            "registro exacto que las respalda. Un ensamblador agrupa las señales por entidad y "
-            "solo acusa cuando al menos dos familias de evidencia independientes coinciden (o una "
-            "regla suficiente por sí sola); lo demás se documenta como caso descartado. Antes de "
-            "publicar, el validador oficial comprueba que cada exhibit exista y que el monto "
-            f"reclamado reconcilie dentro del {TOLERANCIA_PESOS:.0%} con los registros citados."
+            f"Deterministic engine with no language models: {analysis.rules_evaluated} "
+            "fiscal and accounting rule-based detectors inspect the 8 tables and emit "
+            "signals with the exact supporting record. An assembler groups signals by "
+            "entity and accuses only when at least two independent evidence families "
+            "agree (or one independently sufficient rule does); everything else is "
+            "documented as a cleared case. Before publication, the official validator "
+            "confirms that every exhibit exists and that the claimed amount reconciles "
+            f"within {TOLERANCIA_PESOS:.0%} of the cited records."
         ),
         out_of_scope=out_of_scope,
         cannot_detect=[
-            "Pagos en efectivo sin registro contable ni bancario.",
-            "Acuerdos o sobornos que nunca pasan por los libros de la empresa.",
-            "Proveedores fantasma con contrato, orden de compra y alta documentados "
-            "de forma consistente.",
-            "Esquemas con una sola señal: sin evidencia independiente que la corrobore, "
-            "se descarta.",
+            "Cash payments with no accounting or bank record.",
+            "Agreements or bribes that never pass through the company's books.",
+            "Phantom vendors with consistently documented contracts, purchase orders, "
+            "and registration.",
+            "Schemes with only one signal: without independent corroborating evidence, "
+            "they are cleared.",
         ],
         reproduce=Reproduce(
             seed=analysis.seed,
@@ -519,7 +519,7 @@ def _method_and_limits(index: CaseIndex) -> MethodAndLimits:
             dataset_sha256=index.run.sha256,
             command=(
                 f'POST /api/v1/runs/{index.run.run_id}/start {{"seed": {analysis.seed}}}'
-                " (mismo dataset, mismo resultado)"
+                " (same dataset, same result)"
             ),
         ),
     )
@@ -772,35 +772,35 @@ def build_timeline(index: CaseIndex, entity_id: str) -> EntityTimeline | None:
         ]
         lane(
             "purchase_orders",
-            "OC pedidas o aprobadas",
+            "Purchase orders requested or approved",
             [
                 _event(
                     index, "purchase_orders", row, f"{row.get('po_id')} · {row.get('vendor_rfc')}"
                 )
                 for row in orders
             ],
-            "no pidió ni aprobó órdenes",
+            "did not request or approve purchase orders",
         )
         lane(
             "bank_txns",
-            "Pagos a su CLABE",
+            "Payments to their CLABE",
             [_event(index, "bank_txns", row, f"{row.get('txn_id')}") for row in txns],
-            "sin movimientos a su cuenta",
+            "no movements to their account",
         )
         employee = index.row("employees", emp_id) if emp_id else None
         hire = _text(employee.get("hire_date")) if employee else ""
-        registration = TimelineLane(key="registration", label="Registro", events=[])
+        registration = TimelineLane(key="registration", label="Registration", events=[])
         if hire and in_range(hire):
             registration.events.append(
                 TimelineEvent(
                     date=hire,
                     amount=None,
-                    label="Ingreso",
+                    label="Hired",
                     record=RecordRef(source_table="employees", record_id=emp_id),
                 )
             )
         elif hire:
-            registration.note = f"ingresó el {hire} (antes del periodo)"
+            registration.note = f"hired on {hire} (before the audited period)"
         lanes.append(registration)
         paid = sum(
             index.row_amount("bank_txns", row) or 0.0
@@ -824,12 +824,12 @@ def build_timeline(index: CaseIndex, entity_id: str) -> EntityTimeline | None:
         if not is_company:
             lane(
                 "contracts",
-                "Contratos",
+                "Contracts",
                 [
-                    _event(index, "contracts", index.rows["contracts"][cid], f"Contrato {cid}")
+                    _event(index, "contracts", index.rows["contracts"][cid], f"Contract {cid}")
                     for cid in index.by_vendor.get(("contracts", rfc), [])
                 ],
-                "sin contrato",
+                "no contract",
             )
             lane(
                 "purchase_orders",
@@ -839,30 +839,31 @@ def build_timeline(index: CaseIndex, entity_id: str) -> EntityTimeline | None:
                         index,
                         "purchase_orders",
                         index.rows["purchase_orders"][po],
-                        f"{po} · aprobó {index.rows['purchase_orders'][po].get('approver') or '—'}",
+                        f"{po} · approved by "
+                        f"{index.rows['purchase_orders'][po].get('approver') or '—'}",
                     )
                     for po in index.by_vendor.get(("purchase_orders", rfc), [])
                 ],
-                "sin orden de compra",
+                "no purchase order",
             )
             lane(
                 "invoices",
-                "Facturas",
+                "Invoices",
                 [
                     _event(
                         index,
                         "invoices",
                         row,
                         f"{row.get('uuid')}"
-                        + (" · venta" if _text(row.get("issuer_rfc")) == index.company_rfc else "")
-                        + (" · cancelada" if row.get("status") == "cancelado" else ""),
+                        + (" · sale" if _text(row.get("issuer_rfc")) == index.company_rfc else "")
+                        + (" · cancelled" if row.get("status") == "cancelado" else ""),
                     )
                     for row in invoices
                 ],
             )
         lane(
             "bank_txns",
-            "Pagos",
+            "Payments",
             [
                 _event(
                     index,
@@ -872,10 +873,10 @@ def build_timeline(index: CaseIndex, entity_id: str) -> EntityTimeline | None:
                 )
                 for row in txns
             ],
-            "sin movimientos bancarios",
+            "no bank movements",
         )
         if not is_company:
-            registration = TimelineLane(key="registration", label="Registro RFC", events=[])
+            registration = TimelineLane(key="registration", label="RFC registration", events=[])
             outside: list[str] = []
             vendor = index.row("vendors", rfc)
             efos = index.row("efos_list", rfc)
@@ -886,17 +887,17 @@ def build_timeline(index: CaseIndex, entity_id: str) -> EntityTimeline | None:
                         TimelineEvent(
                             date=date,
                             amount=None,
-                            label="Alta como proveedor",
+                            label="Vendor registration",
                             record=RecordRef(
                                 source_table="vendors", record_id=index.record_id("vendors", vendor)
                             ),
                         )
                     )
                 elif date:
-                    outside.append(f"alta el {date}")
+                    outside.append(f"registered on {date}")
             if efos is not None:
                 date = _text(efos.get("publication_date"))
-                label = f"Lista 69-B: {efos.get('status') or 'sin estatus'}"
+                label = f"Article 69-B list: {efos.get('status') or 'no status'}"
                 if date and in_range(date):
                     registration.events.append(
                         TimelineEvent(
@@ -911,10 +912,10 @@ def build_timeline(index: CaseIndex, entity_id: str) -> EntityTimeline | None:
                     )
                 elif date:
                     outside.append(
-                        f"69-B {efos.get('status') or ''} desde {date}".replace("  ", " ")
+                        f"69-B {efos.get('status') or ''} since {date}".replace("  ", " ")
                     )
             if outside:
-                registration.note = f"{' · '.join(outside)} (fuera del periodo)"
+                registration.note = f"{' · '.join(outside)} (outside the audited period)"
             lanes.append(registration)
             invoiced = sum(
                 index.row_amount("invoices", row) or 0.0
@@ -924,12 +925,12 @@ def build_timeline(index: CaseIndex, entity_id: str) -> EntityTimeline | None:
         paid = sum(
             index.row_amount("bank_txns", row) or 0.0
             for row in txns
-            if _direction(index, row, clabes) == "recibe"
+            if _direction(index, row, clabes) == "receives"
         )
         received = sum(
             index.row_amount("bank_txns", row) or 0.0
             for row in txns
-            if _direction(index, row, clabes) == "envía"
+            if _direction(index, row, clabes) == "sends"
         )
         if is_company:
             paid, received = received, paid
@@ -955,8 +956,8 @@ def build_timeline(index: CaseIndex, entity_id: str) -> EntityTimeline | None:
 
 
 def _direction(index: CaseIndex, row: dict[str, CellValue], clabes: set[str]) -> str:
-    """From the entity's side: `recibe` when money lands on one of its accounts, else `envía`."""
-    return "recibe" if _text(row.get("to_clabe")) in clabes else "envía"
+    """From the entity's side: `receives` when money lands on one of its accounts, else `sends`."""
+    return "receives" if _text(row.get("to_clabe")) in clabes else "sends"
 
 
 # ---------------------------------------------------------------------------
@@ -1078,73 +1079,72 @@ def render_markdown(index: CaseIndex) -> str:
         return f"{name} ({entity_id})" if name and name != entity_id else entity_id
 
     lines = [
-        f"# Case file forense · {header.company_name}",
+        f"# Forensic case file · {header.company_name}",
         "",
-        f"RFC {header.company_rfc or 'no identificado'} · Periodo "
-        f"{header.audit_period.from_ or '?'} a {header.audit_period.to or '?'} "
+        f"RFC {header.company_rfc or 'not identified'} · Audited period "
+        f"{header.audit_period.from_ or '?'} to {header.audit_period.to or '?'} "
         f"· Seed {submission.seed}",
         "",
-        "## Resumen",
+        "## Summary",
         "",
         summary.headline,
         "",
-        f"- Hallazgos: {summary.findings_count} "
-        f"({summary.findings_by_confidence['proven']} probados, "
-        f"{summary.findings_by_confidence['probable']} probables)",
-        f"- Exposición total: {_money(summary.total_exposure)} MXN",
-        f"- Casos descartados: {summary.leads_closed_count}",
+        f"- Findings: {summary.findings_count} "
+        f"({summary.findings_by_confidence['proven']} proven, "
+        f"{summary.findings_by_confidence['probable']} probable)",
+        f"- Total exposure: {_money(summary.total_exposure)} MXN",
+        f"- Cleared cases: {summary.leads_closed_count}",
         "",
-        "## Hallazgos",
+        "## Findings",
         "",
     ]
     if not submission.findings:
-        lines += ["Sin hallazgos.", ""]
+        lines += ["No findings.", ""]
     for number, finding in enumerate(submission.findings):
         extra = report.findings_extra[number].reconciliation
         lines += [
-            f"### Hallazgo #{number + 1} · {_scheme_name(finding)} ({finding.confidence})",
+            f"### Finding #{number + 1} · {_scheme_name(finding)} ({finding.confidence})",
             "",
-            f"**Entidades:** {', '.join(who(e) for e in finding.entities)}",
+            f"**Entities:** {', '.join(who(e) for e in finding.entities)}",
             "",
             finding.narrative,
             "",
-            f"**Norma:** {finding.rule_broken}",
+            f"**Rule breached:** {finding.rule_broken}",
             "",
-            f"**Monto:** {_money(finding.peso_amount)} MXN (reconcilia con {extra.table_used}: "
-            f"{_money(extra.sum)}, diferencia {extra.diff_pct}%)",
+            f"**Amount:** {_money(finding.peso_amount)} MXN (reconciles with {extra.table_used}: "
+            f"{_money(extra.sum)}, difference {extra.diff_pct}%)",
             "",
         ]
         if finding.money_trail:
-            lines += ["| Fecha | De | A | Monto | Exhibit |", "|---|---|---|---:|---|"]
+            lines += ["| Date | From | To | Amount | Exhibit |", "|---|---|---|---:|---|"]
             lines += [
                 f"| {s.date} | {s.from_} | {s.to} | {_money(s.amount)} | {s.exhibit_id} |"
                 for s in finding.money_trail
             ]
             lines.append("")
-        lines += ["| Exhibit | Tabla | Registro | Nota |", "|---|---|---|---|"]
+        lines += ["| Exhibit | Table | Record | Note |", "|---|---|---|---|"]
         lines += [
             f"| {e.exhibit_id} | {e.source_table} | {e.record_id} | {e.note.replace('|', '/')} |"
             for e in finding.exhibits
         ]
         lines.append("")
-    lines += ["## Casos descartados", ""]
+    lines += ["## Cleared cases", ""]
     if not submission.leads_not_pursued:
-        lines += ["Ningún caso descartado.", ""]
+        lines += ["No cleared cases.", ""]
     for lead in submission.leads_not_pursued:
         lines += [
-            f"- **{who(lead.entity)}** · {lead.signal} · "
-            f"cerrado por {lead.closed_by}: {lead.reason}"
+            f"- **{who(lead.entity)}** · {lead.signal} · closed by {lead.closed_by}: {lead.reason}"
         ]
     limits = report.method_and_limits
     lines += [
         "",
-        "## Método y límites",
+        "## Method and limits",
         "",
         limits.architecture,
         "",
         *[f"- {item}" for item in limits.out_of_scope + limits.cannot_detect],
         "",
-        f"Reproducir: {limits.reproduce.command} · motor {limits.reproduce.version} · "
+        f"Reproduce: {limits.reproduce.command} · engine {limits.reproduce.version} · "
         f"dataset sha256 {limits.reproduce.dataset_sha256}",
         "",
     ]

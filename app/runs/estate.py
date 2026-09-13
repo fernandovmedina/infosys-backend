@@ -54,8 +54,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
         key_columns=("rfc", "bank_clabe"),
         required=False,
         capability_loss=(
-            "sin proveedores no se pueden ligar las CLABE de los pagos con un RFC "
-            "ni detectar proveedores fantasma"
+            "without vendors, payment CLABEs cannot be linked to an RFC or phantom vendors detected"
         ),
         date_columns=("registered_date",),
         aliases=("vendor", "proveedores", "suppliers"),
@@ -78,7 +77,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
         ),
         key_columns=("uuid", "issuer_rfc", "receiver_rfc", "issue_date", "total"),
         required=True,
-        capability_loss="sin facturas no hay montos que investigar ni conciliar",
+        capability_loss="without invoices, there are no amounts to investigate or reconcile",
         numeric_columns=("subtotal", "iva", "total"),
         date_columns=("issue_date",),
         enum_columns={"metodo_pago": ("PUE", "PPD"), "status": ("vigente", "cancelado")},
@@ -101,7 +100,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
         key_columns=("entry_id", "date", "account_code", "debit", "credit"),
         required=False,
         capability_loss=(
-            "sin ledger no se puede conciliar el registro contable con facturas y pagos"
+            "without the ledger, accounting entries cannot be reconciled with invoices and payments"
         ),
         numeric_columns=("debit", "credit"),
         date_columns=("date",),
@@ -112,7 +111,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
         columns=("txn_id", "date", "from_clabe", "to_clabe", "amount", "reference", "channel"),
         key_columns=("txn_id", "date", "from_clabe", "to_clabe", "amount"),
         required=True,
-        capability_loss="sin transacciones bancarias no se puede seguir el rastro del dinero",
+        capability_loss="without bank transactions, the money trail cannot be followed",
         numeric_columns=("amount",),
         date_columns=("date",),
         enum_columns={"channel": ("SPEI", "cheque", "efectivo")},
@@ -131,8 +130,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
         key_columns=("po_id", "vendor_rfc", "amount"),
         required=False,
         capability_loss=(
-            "sin órdenes de compra no se pueden verificar límites de aprobación "
-            "ni pagos fraccionados"
+            "without purchase orders, approval limits and split payments cannot be verified"
         ),
         numeric_columns=("amount",),
         date_columns=("date",),
@@ -143,7 +141,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
         columns=("contract_id", "vendor_rfc", "start_date", "value", "scope_text"),
         key_columns=("contract_id", "vendor_rfc", "value"),
         required=False,
-        capability_loss="sin contratos no se puede verificar el alcance de los servicios",
+        capability_loss="without contracts, the scope of services cannot be verified",
         numeric_columns=("value",),
         date_columns=("start_date",),
         aliases=("contract", "contratos"),
@@ -153,7 +151,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
         columns=("emp_id", "name", "role", "bank_clabe", "hire_date"),
         key_columns=("emp_id", "name", "bank_clabe"),
         required=False,
-        capability_loss="sin empleados no se detectan vínculos entre empleados y proveedores",
+        capability_loss="without employees, employee-vendor relationships cannot be detected",
         date_columns=("hire_date",),
         aliases=("employee", "empleados", "staff"),
     ),
@@ -162,7 +160,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
         columns=("rfc", "legal_name", "status", "publication_date"),
         key_columns=("rfc", "status"),
         required=False,
-        capability_loss="sin lista EFOS no corre el detector de proveedores 69-B",
+        capability_loss="without the EFOS list, the Article 69-B vendor detector cannot run",
         date_columns=("publication_date",),
         enum_columns={"status": ("definitivo", "presunto")},
         aliases=("efos", "lista_efos", "sat_69b", "69b", "blacklist", "black_list"),

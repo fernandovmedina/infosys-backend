@@ -69,6 +69,11 @@ The following are intentionally not part of the current implementation:
   questions.
 - Adversarial reviewer/challenger stage.
 - Decoy-driven threshold calibration and other false-positive reduction work.
+- Independent adversarial benchmark fixtures and stricter evaluation metrics.
+  The current generator/engine alignment is a self-consistency check, not
+  evidence of real-world robustness. Add hard decoys with multiple suspicious
+  signals, noisy/partial evidence, near-threshold values, and stricter
+  entity/evidence/amount matching before making quality claims.
 - Supported offline replay CLI and immutable artifact caching for stable
   wall-clock metadata.
 - Production hardening: durable jobs/recovery, concurrency control, data

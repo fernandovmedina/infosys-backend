@@ -126,16 +126,16 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
 def start_events(table_rows: dict[str, int]) -> list[EventDraft]:
     present = {name: rows for name, rows in table_rows.items() if rows > 0}
     return [
-        EventDraft("step", "system", "Investigación iniciada", {"kind": "start"}),
+        EventDraft("step", "system", "Investigation started", {"kind": "start"}),
         EventDraft(
             "step",
             "system",
-            "Cargando dataset",
+            "Loading dataset",
             {
                 "kind": "load",
                 "result": (
-                    f"{_plural(len(present), 'tabla', 'tablas')}, "
-                    f"{_plural(sum(present.values()), 'registro', 'registros')}"
+                    f"{_plural(len(present), 'table', 'tables')}, "
+                    f"{_plural(sum(present.values()), 'record', 'records')}"
                 ),
                 "result_status": "ok",
             },
@@ -170,7 +170,7 @@ def analysis_events(
             "kind": "data_quality" if rule_id in REGLAS_INTEGRIDAD else "rule",
             "tool": rule_id,
             "detail": FRASE_FAMILIA.get(family) if family else None,
-            "result": _plural(count, "señal", "señales") if count else "sin señales",
+            "result": _plural(count, "signal", "signals") if count else "no signals",
             "result_status": "warning" if count else "ok",
         }
         _with_entities(payload, signal_entities.get(rule_id, [])[:MAX_EVENT_ENTITIES], names)
@@ -189,7 +189,7 @@ def analysis_events(
         payload = {
             "kind": finding.scheme_type,
             "detail": finding.rule_broken,
-            "result": "probado" if finding.confidence == "proven" else "probable",
+            "result": "proven" if finding.confidence == "proven" else "probable",
             "result_status": "error" if finding.confidence == "proven" else "warning",
         }
         _with_entities(payload, finding.entities, names)
@@ -197,7 +197,7 @@ def analysis_events(
             EventDraft(
                 "finding_draft",
                 "investigator",
-                f"Hallazgo #{number} · {scheme} por {_money(finding.peso_amount)}",
+                f"Finding #{number} · {scheme} for {_money(finding.peso_amount)}",
                 payload,
             )
         )
@@ -207,7 +207,7 @@ def analysis_events(
             "kind": "lead",
             "entity": lead.entity,
             "detail": lead.reason,
-            "result": "descartado",
+            "result": "cleared",
             "result_status": "ok",
         }
         _with_entities(payload, [lead.entity], names)
@@ -217,14 +217,12 @@ def analysis_events(
         EventDraft(
             "validation",
             "validator",
-            "Submission validada con el validador oficial",
+            "Submission validated by the official validator",
             {
                 "kind": "official_validator",
                 "result": (
-                    f"{_plural(len(submission.findings), 'hallazgo', 'hallazgos')}, "
-                    + _plural(
-                        len(submission.leads_not_pursued), "caso descartado", "casos descartados"
-                    )
+                    f"{_plural(len(submission.findings), 'finding', 'findings')}, "
+                    + _plural(len(submission.leads_not_pursued), "cleared case", "cleared cases")
                 ),
                 "result_status": "ok",
             },
@@ -234,7 +232,7 @@ def analysis_events(
         EventDraft(
             "completed",
             "system",
-            "Investigación terminada",
+            "Investigation completed",
             {"run_id": run_id, "report_url": f"/api/v1/runs/{run_id}/report"},
         )
     )
@@ -243,5 +241,8 @@ def analysis_events(
 
 def failed_event(error: dict[str, Any]) -> EventDraft:
     return EventDraft(
-        "failed", "system", str(error.get("message") or "La investigación falló."), {"error": error}
+        "failed",
+        "system",
+        str(error.get("message") or "The investigation failed."),
+        {"error": error},
     )

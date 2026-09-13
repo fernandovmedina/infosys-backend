@@ -38,7 +38,7 @@ def rule_ar_aging_excessive(
                 MIN(TRY_CAST(date AS DATE))                                     AS fecha_registro,
                 SUM(CAST(debit AS DOUBLE)) - SUM(CAST(credit AS DOUBLE))        AS saldo
             FROM ledger
-            WHERE account_name ILIKE '%cobrar%'
+            WHERE account_name ILIKE '%cobrar%' OR account_name ILIKE '%receivable%'
               AND invoice_uuid IS NOT NULL
               AND TRIM(invoice_uuid) <> ''
               AND TRY_CAST(date AS DATE) IS NOT NULL

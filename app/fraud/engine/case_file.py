@@ -56,11 +56,11 @@ def _corto(texto: str, n: int = 34) -> str:
 def diagrama_money_trail(pasos: list[dict], nombres: dict[str, str]) -> str:
     """Una fila por paso: caja origen -> flecha con monto, fecha y exhibit -> caja destino."""
     if not pasos:
-        return "<p><em>Este finding no cita movimientos de dinero trazables paso a paso.</em></p>"
+        return "<p><em>This finding does not cite money movements traceable step by step.</em></p>"
     ancho_caja, alto_fila, x_destino = 250, 78, 470
     alto = alto_fila * len(pasos) + 10
     partes = [
-        f'<svg role="img" aria-label="Rastro del dinero" viewBox="0 0 {x_destino + ancho_caja + 10} {alto}" '
+        f'<svg role="img" aria-label="Money trail" viewBox="0 0 {x_destino + ancho_caja + 10} {alto}" '
         f'width="100%" style="min-width:640px" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">',
         '<defs><marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" '
         'orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a2c1b"/></marker></defs>',
@@ -108,7 +108,7 @@ def _seccion_finding(i: int, f: dict, anexo: dict) -> str:
     for tabla, items in anexo["reconciliacion"].items():
         suma = sum(m for _, _, m in items)
         terminos = " + ".join(f"{pesos(m)} ({eid})" for eid, _, m in items)
-        marca = " ← monto reclamado" if tabla == anexo["tabla_monto"] else ""
+        marca = " ← claimed amount" if tabla == anexo["tabla_monto"] else ""
         reconciliacion.append(
             f"<tr><td><code>{_e(tabla)}</code></td><td>{_e(terminos)}</td>"
             f"<td class='num'>{_e(pesos(suma))}</td><td>{_e(marca)}</td></tr>"
@@ -118,33 +118,33 @@ def _seccion_finding(i: int, f: dict, anexo: dict) -> str:
   <p class="sub">Finding {i} · {_e(NOMBRE_ESQUEMA[f["scheme_type"]])} (<code>{_e(f["scheme_type"])}</code>)</p>
   <h3>{_e(titulo)}</h3>
   <dl>
-    <dt>Regla violada</dt><dd>{_e(f["rule_broken"])}</dd>
-    <dt>Monto</dt><dd><b>{_e(pesos(f["peso_amount"]))}</b></dd>
-    <dt>Confianza</dt><dd><span class="etiqueta {_e(f["confidence"])}">{_e(f["confidence"])}</span></dd>
-    <dt>Detectores</dt><dd>{_e(", ".join(anexo["reglas"]))}</dd>
+    <dt>Rule breached</dt><dd>{_e(f["rule_broken"])}</dd>
+    <dt>Amount</dt><dd><b>{_e(pesos(f["peso_amount"]))}</b></dd>
+    <dt>Confidence</dt><dd><span class="etiqueta {_e(f["confidence"])}">{_e(f["confidence"])}</span></dd>
+    <dt>Detectors</dt><dd>{_e(", ".join(anexo["reglas"]))}</dd>
   </dl>
-  <h4>Qué pasó</h4>
+  <h4>What happened</h4>
   <p>{_e(f["narrative"])}</p>
-  <h4>Rastro del dinero</h4>
+  <h4>Money trail</h4>
   {diagrama_money_trail(f.get("money_trail") or [], nombres)}
   <h4>Exhibits</h4>
-  <div class="tabla"><table><thead><tr><th>Exhibit</th><th>Tabla</th><th>Registro</th><th>Qué prueba</th></tr></thead>
+  <div class="tabla"><table><thead><tr><th>Exhibit</th><th>Table</th><th>Record</th><th>What it establishes</th></tr></thead>
   <tbody>{filas_ex}</tbody></table></div>
-  <h4>Reconciliación</h4>
-  <p>Los montos se suman por tabla; una factura y el pago que la liquidó son el mismo dinero visto dos veces.
-  El monto reclamado ({_e(pesos(f["peso_amount"]))}) es el total de <code>{_e(anexo["tabla_monto"])}</code>
+  <h4>Reconciliation</h4>
+  <p>Amounts are totalled by table; an invoice and the payment that settled it are the same money viewed twice.
+  The claimed amount ({_e(pesos(f["peso_amount"]))}) is the total of <code>{_e(anexo["tabla_monto"])}</code>
   ({_e(TABLA_LLANA.get(anexo["tabla_monto"], anexo["tabla_monto"]))}).</p>
-  <div class="tabla"><table><thead><tr><th>Tabla</th><th>Suma de exhibits</th><th>Total</th><th></th></tr></thead>
+  <div class="tabla"><table><thead><tr><th>Table</th><th>Exhibit sum</th><th>Total</th><th></th></tr></thead>
   <tbody>{"".join(reconciliacion)}</tbody></table></div>
 </section>"""
 
 
 def _seccion_leads(leads: list[dict], nombres: dict[str, str]) -> str:
     if not leads:
-        return "<p>No quedaron pistas abiertas: ningún detector señaló entidades que se descartaran.</p>"
+        return "<p>No open leads remain: no detector flagged an entity that was subsequently cleared.</p>"
     items = []
     for lead in leads:
-        herramientas = ", ".join(lead.get("tool_calls_made") or []) or "ninguna"
+        herramientas = ", ".join(lead.get("tool_calls_made") or []) or "none"
         titulo = (
             f"{nombres[lead['entity']]} ({lead['entity']})"
             if nombres.get(lead["entity"])
@@ -153,10 +153,10 @@ def _seccion_leads(leads: list[dict], nombres: dict[str, str]) -> str:
         items.append(f"""
 <div class="lead">
   <h3>{_e(titulo)}</h3>
-  <p><b>Qué lo señaló:</b> <code>{_e(lead["signal"])}</code></p>
-  <p><b>Por qué no se acusó:</b> {_e(lead["reason"])}</p>
-  <p><b>Consultas realizadas:</b> <code>{_e(herramientas)}</code></p>
-  <p><b>Cerrado por:</b> {_e(lead.get("closed_by", "investigator"))}</p>
+  <p><b>What flagged it:</b> <code>{_e(lead["signal"])}</code></p>
+  <p><b>Why it was not accused:</b> {_e(lead["reason"])}</p>
+  <p><b>Queries performed:</b> <code>{_e(herramientas)}</code></p>
+  <p><b>Closed by:</b> {_e(lead.get("closed_by", "investigator"))}</p>
 </div>""")
     return "".join(items)
 
@@ -167,7 +167,7 @@ def render_case_file(submission: dict, anexos: list[dict], contexto: dict) -> st
     probados = sum(1 for f in findings if f["confidence"] == "proven")
     exposicion = sum(f["peso_amount"] for f in findings)
     inicio, fin = contexto["periodo"]
-    empresa = contexto.get("empresa_nombre") or "Empresa auditada"
+    empresa = contexto.get("empresa_nombre") or "Audited company"
 
     if findings:
         por_esquema = {}
@@ -175,21 +175,21 @@ def render_case_file(submission: dict, anexos: list[dict], contexto: dict) -> st
             por_esquema[f["scheme_type"]] = por_esquema.get(f["scheme_type"], 0) + 1
         esquemas = "; ".join(f"{n} de {NOMBRE_ESQUEMA[s]}" for s, n in sorted(por_esquema.items()))
         resumen = (
-            f"El sistema encontró {len(findings)} posible(s) esquema(s) de fraude ({esquemas}) por un total de "
-            f"{pesos(exposicion)}. {probados} se consideran probados y {len(findings) - probados} probables. "
-            f"Además revisó y descartó {len(leads)} pista(s); cada una se explica en la sección 4."
+            f"The system found {len(findings)} potential fraud scheme(s) ({esquemas}) totaling "
+            f"{pesos(exposicion)}. {probados} are considered proven and {len(findings) - probados} probable. "
+            f"It also reviewed and cleared {len(leads)} lead(s), each explained in section 4."
         )
     else:
         resumen = (
-            f"El sistema no encontró evidencia suficiente para acusar a nadie. Revisó y descartó "
-            f"{len(leads)} pista(s); cada una se explica en la sección 4."
+            f"The system found insufficient evidence to accuse anyone. It reviewed and cleared "
+            f"{len(leads)} lead(s), each explained in section 4."
         )
 
     secciones_findings = (
         "".join(
             _seccion_finding(i, f, a) for i, (f, a) in enumerate(zip(findings, anexos), start=1)
         )
-        or "<p>Sin findings en esta corrida.</p>"
+        or "<p>No findings in this run.</p>"
     )
 
     calidad = contexto.get("calidad") or {}
@@ -198,12 +198,12 @@ def render_case_file(submission: dict, anexos: list[dict], contexto: dict) -> st
             f"<tr><td><code>{_e(r)}</code></td><td class='num'>{n}</td></tr>"
             for r, n in calidad.items()
         )
-        or "<tr><td colspan='2'>Sin problemas de calidad de datos detectados.</td></tr>"
+        or "<tr><td colspan='2'>No data-quality issues detected.</td></tr>"
     )
     fallidas = contexto.get("reglas_fallidas") or []
     texto_fallidas = (
         (
-            "<p><b>Detectores que fallaron en esta corrida</b> (sus resultados no se consideraron): "
+            "<p><b>Detectors that failed in this run</b> (their results were not considered): "
             + _e("; ".join(f"{n}: {err}" for n, err in fallidas))
             + "</p>"
         )
@@ -212,7 +212,7 @@ def render_case_file(submission: dict, anexos: list[dict], contexto: dict) -> st
     )
 
     return f"""<!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -222,49 +222,48 @@ def render_case_file(submission: dict, anexos: list[dict], contexto: dict) -> st
 <body>
 <main>
 <header>
-  <h1>Case file forense · {_e(empresa)}</h1>
-  <p class="sub">RFC {_e(contexto.get("empresa_rfc") or "no identificado")} · Periodo auditado {_e(inicio or "?")} a {_e(fin or "?")} · Seed {_e(submission["seed"])}</p>
+  <h1>Forensic case file · {_e(empresa)}</h1>
+  <p class="sub">RFC {_e(contexto.get("empresa_rfc") or "not identified")} · Audited period {_e(inicio or "?")} to {_e(fin or "?")} · Seed {_e(submission["seed"])}</p>
   <div class="metricas">
-    <div class="metrica"><b>{_e(meta["llm_calls"])}</b><span>llamadas a LLM</span></div>
-    <div class="metrica"><b>{_e(pesos(meta["mxn_cost"]))}</b><span>costo MXN</span></div>
-    <div class="metrica"><b>{_e(meta["wall_clock_seconds"])} s</b><span>tiempo de ejecución</span></div>
-    <div class="metrica"><b>{"Sí" if meta.get("deterministic") else "No"}</b><span>corrida determinista</span></div>
+    <div class="metrica"><b>{_e(meta["llm_calls"])}</b><span>LLM calls</span></div>
+    <div class="metrica"><b>{_e(pesos(meta["mxn_cost"]))}</b><span>MXN cost</span></div>
+    <div class="metrica"><b>{_e(meta["wall_clock_seconds"])} s</b><span>execution time</span></div>
+    <div class="metrica"><b>{"Yes" if meta.get("deterministic") else "No"}</b><span>deterministic run</span></div>
   </div>
 </header>
 
-<h2>2. Resumen ejecutivo</h2>
+<h2>2. Executive summary</h2>
 <p>{_e(resumen)}</p>
 <div class="tabla"><table><tbody>
-  <tr><th>Findings</th><td>{len(findings)} ({probados} probados, {len(findings) - probados} probables)</td></tr>
-  <tr><th>Exposición total</th><td>{_e(pesos(exposicion))}</td></tr>
-  <tr><th>Pistas investigadas y cerradas</th><td>{len(leads)}</td></tr>
+  <tr><th>Findings</th><td>{len(findings)} ({probados} proven, {len(findings) - probados} probable)</td></tr>
+  <tr><th>Total exposure</th><td>{_e(pesos(exposicion))}</td></tr>
+  <tr><th>Investigated and closed leads</th><td>{len(leads)}</td></tr>
 </tbody></table></div>
-<p class="sub">Si dos findings comparten una entidad (esquemas entrelazados), parte del dinero puede aparecer en ambos.</p>
+<p class="sub">If two findings share an entity (intertwined schemes), some money may appear in both.</p>
 
 <h2>3. Findings</h2>
 {secciones_findings}
 
-<h2>4. Pistas no perseguidas</h2>
+<h2>4. Leads not pursued</h2>
 {_seccion_leads(leads, contexto.get("nombres_pistas") or {})}
 
-<h2>5. Método y límites</h2>
-<p><b>Arquitectura.</b> {len(contexto.get("reglas_ejecutadas", []))} detectores SQL deterministas corren sobre el estate
-DuckDB y emiten señales. Un ensamblador agrupa las señales por entidad y esquema, y solo acusa cuando hay al menos dos
-familias de evidencia independientes (o una regla suficiente por sí sola, como un EFOS definitivo o un pago a la cuenta
-de un empleado) y ningún documento explica la relación. Cada acusación cita al menos 3 registros verificados y su monto
-se reconcilia por tabla. La narrativa sale de plantillas: no hay LLM en ninguna parte del proceso.</p>
-<p><b>Fuera de alcance en esta corrida.</b> Detectores de fraccionamiento de compras (<code>threshold_splitting</code>) e
-inflado de ingresos (<code>revenue_inflation</code>), que aún no están implementados; y las reglas de similitud de texto
-(concepto genérico, giro que no corresponde, nombre de proveedor parecido al de un empleado).</p>
-<p><b>Qué no puede detectar.</b> Esquemas que no dejan rastro en las 8 tablas; proveedores fantasma con órdenes de compra
-y contratos completos y sin otra señal; ciclos de dinero que pasan por cuentas fuera del catálogo; pagos en efectivo sin
-registro bancario. Una sola señal nunca basta para acusar, así que un esquema con una única huella queda como pista.</p>
+<h2>5. Method and limits</h2>
+<p><b>Architecture.</b> {len(contexto.get("reglas_ejecutadas", []))} deterministic SQL detectors run against the DuckDB
+estate and emit signals. An assembler groups signals by entity and scheme, and accuses only when there are at least two
+independent evidence families (or one independently sufficient rule, such as a definitive EFOS listing or a payment to an
+employee account) and no document explains the relationship. Each accusation cites at least 3 verified records and
+reconciles its amount by table. Narratives are template-generated: no LLM is used anywhere in the process.</p>
+<p><b>Out of scope for this run.</b> Text-similarity rules (generic descriptions, incompatible business activity, or a
+vendor name similar to an employee name). Purchase-order splitting and revenue-inflation detectors are implemented.</p>
+<p><b>What it cannot detect.</b> Schemes that leave no trace in the 8 tables; phantom vendors with complete purchase orders
+and contracts and no other signal; money cycles through accounts outside the catalogs; or unrecorded cash payments. A
+single signal is never enough to accuse, so a scheme with only one footprint remains a lead.</p>
 {texto_fallidas}
-<p><b>Calidad de datos.</b> Problemas encontrados en el estate (no son acusaciones, pero pueden ocultar evidencia):</p>
-<div class="tabla"><table><thead><tr><th>Regla</th><th>Registros</th></tr></thead><tbody>{filas_calidad}</tbody></table></div>
-<p><b>Reproducibilidad.</b> Sin conexión a internet:
-<code>PYTHONPATH=src python -m agente --estate {_e(contexto.get("estate_nombre", "estate.duckdb"))} --seed {_e(submission["seed"])} --salida &lt;carpeta&gt;</code>.
-El mismo estate y seed producen los mismos findings y pistas; solo cambia el tiempo de ejecución.</p>
+<p><b>Data quality.</b> Issues found in the estate (they are not accusations, but may hide evidence):</p>
+<div class="tabla"><table><thead><tr><th>Rule</th><th>Records</th></tr></thead><tbody>{filas_calidad}</tbody></table></div>
+<p><b>Reproducibility.</b> Offline replay:
+<code>uv run python -m app.fraud.engine.cli --input-dir &lt;csv-directory&gt; --seed {_e(submission["seed"])} --output-dir &lt;output-directory&gt;</code>.
+The same CSV estate and seed produce the same findings and leads; only execution time changes.</p>
 </main>
 </body>
 </html>

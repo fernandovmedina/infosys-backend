@@ -108,7 +108,7 @@ class Estate:
     # --- catálogos ----------------------------------------------------------
 
     def vendors_por_rfc(self, rfc: str) -> list[dict]:
-        self._anotar("consultar_vendors")
+        self._anotar("query_vendors")
         return self._filas(
             "SELECT rfc, legal_name, registered_date, bank_clabe, category FROM vendors "
             "WHERE UPPER(TRIM(rfc)) = ? ORDER BY rfc",
@@ -116,21 +116,21 @@ class Estate:
         )
 
     def vendors_por_clabe(self, clabe: str) -> list[dict]:
-        self._anotar("consultar_vendors")
+        self._anotar("query_vendors")
         return self._filas(
             "SELECT rfc, legal_name FROM vendors WHERE TRIM(bank_clabe) = ? ORDER BY rfc",
             [clabe],
         )
 
     def employees_por_clabe(self, clabe: str) -> list[dict]:
-        self._anotar("consultar_employees")
+        self._anotar("query_employees")
         return self._filas(
             "SELECT emp_id, name, role FROM employees WHERE TRIM(bank_clabe) = ? ORDER BY emp_id",
             [clabe],
         )
 
     def employees_por_nombre(self, nombre: str) -> list[dict]:
-        self._anotar("consultar_employees")
+        self._anotar("query_employees")
         return self._filas(
             "SELECT emp_id, name, role FROM employees "
             "WHERE UPPER(TRIM(name)) = UPPER(TRIM(?)) OR TRIM(emp_id) = TRIM(?) ORDER BY emp_id",
@@ -138,14 +138,14 @@ class Estate:
         )
 
     def employee_por_id(self, emp_id: str) -> list[dict]:
-        self._anotar("consultar_employees")
+        self._anotar("query_employees")
         return self._filas(
             "SELECT emp_id, name, role, bank_clabe FROM employees WHERE TRIM(emp_id) = ?",
             [emp_id],
         )
 
     def efos_por_rfc(self, rfc: str) -> list[dict]:
-        self._anotar("consultar_efos_list")
+        self._anotar("query_efos_list")
         return self._filas(
             "SELECT rfc, status, publication_date FROM efos_list "
             "WHERE UPPER(TRIM(rfc)) = ? ORDER BY rfc",
@@ -153,7 +153,7 @@ class Estate:
         )
 
     def ordenes_por_rfc(self, rfc: str) -> list[dict]:
-        self._anotar("consultar_purchase_orders")
+        self._anotar("query_purchase_orders")
         return self._filas(
             "SELECT po_id, amount, date FROM purchase_orders "
             "WHERE UPPER(TRIM(vendor_rfc)) = ? ORDER BY date, po_id",
@@ -161,7 +161,7 @@ class Estate:
         )
 
     def contratos_por_rfc(self, rfc: str) -> list[dict]:
-        self._anotar("consultar_contracts")
+        self._anotar("query_contracts")
         return self._filas(
             "SELECT contract_id, value, start_date FROM contracts "
             "WHERE UPPER(TRIM(vendor_rfc)) = ? ORDER BY start_date, contract_id",
@@ -169,7 +169,7 @@ class Estate:
         )
 
     def facturas_emitidas_por(self, rfc: str) -> list[dict]:
-        self._anotar("consultar_invoices")
+        self._anotar("query_invoices")
         return self._filas(
             "SELECT uuid FROM invoices WHERE UPPER(TRIM(issuer_rfc)) = ? ORDER BY issue_date, uuid",
             [rfc],
@@ -177,7 +177,7 @@ class Estate:
 
     def autorizaciones_de(self, nombre: str, limite: int) -> list[dict]:
         """Órdenes de compra y asientos que la persona solicitó o aprobó, más recientes primero."""
-        self._anotar("consultar_autorizaciones")
+        self._anotar("query_authorizations")
         return self._filas(
             """
             SELECT tabla, id FROM (
@@ -194,7 +194,7 @@ class Estate:
         )
 
     def pagos_a_clabe(self, clabe: str) -> list[dict]:
-        self._anotar("consultar_bank_txns")
+        self._anotar("query_bank_transactions")
         return self._filas(
             "SELECT txn_id FROM bank_txns WHERE TRIM(to_clabe) = ? ORDER BY date, txn_id",
             [clabe],
@@ -205,7 +205,7 @@ class Estate:
         Facturas que liquida una transferencia: emitidas por el proveedor dueño de
         la CLABE destino y con un abono en el ledger por el mismo monto ese día.
         """
-        self._anotar("consultar_ledger")
+        self._anotar("query_ledger")
         return self._filas(
             """
             SELECT DISTINCT i.uuid
@@ -230,7 +230,7 @@ class Estate:
         todas las cuentas (la cancelación se revirtió). Es el caso limpio de
         INFLATE_AND_CANCEL, que se reporta como pista descartada.
         """
-        self._anotar("consultar_ledger")
+        self._anotar("query_ledger")
         return self._filas(
             """
             WITH saldos AS (

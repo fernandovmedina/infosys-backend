@@ -110,13 +110,13 @@ def ingest(files: list[UploadedFile]) -> Dataset:
     `Dataset.diagnostics` so the user sees all of them at once.
     """
     if not files:
-        raise UploadRejectedError("no_files", "No se recibió ningún archivo.")
+        raise UploadRejectedError("no_files", "No files were received.")
 
     for file in files:
         if not file.filename.lower().endswith(ACCEPTED_EXTENSIONS):
             raise UploadRejectedError(
                 "unsupported_format",
-                f"El formato de {file.filename} no está soportado. Sube un .zip o archivos .csv.",
+                f"The format of {file.filename} is not supported. Upload a .zip or .csv files.",
                 details={"filename": file.filename, "accepted": list(ACCEPTED_EXTENSIONS)},
                 status_code=415,
             )
@@ -126,13 +126,13 @@ def ingest(files: list[UploadedFile]) -> Dataset:
     if archives and len(archives) != len(files):
         raise UploadRejectedError(
             "mixed_formats",
-            "Sube un solo .zip o uno o varios .csv, pero no ambos a la vez.",
+            "Upload one .zip or one or more .csv files, but not both at once.",
             details={"filenames": filenames},
         )
     if len(archives) > 1:
         raise UploadRejectedError(
             "multiple_archives",
-            "Solo se puede subir un .zip por investigación.",
+            "Only one .zip can be uploaded per investigation.",
             details={"filenames": filenames},
         )
 
@@ -145,8 +145,8 @@ def ingest(files: list[UploadedFile]) -> Dataset:
     if not dataset.tables:
         raise UploadRejectedError(
             "no_tables_found",
-            "No se encontró ninguna tabla reconocible. Nombra cada CSV como la tabla "
-            "(por ejemplo invoices.csv) o usa las columnas del estate.",
+            "No recognizable table was found. Name each CSV after its table "
+            "(for example, invoices.csv) or use the estate columns.",
             details={"ignored_files": [_ignored_dict(i) for i in dataset.ignored_files]},
         )
 
@@ -167,7 +167,7 @@ def _read_zip(archive: UploadedFile) -> Dataset:
     try:
         bundle = zipfile.ZipFile(io.BytesIO(archive.data))
     except zipfile.BadZipFile as exc:
-        raise _invalid_archive(archive.filename, "el archivo está dañado o no es un ZIP") from exc
+        raise _invalid_archive(archive.filename, "the file is corrupt or is not a ZIP") from exc
 
     candidates: list[UploadedFile] = []
     ignored: list[IgnoredFile] = []
@@ -186,26 +186,26 @@ def _read_zip(archive: UploadedFile) -> Dataset:
                 continue  # OS metadata; not worth mentioning.
             if "private" in parts[:-1]:
                 ignored.append(
-                    IgnoredFile(info.filename, "carpeta private/: no se usa en la investigación")
+                    IgnoredFile(info.filename, "private/ directory: not used in the investigation")
                 )
                 continue
             if info.flag_bits & 0x1:
-                raise _invalid_archive(archive.filename, "el ZIP está protegido con contraseña")
+                raise _invalid_archive(archive.filename, "the ZIP is password protected")
             suffix = path.suffix.lower()
             if suffix == ".zip":
-                ignored.append(IgnoredFile(info.filename, "no se admiten ZIP dentro del ZIP"))
+                ignored.append(
+                    IgnoredFile(info.filename, "ZIP files within a ZIP are not supported")
+                )
                 continue
             if suffix != ".csv":
-                ignored.append(IgnoredFile(info.filename, "no es un archivo .csv"))
+                ignored.append(IgnoredFile(info.filename, "is not a .csv file"))
                 continue
             if info.compress_size and info.file_size / info.compress_size > MAX_COMPRESSION_RATIO:
-                raise _invalid_archive(archive.filename, f"{info.filename} está sobrecomprimido")
+                raise _invalid_archive(archive.filename, f"{info.filename} is overcompressed")
             try:
                 data = bundle.read(info)
             except (zipfile.BadZipFile, OSError, RuntimeError) as exc:
-                raise _invalid_archive(
-                    archive.filename, f"no se pudo leer {info.filename}"
-                ) from exc
+                raise _invalid_archive(archive.filename, f"could not read {info.filename}") from exc
             candidates.append(UploadedFile(info.filename, data))
 
     tables, more_ignored = _map_csvs(candidates)
@@ -239,7 +239,7 @@ def _read_csvs(files: list[UploadedFile]) -> Dataset:
 def _invalid_archive(filename: str, reason: str) -> UploadRejectedError:
     return UploadRejectedError(
         "invalid_archive",
-        f"No se pudo leer {filename}: {reason}.",
+        f"Could not read {filename}: {reason}.",
         details={"filename": filename},
     )
 
@@ -261,9 +261,7 @@ def _map_csvs(
         name = table_for_filename(file.filename) or table_for_header(header)
         if name is None:
             ignored.append(
-                IgnoredFile(
-                    file.filename, "no coincide con ninguna tabla por nombre ni por columnas"
-                )
+                IgnoredFile(file.filename, "does not match any table by name or columns")
             )
             continue
         sources.setdefault(name, []).append(file.filename)
@@ -273,8 +271,7 @@ def _map_csvs(
         if len(filenames) > 1:
             raise UploadRejectedError(
                 "duplicate_table",
-                f"La tabla {name} aparece en varios archivos: {', '.join(filenames)}. "
-                "Deja solo uno.",
+                f"Table {name} appears in several files: {', '.join(filenames)}. Keep only one.",
                 details={"table": name, "filenames": filenames},
             )
     return tables, ignored
@@ -294,11 +291,11 @@ def parse_csv(file: UploadedFile) -> tuple[list[str], list[list[str]], int]:
         raw_header = next(reader, None)
         records = [row for row in reader if any(cell.strip() for cell in row)]
     except csv.Error as exc:
-        raise _invalid_csv(file.filename, f"CSV mal formado ({exc})") from exc
+        raise _invalid_csv(file.filename, f"malformed CSV ({exc})") from exc
 
     header = [_normalize_column(c) for c in raw_header or []]
     if not any(header):
-        raise _invalid_csv(file.filename, "no tiene fila de encabezados")
+        raise _invalid_csv(file.filename, "has no header row")
 
     width = len(header)
     malformed = 0
@@ -313,7 +310,7 @@ def parse_csv(file: UploadedFile) -> tuple[list[str], list[list[str]], int]:
 
 def _decode(file: UploadedFile) -> str:
     if b"\0" in file.data[:8192]:
-        raise _invalid_csv(file.filename, "parece un archivo binario, no texto")
+        raise _invalid_csv(file.filename, "appears to be a binary file, not text")
     for encoding in ("utf-8-sig", "cp1252"):
         try:
             return file.data.decode(encoding)
@@ -325,7 +322,7 @@ def _decode(file: UploadedFile) -> str:
 def _invalid_csv(filename: str, reason: str) -> UploadRejectedError:
     return UploadRejectedError(
         "invalid_csv",
-        f"No se pudo leer {filename}: {reason}.",
+        f"Could not read {filename}: {reason}.",
         details={"filename": filename, "reason": reason},
     )
 
@@ -380,7 +377,7 @@ def diagnose(
                     name=spec.name,
                     rows=0,
                     status="error" if spec.required else "warning",
-                    warnings=[f"no encontrada → {spec.capability_loss}"],
+                    warnings=[f"not found → {spec.capability_loss}"],
                     source_file=None,
                     missing=True,
                 )
@@ -414,12 +411,12 @@ def _diagnose_table(spec: TableSpec, table: ParsedTable) -> tuple[list[str], lis
     columns: list[ColumnWarning] = []
 
     if not table.rows:
-        warnings.append(f"la tabla está vacía → {spec.capability_loss}")
+        warnings.append(f"table is empty → {spec.capability_loss}")
 
     missing_keys = [c for c in spec.key_columns if c not in table.header]
     if missing_keys:
         warnings.append(
-            f"faltan columnas imprescindibles ({', '.join(missing_keys)}) → {spec.capability_loss}"
+            f"required columns are missing ({', '.join(missing_keys)}) → {spec.capability_loss}"
         )
     for column in spec.columns:
         if column not in table.header and column not in spec.key_columns:
@@ -427,13 +424,13 @@ def _diagnose_table(spec: TableSpec, table: ParsedTable) -> tuple[list[str], lis
 
     if table.malformed_rows:
         warnings.append(
-            f"{table.malformed_rows} filas no tienen el mismo número de columnas que el encabezado"
+            f"{table.malformed_rows} rows do not have the same number of columns as the header"
         )
 
     duplicates = _duplicate_key_count(table, spec.columns[0])
     if duplicates:
         warnings.append(
-            f"{duplicates} valores repetidos en {spec.columns[0]}, que debería ser único"
+            f"{duplicates} repeated values in {spec.columns[0]}, which should be unique"
         )
 
     for column in spec.numeric_columns:
@@ -462,8 +459,8 @@ def _diagnose_table(spec: TableSpec, table: ParsedTable) -> tuple[list[str], lis
 
 def _missing_column_message(spec: TableSpec, column: str) -> str:
     if column in spec.enum_columns:
-        return f"falta la columna; se esperaba {' | '.join(spec.enum_columns[column])}"
-    return "falta la columna"
+        return f"column is missing; expected {' | '.join(spec.enum_columns[column])}"
+    return "column is missing"
 
 
 def _column_values(table: ParsedTable, column: str) -> list[str] | None:
@@ -492,7 +489,7 @@ def _invalid_values(table: ParsedTable, column: str, valid: Any) -> Counter[str]
 def _bad_values_message(bad: Counter[str], expected: str) -> str:
     total = sum(bad.values())
     examples = ", ".join(repr(v) for v, _ in bad.most_common(_MAX_VALUE_EXAMPLES))
-    return f"{total} valores no son {expected} (p. ej. {examples})"
+    return f"{total} values are not {expected} (for example, {examples})"
 
 
 def _is_number(value: str) -> bool:

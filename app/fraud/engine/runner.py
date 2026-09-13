@@ -49,10 +49,10 @@ def validar_contrato(df: pd.DataFrame) -> list[str]:
         errores.append(f"rule_id no constante: {sorted(df['rule_id'].astype(str).unique())}")
     invalidas = set(df["severidad"]) - SEVERIDADES
     if invalidas:
-        errores.append(f"severidad inválida: {sorted(map(str, invalidas))}")
+        errores.append(f"invalid severity: {sorted(map(str, invalidas))}")
     invalidas = set(df["autosuficiencia"]) - AUTOSUFICIENCIAS
     if invalidas:
-        errores.append(f"autosuficiencia inválida: {sorted(map(str, invalidas))}")
+        errores.append(f"invalid self-sufficiency: {sorted(map(str, invalidas))}")
     return errores
 
 

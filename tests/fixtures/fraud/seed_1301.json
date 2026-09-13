@@ -7,8 +7,8 @@
         "EMP:00001301-0006",
         "RFC:HTH751228HTR"
       ],
-      "narrative": "Posible soborno o comisión indebida (kickback) que involucra a Fabian Rios 06 00001301 (EMP:00001301-0006), Servicios Mantenimiento 00001301-054 SA de CV (RFC:HTH751228HTR). Los registros muestran que la empresa transfirió dinero directamente a la cuenta bancaria de un empleado; además, la misma persona pidió y autorizó sus órdenes de compra; además, cobró muy por encima de otros proveedores de su categoría. El monto en juego es $13,778.94, la suma de 1 transferencias bancarias (el 2026-03-09). Lo consideramos probado: al menos uno de los registros demuestra el hecho por sí solo.",
-      "rule_broken": "LISR Artículo 27, fracción I (erogación no estrictamente indispensable) y Código Penal Federal Artículo 386 (fraude)",
+      "narrative": "Potential kickback or improper commission involving Fabian Rios 06 00001301 (EMP:00001301-0006), Servicios Mantenimiento 00001301-054 SA de CV (RFC:HTH751228HTR). The records show that it the company transferred funds directly to an employee's bank account; additionally, the same person requested and approved its purchase orders; additionally, charged far above other vendors in its category. The amount at issue is $13,778.94, the total of 1 bank transfers (on 2026-03-09). We consider this proven: at least one record independently establishes the fact.",
+      "rule_broken": "Mexican Income Tax Law (LISR), Article 27(I) (expense not strictly necessary) and Federal Criminal Code, Article 386 (fraud)",
       "peso_amount": 13778.94,
       "money_trail": [
         {
@@ -24,49 +24,49 @@
           "exhibit_id": "EX-01",
           "source_table": "invoices",
           "record_id": "INV-00139",
-          "note": "Factura INV-00139 de HTH751228HTR a HRF810614GSR por $137,789.44 del 2026-02-25 (vigente): su subtotal está a 2.8 desviaciones estándar del promedio de la categoría Mantenimiento ($51,027.71)."
+          "note": "Invoice INV-00139 from HTH751228HTR to HRF810614GSR for $137,789.44 dated 2026-02-25 (vigente): its subtotal is 2.8 standard deviations from the Mantenimiento category average ($51,027.71)."
         },
         {
           "exhibit_id": "EX-02",
           "source_table": "bank_txns",
           "record_id": "BNK-00124",
-          "note": "Transferencia BNK-00124 por $13,778.94 de la CLABE 646180000134467330 a la CLABE 646180008049666215 el 2026-03-09: llegó a la cuenta bancaria del empleado EMP:00001301-0006 (Fabian Rios 06 00001301, Compras)."
+          "note": "Transfer BNK-00124 for $13,778.94 from CLABE 646180000134467330 to CLABE 646180008049666215 on 2026-03-09: reached employee EMP:00001301-0006's bank account (Fabian Rios 06 00001301, Compras)."
         },
         {
           "exhibit_id": "EX-03",
           "source_table": "purchase_orders",
           "record_id": "PO-00287",
-          "note": "Orden de compra PO-00287 a HTH751228HTR por $137,789.44 del 2026-02-25, solicitada por Fabian Rios 06 00001301 y aprobada por Fabian Rios 06 00001301: Fabian Rios 06 00001301 la solicitó y también la aprobó."
+          "note": "Purchase order PO-00287 to HTH751228HTR for $137,789.44 dated 2026-02-25, requested by Fabian Rios 06 00001301 and approved by Fabian Rios 06 00001301: was both requested and approved by Fabian Rios 06 00001301."
         },
         {
           "exhibit_id": "EX-04",
           "source_table": "purchase_orders",
           "record_id": "PO-00163",
-          "note": "Orden de compra PO-00163 a HRY700307HCE por $37,630.40 del 2026-06-29, solicitada por Fabian Rios 06 00001301 y aprobada por Ana Ruiz 07 00001301: muestra que Fabian Rios 06 00001301 (Compras) solicita o aprueba operaciones de compra de la empresa."
+          "note": "Purchase order PO-00163 to HRY700307HCE for $37,630.40 dated 2026-06-29, requested by Fabian Rios 06 00001301 and approved by Ana Ruiz 07 00001301: shows that Fabian Rios 06 00001301 (Compras) requests or approves the company's purchasing transactions."
         },
         {
           "exhibit_id": "EX-05",
           "source_table": "ledger",
           "record_id": "1112",
-          "note": "Asiento 1112 del 2026-06-26 en la cuenta 2100 por $45,752.72, aprobado por Fabian Rios 06 00001301: muestra que Fabian Rios 06 00001301 (Compras) solicita o aprueba operaciones de compra de la empresa."
+          "note": "Ledger entry 1112 dated 2026-06-26 in account 2100 for $45,752.72, approved by Fabian Rios 06 00001301: shows that Fabian Rios 06 00001301 (Compras) requests or approves the company's purchasing transactions."
         },
         {
           "exhibit_id": "EX-06",
           "source_table": "ledger",
           "record_id": "413",
-          "note": "Asiento 413 del 2026-06-26 en la cuenta 1180 por $6,310.72, aprobado por Fabian Rios 06 00001301: muestra que Fabian Rios 06 00001301 (Compras) solicita o aprueba operaciones de compra de la empresa."
+          "note": "Ledger entry 413 dated 2026-06-26 in account 1180 for $6,310.72, approved by Fabian Rios 06 00001301: shows that Fabian Rios 06 00001301 (Compras) requests or approves the company's purchasing transactions."
         },
         {
           "exhibit_id": "EX-07",
           "source_table": "vendors",
           "record_id": "HTH751228HTR",
-          "note": "Alta del proveedor HTH751228HTR (Servicios Mantenimiento 00001301-054 SA de CV) el 2024-01-15 con CLABE 646180000134467330: identifica al proveedor señalado y la cuenta en la que cobra."
+          "note": "Vendor registration for HTH751228HTR (Servicios Mantenimiento 00001301-054 SA de CV) on 2024-01-15 with CLABE 646180000134467330: identifies the flagged vendor and the account it receives payments into."
         },
         {
           "exhibit_id": "EX-08",
           "source_table": "employees",
           "record_id": "EMP:00001301-0006",
-          "note": "Empleado EMP:00001301-0006 (Fabian Rios 06 00001301, Compras) con CLABE 646180008049666215."
+          "note": "Employee EMP:00001301-0006 (Fabian Rios 06 00001301, Compras) with CLABE 646180008049666215."
         }
       ],
       "confidence": "proven"
@@ -77,8 +77,8 @@
         "EMP:00001301-0003",
         "RFC:HTE720307HSE"
       ],
-      "narrative": "Posible proveedor fantasma que involucra a Carla Soto 03 00001301 (EMP:00001301-0003), Servicios Consultoria 00001301-051 SA de CV (RFC:HTE720307HSE). Los registros muestran que aparece en la lista del SAT de empresas que facturan operaciones simuladas; además, no tiene ninguna orden de compra ni contrato con la empresa; además, la empresa transfirió dinero directamente a la cuenta bancaria de un empleado. El monto en juego es $100,257.64, la suma de 1 facturas (el 2026-02-16). Lo consideramos probado: al menos uno de los registros demuestra el hecho por sí solo.",
-      "rule_broken": "CFF Artículo 69-B (operaciones inexistentes amparadas en comprobantes de un EFOS)",
+      "narrative": "Potential phantom vendor involving Carla Soto 03 00001301 (EMP:00001301-0003), Servicios Consultoria 00001301-051 SA de CV (RFC:HTE720307HSE). The records show that it appears on the SAT list of taxpayers suspected of issuing invoices for simulated transactions; additionally, has no purchase order or contract with the audited company; additionally, the company transferred funds directly to an employee's bank account. The amount at issue is $100,257.64, the total of 1 invoices (on 2026-02-16). We consider this proven: at least one record independently establishes the fact.",
+      "rule_broken": "Mexican Federal Fiscal Code (CFF), Article 69-B (non-existent transactions supported by EFOS invoices)",
       "peso_amount": 100257.64,
       "money_trail": [
         {
@@ -94,49 +94,49 @@
           "exhibit_id": "EX-01",
           "source_table": "invoices",
           "record_id": "INV-00203",
-          "note": "Factura INV-00203 de HTE720307HSE a HRF810614GSR por $100,257.64 del 2026-02-16 (vigente): emitida por un contribuyente que el SAT presume EFOS; su emisor no tiene ninguna orden de compra ni contrato con la empresa."
+          "note": "Invoice INV-00203 from HTE720307HSE to HRF810614GSR for $100,257.64 dated 2026-02-16 (vigente): issued by a taxpayer that SAT lists as a presumed EFOS; its issuer has no purchase order or contract with the audited company."
         },
         {
           "exhibit_id": "EX-02",
           "source_table": "bank_txns",
           "record_id": "BNK-00086",
-          "note": "Transferencia BNK-00086 por $100,257.64 de la CLABE 646180000130191079 a la CLABE 646180008049428644 el 2026-02-26: pago a HTE720307HSE, proveedor con EFOS presunto; llegó a la cuenta bancaria del empleado EMP:00001301-0003 (Carla Soto 03 00001301, Operaciones)."
+          "note": "Transfer BNK-00086 for $100,257.64 from CLABE 646180000130191079 to CLABE 646180008049428644 on 2026-02-26: payment to HTE720307HSE, a vendor with EFOS presunto; reached employee EMP:00001301-0003's bank account (Carla Soto 03 00001301, Operaciones)."
         },
         {
           "exhibit_id": "EX-03",
           "source_table": "ledger",
           "record_id": "1702",
-          "note": "Asiento 1702 del 2026-06-27 en la cuenta 5000 por $80,180.00, aprobado por Carla Soto 03 00001301: muestra que Carla Soto 03 00001301 (Operaciones) solicita o aprueba operaciones de compra de la empresa."
+          "note": "Ledger entry 1702 dated 2026-06-27 in account 5000 for $80,180.00, approved by Carla Soto 03 00001301: shows that Carla Soto 03 00001301 (Operaciones) requests or approves the company's purchasing transactions."
         },
         {
           "exhibit_id": "EX-04",
           "source_table": "ledger",
           "record_id": "1875",
-          "note": "Asiento 1875 del 2026-06-27 en la cuenta 2100 por $93,008.80, aprobado por Carla Soto 03 00001301: muestra que Carla Soto 03 00001301 (Operaciones) solicita o aprueba operaciones de compra de la empresa."
+          "note": "Ledger entry 1875 dated 2026-06-27 in account 2100 for $93,008.80, approved by Carla Soto 03 00001301: shows that Carla Soto 03 00001301 (Operaciones) requests or approves the company's purchasing transactions."
         },
         {
           "exhibit_id": "EX-05",
           "source_table": "ledger",
           "record_id": "857",
-          "note": "Asiento 857 del 2026-06-27 en la cuenta 1180 por $12,828.80, aprobado por Carla Soto 03 00001301: muestra que Carla Soto 03 00001301 (Operaciones) solicita o aprueba operaciones de compra de la empresa."
+          "note": "Ledger entry 857 dated 2026-06-27 in account 1180 for $12,828.80, approved by Carla Soto 03 00001301: shows that Carla Soto 03 00001301 (Operaciones) requests or approves the company's purchasing transactions."
         },
         {
           "exhibit_id": "EX-06",
           "source_table": "vendors",
           "record_id": "HTE720307HSE",
-          "note": "Alta del proveedor HTE720307HSE (Servicios Consultoria 00001301-051 SA de CV) el 2021-07-15 con CLABE 646180008049428644: identifica al proveedor señalado y la cuenta en la que cobra."
+          "note": "Vendor registration for HTE720307HSE (Servicios Consultoria 00001301-051 SA de CV) on 2021-07-15 with CLABE 646180008049428644: identifies the flagged vendor and the account it receives payments into."
         },
         {
           "exhibit_id": "EX-07",
           "source_table": "efos_list",
           "record_id": "HTE720307HSE",
-          "note": "El SAT publicó a HTE720307HSE en la lista EFOS con status presunto el 2026-02-17."
+          "note": "SAT listed HTE720307HSE on the EFOS list with status presunto on 2026-02-17."
         },
         {
           "exhibit_id": "EX-08",
           "source_table": "employees",
           "record_id": "EMP:00001301-0003",
-          "note": "Empleado EMP:00001301-0003 (Carla Soto 03 00001301, Operaciones) con CLABE 646180008049428644."
+          "note": "Employee EMP:00001301-0003 (Carla Soto 03 00001301, Operaciones) with CLABE 646180008049428644."
         }
       ],
       "confidence": "proven"
@@ -147,8 +147,8 @@
         "RFC:HRF810614GSR",
         "RFC:VCM720921ZJE"
       ],
-      "narrative": "Posible inflado de ingresos que involucra a RFC:HRF810614GSR, RFC:VCM720921ZJE. Los registros muestran que facturas de venta canceladas siguen registradas como ingreso en la contabilidad; además, las cuentas por cobrar de esas ventas llevan meses abiertas sin ningún cobro. El monto en juego es $199,014.23, la suma de 3 facturas (entre el 2026-02-09 y el 2026-02-11). Lo consideramos probable: varias señales independientes apuntan a lo mismo, pero hace falta confirmar con documentos fuera de la contabilidad que la operación no existió.",
-      "rule_broken": "CFF Artículo 28, fracción I (la contabilidad debe registrar operaciones reales)",
+      "narrative": "Potential revenue inflation involving RFC:HRF810614GSR, RFC:VCM720921ZJE. The records show that it cancelled sales invoices remain recorded as revenue in the ledger; additionally, the receivables from those sales have remained open for months with no collection. The amount at issue is $199,014.23, the total of 3 invoices (between 2026-02-09 and 2026-02-11). We consider this probable: several independent signals point to the same conclusion, but documents outside the accounting records are needed to confirm that the transaction did not occur.",
+      "rule_broken": "Mexican Federal Fiscal Code (CFF), Article 28(I) (accounting must record real transactions)",
       "peso_amount": 199014.23,
       "money_trail": [
         {
@@ -178,37 +178,37 @@
           "exhibit_id": "EX-01",
           "source_table": "invoices",
           "record_id": "INV-00190",
-          "note": "Factura INV-00190 de HRF810614GSR a VCM720921ZJE por $65,932.08 del 2026-02-09 (cancelado): su cuenta por cobrar a VCM720921ZJE nunca se cobró; está cancelada, pero su registro contable no se revirtió (1050 Cuentas por cobrar: -65932.08; 2080 IVA trasladado: 9094.08; 4000 Ingresos por servicios: 56838.0)."
+          "note": "Invoice INV-00190 from HRF810614GSR to VCM720921ZJE for $65,932.08 dated 2026-02-09 (cancelado): its receivable from VCM720921ZJE was never collected; is cancelled, but its accounting entry was not reversed (1050 Cuentas por cobrar: -65932.08; 2080 IVA trasladado: 9094.08; 4000 Ingresos por servicios: 56838.0)."
         },
         {
           "exhibit_id": "EX-02",
           "source_table": "invoices",
           "record_id": "INV-00174",
-          "note": "Factura INV-00174 de HRF810614GSR a VCM720921ZJE por $66,338.08 del 2026-02-10 (cancelado): su cuenta por cobrar a VCM720921ZJE nunca se cobró; está cancelada, pero su registro contable no se revirtió (1050 Cuentas por cobrar: -66338.08; 2080 IVA trasladado: 9150.08; 4000 Ingresos por servicios: 57188.0)."
+          "note": "Invoice INV-00174 from HRF810614GSR to VCM720921ZJE for $66,338.08 dated 2026-02-10 (cancelado): its receivable from VCM720921ZJE was never collected; is cancelled, but its accounting entry was not reversed (1050 Cuentas por cobrar: -66338.08; 2080 IVA trasladado: 9150.08; 4000 Ingresos por servicios: 57188.0)."
         },
         {
           "exhibit_id": "EX-03",
           "source_table": "invoices",
           "record_id": "INV-00005",
-          "note": "Factura INV-00005 de HRF810614GSR a VCM720921ZJE por $66,744.08 del 2026-02-11 (cancelado): su cuenta por cobrar a VCM720921ZJE nunca se cobró; está cancelada, pero su registro contable no se revirtió (1050 Cuentas por cobrar: -66744.08; 2080 IVA trasladado: 9206.08; 4000 Ingresos por servicios: 57538.0)."
+          "note": "Invoice INV-00005 from HRF810614GSR to VCM720921ZJE for $66,744.08 dated 2026-02-11 (cancelado): its receivable from VCM720921ZJE was never collected; is cancelled, but its accounting entry was not reversed (1050 Cuentas por cobrar: -66744.08; 2080 IVA trasladado: 9206.08; 4000 Ingresos por servicios: 57538.0)."
         },
         {
           "exhibit_id": "EX-04",
           "source_table": "ledger",
           "record_id": "839",
-          "note": "Asiento 839 del 2026-02-09 en la cuenta 1050 por $65,932.08, aprobado por Bruno Garcia 02 00001301: cargo a cuentas por cobrar de la factura INV-00190 que sigue abierto 141 días después, al corte del 2026-06-30."
+          "note": "Ledger entry 839 dated 2026-02-09 in account 1050 for $65,932.08, approved by Bruno Garcia 02 00001301: accounts-receivable debit for invoice INV-00190 that remains open 141 days later, as of 2026-06-30."
         },
         {
           "exhibit_id": "EX-05",
           "source_table": "ledger",
           "record_id": "1079",
-          "note": "Asiento 1079 del 2026-02-10 en la cuenta 1050 por $66,338.08, aprobado por Bruno Garcia 02 00001301: cargo a cuentas por cobrar de la factura INV-00174 que sigue abierto 140 días después, al corte del 2026-06-30."
+          "note": "Ledger entry 1079 dated 2026-02-10 in account 1050 for $66,338.08, approved by Bruno Garcia 02 00001301: accounts-receivable debit for invoice INV-00174 that remains open 140 days later, as of 2026-06-30."
         },
         {
           "exhibit_id": "EX-06",
           "source_table": "ledger",
           "record_id": "769",
-          "note": "Asiento 769 del 2026-02-11 en la cuenta 1050 por $66,744.08, aprobado por Bruno Garcia 02 00001301: cargo a cuentas por cobrar de la factura INV-00005 que sigue abierto 139 días después, al corte del 2026-06-30."
+          "note": "Ledger entry 769 dated 2026-02-11 in account 1050 for $66,744.08, approved by Bruno Garcia 02 00001301: accounts-receivable debit for invoice INV-00005 that remains open 139 days later, as of 2026-06-30."
         }
       ],
       "confidence": "probable"
@@ -218,8 +218,8 @@
       "entities": [
         "RFC:HTF730614HSR"
       ],
-      "narrative": "Posible dinero que da la vuelta (round tripping) que involucra a Servicios Logistica 00001301-052 SA de CV (RFC:HTF730614HSR). Los registros muestran que el dinero enviado regresó a la cuenta de origen en pocos días; además, el dinero que regresó a la empresa no aparece en su contabilidad. El monto en juego es $83,810.00, la suma de 1 facturas (el 2026-02-19). Lo consideramos probable: varias señales independientes apuntan a lo mismo, pero hace falta confirmar con documentos fuera de la contabilidad que la operación no existió.",
-      "rule_broken": "CFF Artículo 69-B (operaciones simuladas sin sustancia económica)",
+      "narrative": "Potential round tripping involving Servicios Logistica 00001301-052 SA de CV (RFC:HTF730614HSR). The records show that it funds sent out returned to the originating account within a few days; additionally, funds returned to the company do not appear in its ledger. The amount at issue is $83,810.00, the total of 1 invoices (on 2026-02-19). We consider this probable: several independent signals point to the same conclusion, but documents outside the accounting records are needed to confirm that the transaction did not occur.",
+      "rule_broken": "Mexican Federal Fiscal Code (CFF), Article 69-B (simulated transactions without economic substance)",
       "peso_amount": 83810.0,
       "money_trail": [
         {
@@ -249,31 +249,31 @@
           "exhibit_id": "EX-01",
           "source_table": "invoices",
           "record_id": "INV-00323",
-          "note": "Factura INV-00323 de HTF730614HSR a HRF810614GSR por $83,810.00 del 2026-02-19 (vigente): es la factura que pagó la transferencia BNK-00277 con la que inicia el ciclo."
+          "note": "Invoice INV-00323 from HTF730614HSR to HRF810614GSR for $83,810.00 dated 2026-02-19 (vigente): is the invoice paid by transfer BNK-00277, which starts the cycle."
         },
         {
           "exhibit_id": "EX-02",
           "source_table": "bank_txns",
           "record_id": "BNK-00277",
-          "note": "Transferencia BNK-00277 por $83,810.00 de la CLABE 646180000130191079 a la CLABE 646180000134308952 el 2026-03-01: es un salto del ciclo 646180000130191079 -> 646180000134308952 -> 646180055563428649 -> 646180000130191079, cerrado en 4 días."
+          "note": "Transfer BNK-00277 for $83,810.00 from CLABE 646180000130191079 to CLABE 646180000134308952 on 2026-03-01: is a hop in cycle 646180000130191079 -> 646180000134308952 -> 646180055563428649 -> 646180000130191079, completed in 4 days."
         },
         {
           "exhibit_id": "EX-03",
           "source_table": "bank_txns",
           "record_id": "BNK-00160",
-          "note": "Transferencia BNK-00160 por $83,810.00 de la CLABE 646180000134308952 a la CLABE 646180055563428649 el 2026-03-03: es un salto del ciclo 646180000130191079 -> 646180000134308952 -> 646180055563428649 -> 646180000130191079, cerrado en 4 días."
+          "note": "Transfer BNK-00160 for $83,810.00 from CLABE 646180000134308952 to CLABE 646180055563428649 on 2026-03-03: is a hop in cycle 646180000130191079 -> 646180000134308952 -> 646180055563428649 -> 646180000130191079, completed in 4 days."
         },
         {
           "exhibit_id": "EX-04",
           "source_table": "bank_txns",
           "record_id": "BNK-00272",
-          "note": "Transferencia BNK-00272 por $83,310.00 de la CLABE 646180055563428649 a la CLABE 646180000130191079 el 2026-03-05: es un salto del ciclo 646180000130191079 -> 646180000134308952 -> 646180055563428649 -> 646180000130191079, cerrado en 4 días; entró a la cuenta de la empresa sin ningún asiento contable por ese monto (referencia: Ajuste de tesoreria INV-00323)."
+          "note": "Transfer BNK-00272 for $83,310.00 from CLABE 646180055563428649 to CLABE 646180000130191079 on 2026-03-05: is a hop in cycle 646180000130191079 -> 646180000134308952 -> 646180055563428649 -> 646180000130191079, completed in 4 days; entered the company's account with no ledger entry for that amount (reference: Ajuste de tesoreria INV-00323)."
         },
         {
           "exhibit_id": "EX-05",
           "source_table": "vendors",
           "record_id": "HTF730614HSR",
-          "note": "Alta del proveedor HTF730614HSR (Servicios Logistica 00001301-052 SA de CV) el 2022-08-15 con CLABE 646180000134308952: identifica al proveedor señalado y la cuenta en la que cobra."
+          "note": "Vendor registration for HTF730614HSR (Servicios Logistica 00001301-052 SA de CV) on 2022-08-15 with CLABE 646180000134308952: identifies the flagged vendor and the account it receives payments into."
         }
       ],
       "confidence": "probable"
@@ -284,8 +284,8 @@
         "EMP:00001301-0005",
         "RFC:HTG740921HTE"
       ],
-      "narrative": "Posible fraccionamiento de compras que involucra a Elena Mora 05 00001301 (EMP:00001301-0005), Servicios Insumos 00001301-053 SA de CV (RFC:HTG740921HTE). Los registros muestran que la misma persona autorizó varias órdenes de compra seguidas al mismo proveedor que juntas superan el límite; además, un solo contrato por el total se pidió en varias órdenes de compra más chicas. El monto en juego es $158,614.92, la suma de 3 órdenes de compra (entre el 2026-02-22 y el 2026-02-24). Lo consideramos probado: al menos uno de los registros demuestra el hecho por sí solo.",
-      "rule_broken": "Política interna de montos de autorización de compras (fraccionamiento para evadir el control)",
+      "narrative": "Potential purchase-order splitting involving Elena Mora 05 00001301 (EMP:00001301-0005), Servicios Insumos 00001301-053 SA de CV (RFC:HTG740921HTE). The records show that it the same person approved consecutive purchase orders to the same vendor that together exceed the limit; additionally, one contract was requested through several smaller purchase orders. The amount at issue is $158,614.92, the total of 3 purchase orders (between 2026-02-22 and 2026-02-24). We consider this proven: at least one record independently establishes the fact.",
+      "rule_broken": "Internal purchase-approval limit policy (splitting to evade a control)",
       "peso_amount": 158614.92,
       "money_trail": [
         {
@@ -315,37 +315,37 @@
           "exhibit_id": "EX-01",
           "source_table": "purchase_orders",
           "record_id": "PO-00177",
-          "note": "Orden de compra PO-00177 a HTG740921HTE por $52,296.28 del 2026-02-22, solicitada por Elena Mora 05 00001301 y aprobada por Elena Mora 05 00001301: es un pedazo del contrato CTR-00005; una de 3 órdenes a HTG740921HTE autorizadas por Elena Mora 05 00001301 en menos de una semana, que suman $158,614.92."
+          "note": "Purchase order PO-00177 to HTG740921HTE for $52,296.28 dated 2026-02-22, requested by Elena Mora 05 00001301 and approved by Elena Mora 05 00001301: is part of contract CTR-00005; one of 3 orders to HTG740921HTE approved by Elena Mora 05 00001301 within less than a week, totaling $158,614.92."
         },
         {
           "exhibit_id": "EX-02",
           "source_table": "purchase_orders",
           "record_id": "PO-00217",
-          "note": "Orden de compra PO-00217 a HTG740921HTE por $52,853.08 del 2026-02-23, solicitada por Elena Mora 05 00001301 y aprobada por Elena Mora 05 00001301: es un pedazo del contrato CTR-00005; una de 3 órdenes a HTG740921HTE autorizadas por Elena Mora 05 00001301 en menos de una semana, que suman $158,614.92."
+          "note": "Purchase order PO-00217 to HTG740921HTE for $52,853.08 dated 2026-02-23, requested by Elena Mora 05 00001301 and approved by Elena Mora 05 00001301: is part of contract CTR-00005; one of 3 orders to HTG740921HTE approved by Elena Mora 05 00001301 within less than a week, totaling $158,614.92."
         },
         {
           "exhibit_id": "EX-03",
           "source_table": "purchase_orders",
           "record_id": "PO-00205",
-          "note": "Orden de compra PO-00205 a HTG740921HTE por $53,465.56 del 2026-02-24, solicitada por Elena Mora 05 00001301 y aprobada por Elena Mora 05 00001301: es un pedazo del contrato CTR-00005; una de 3 órdenes a HTG740921HTE autorizadas por Elena Mora 05 00001301 en menos de una semana, que suman $158,614.92."
+          "note": "Purchase order PO-00205 to HTG740921HTE for $53,465.56 dated 2026-02-24, requested by Elena Mora 05 00001301 and approved by Elena Mora 05 00001301: is part of contract CTR-00005; one of 3 orders to HTG740921HTE approved by Elena Mora 05 00001301 within less than a week, totaling $158,614.92."
         },
         {
           "exhibit_id": "EX-04",
           "source_table": "contracts",
           "record_id": "CTR-00005",
-          "note": "Contrato CTR-00005 con HTG740921HTE por $158,614.92 desde 2026-02-22: su valor es la suma de las 3 órdenes PO-00177, PO-00217, PO-00205 ($158,614.92)."
+          "note": "Contract CTR-00005 with HTG740921HTE for $158,614.92 from 2026-02-22: its value is the sum of the 3 purchase orders PO-00177, PO-00217, PO-00205 ($158,614.92)."
         },
         {
           "exhibit_id": "EX-05",
           "source_table": "vendors",
           "record_id": "HTG740921HTE",
-          "note": "Alta del proveedor HTG740921HTE (Servicios Insumos 00001301-053 SA de CV) el 2023-09-15 con CLABE 646180000134388147: identifica al proveedor señalado y la cuenta en la que cobra."
+          "note": "Vendor registration for HTG740921HTE (Servicios Insumos 00001301-053 SA de CV) on 2023-09-15 with CLABE 646180000134388147: identifies the flagged vendor and the account it receives payments into."
         },
         {
           "exhibit_id": "EX-06",
           "source_table": "employees",
           "record_id": "EMP:00001301-0005",
-          "note": "Empleado EMP:00001301-0005 (Elena Mora 05 00001301, Direccion) con CLABE 646180008049587022: identifica al empleado señalado y su cuenta bancaria."
+          "note": "Employee EMP:00001301-0005 (Elena Mora 05 00001301, Direccion) with CLABE 646180008049587022: identifies the flagged employee and their bank account."
         }
       ],
       "confidence": "proven"
@@ -355,51 +355,51 @@
     {
       "entity": "EMP:00001301-0005",
       "signal": "NO_SEGREGATION_OF_DUTIES",
-      "reason": "Elena Mora 05 00001301 (EMP:00001301-0005) (junto con Servicios Insumos 00001301-053 SA de CV (RFC:HTG740921HTE)) solo tiene una señal: la misma persona pidió y autorizó sus órdenes de compra (NO_SEGREGATION_OF_DUTIES en PO-00177, PO-00205, PO-00217, $158,614.92). Para acusar soborno o comisión indebida (kickback) buscamos una segunda señal independiente (que la empresa transfirió dinero directamente a la cuenta bancaria de un empleado; o que un mismo empleado aprobó muchas de sus facturas; o que cobró muy por encima de otros proveedores de su categoría) y ninguna regla la encontró.",
+      "reason": "Elena Mora 05 00001301 (EMP:00001301-0005) (together with Servicios Insumos 00001301-053 SA de CV (RFC:HTG740921HTE)) has only one signal: the same person requested and approved its purchase orders (NO_SEGREGATION_OF_DUTIES in PO-00177, PO-00205, PO-00217, $158,614.92). To accuse kickback or improper commission, we require a second independent signal (one that the company transferred funds directly to an employee's bank account; or that one employee approved many of its invoices; or that charged far above other vendors in its category), and no rule found one.",
       "tool_calls_made": [
         "rule_no_segregation_of_duties",
-        "consultar_employees"
+        "query_employees"
       ],
       "closed_by": "investigator"
     },
     {
       "entity": "EMP:00001301-0007",
       "signal": "NO_SEGREGATION_OF_DUTIES",
-      "reason": "Ana Ruiz 07 00001301 (EMP:00001301-0007) (junto con Servicios Insumos 00001301-057 SA de CV (RFC:HTK780921HVE)) solo tiene una señal: la misma persona pidió y autorizó sus órdenes de compra (NO_SEGREGATION_OF_DUTIES en PO-00014, PO-00300, PO-00353, $147,900.00). Para acusar soborno o comisión indebida (kickback) buscamos una segunda señal independiente (que la empresa transfirió dinero directamente a la cuenta bancaria de un empleado; o que un mismo empleado aprobó muchas de sus facturas; o que cobró muy por encima de otros proveedores de su categoría) y ninguna regla la encontró.",
+      "reason": "Ana Ruiz 07 00001301 (EMP:00001301-0007) (together with Servicios Insumos 00001301-057 SA de CV (RFC:HTK780921HVE)) has only one signal: the same person requested and approved its purchase orders (NO_SEGREGATION_OF_DUTIES in PO-00014, PO-00300, PO-00353, $147,900.00). To accuse kickback or improper commission, we require a second independent signal (one that the company transferred funds directly to an employee's bank account; or that one employee approved many of its invoices; or that charged far above other vendors in its category), and no rule found one.",
       "tool_calls_made": [
         "rule_no_segregation_of_duties",
-        "consultar_employees"
+        "query_employees"
       ],
       "closed_by": "investigator"
     },
     {
       "entity": "RFC:HRG820921GTE",
       "signal": "EFOS_DIRECT_MATCH, OUTBOUND_TO_SUSPECT_ENTITY",
-      "reason": "Servicios Mantenimiento 00001301-001 SA de CV (RFC:HRG820921GTE) disparó EFOS_DIRECT_MATCH en INV-00066, INV-00086, INV-00099 y 3 más, $222,044.88; OUTBOUND_TO_SUSPECT_ENTITY en BNK-00131, BNK-00140, BNK-00149 y 6 más, $222,044.88, pero RFC:HRG820921GTE tiene 6 orden(es) de compra (PO-00314, PO-00037, PO-00120) y 1 contrato(s) (CTR-00006) que documentan una relación comercial real, y no comparte cuenta bancaria con otro proveedor.",
+      "reason": "Servicios Mantenimiento 00001301-001 SA de CV (RFC:HRG820921GTE) triggered EFOS_DIRECT_MATCH in INV-00066, INV-00086, INV-00099 and 3 more, $222,044.88; OUTBOUND_TO_SUSPECT_ENTITY in BNK-00131, BNK-00140, BNK-00149 and 6 more, $222,044.88, but RFC:HRG820921GTE has 6 purchase order(s) (PO-00314, PO-00037, PO-00120) and 1 contract(s) (CTR-00006) documenting a real commercial relationship, and does not share a bank account with another vendor.",
       "tool_calls_made": [
         "rule_efos_direct_match",
         "rule_outbound_to_suspect_entity",
-        "consultar_purchase_orders",
-        "consultar_contracts"
+        "query_purchase_orders",
+        "query_contracts"
       ],
       "closed_by": "investigator"
     },
     {
       "entity": "RFC:HTI760307HUE",
       "signal": "EFOS_PRESUNTO_MATCH, OUTBOUND_TO_SUSPECT_ENTITY",
-      "reason": "Servicios Consultoria 00001301-055 SA de CV (RFC:HTI760307HUE) solo tiene una señal: aparece en la lista del SAT de empresas que facturan operaciones simuladas (EFOS_PRESUNTO_MATCH en INV-00016, $87,000.00; OUTBOUND_TO_SUSPECT_ENTITY en BNK-00002, $87,000.00). Para acusar proveedor fantasma buscamos una segunda señal independiente (que empezó a facturar casi recién dado de alta; o que no tiene ninguna orden de compra ni contrato con la empresa; o que cobra en una cuenta bancaria registrada también por otro proveedor) y ninguna regla la encontró. Además, RFC:HTI760307HUE tiene 1 orden(es) de compra (PO-00237) y 1 contrato(s) (CTR-00008) que documentan la relación comercial.",
+      "reason": "Servicios Consultoria 00001301-055 SA de CV (RFC:HTI760307HUE) has only one signal: appears on the SAT list of taxpayers suspected of issuing invoices for simulated transactions (EFOS_PRESUNTO_MATCH in INV-00016, $87,000.00; OUTBOUND_TO_SUSPECT_ENTITY in BNK-00002, $87,000.00). To accuse phantom vendor, we require a second independent signal (one that began invoicing soon after registration; or that has no purchase order or contract with the audited company; or that receives payments into a bank account also registered to another vendor), and no rule found one. In addition, RFC:HTI760307HUE has 1 purchase order(s) (PO-00237) and 1 contract(s) (CTR-00008) documenting the commercial relationship.",
       "tool_calls_made": [
         "rule_efos_presunto_match",
         "rule_outbound_to_suspect_entity",
-        "consultar_purchase_orders",
-        "consultar_contracts"
+        "query_purchase_orders",
+        "query_contracts"
       ],
       "closed_by": "investigator"
     },
     {
       "entity": "RFC:HRF810614GSR",
       "signal": "INVOICE_NO_PO_NO_CONTRACT",
-      "reason": "INVOICE_NO_PO_NO_CONTRACT en INV-00005, $66,744.08. Todas las cuentas y RFC involucrados son de la propia empresa (HRF810614GSR), así que es un movimiento interno, no un esquema con terceros.",
+      "reason": "INVOICE_NO_PO_NO_CONTRACT in INV-00005, $66,744.08. All accounts and RFCs involved belong to the audited company (HRF810614GSR), so this is an internal movement, not a third-party scheme.",
       "tool_calls_made": [
         "rule_invoice_no_po_no_contract"
       ],
@@ -408,7 +408,7 @@
     {
       "entity": "RFC:HRF810614GSR",
       "signal": "INVOICE_NO_PO_NO_CONTRACT",
-      "reason": "INVOICE_NO_PO_NO_CONTRACT en INV-00109, $71,340.00. Todas las cuentas y RFC involucrados son de la propia empresa (HRF810614GSR), así que es un movimiento interno, no un esquema con terceros.",
+      "reason": "INVOICE_NO_PO_NO_CONTRACT in INV-00109, $71,340.00. All accounts and RFCs involved belong to the audited company (HRF810614GSR), so this is an internal movement, not a third-party scheme.",
       "tool_calls_made": [
         "rule_invoice_no_po_no_contract"
       ],
@@ -417,7 +417,7 @@
     {
       "entity": "RFC:HRF810614GSR",
       "signal": "INVOICE_NO_PO_NO_CONTRACT",
-      "reason": "INVOICE_NO_PO_NO_CONTRACT en INV-00174, $66,338.08. Todas las cuentas y RFC involucrados son de la propia empresa (HRF810614GSR), así que es un movimiento interno, no un esquema con terceros.",
+      "reason": "INVOICE_NO_PO_NO_CONTRACT in INV-00174, $66,338.08. All accounts and RFCs involved belong to the audited company (HRF810614GSR), so this is an internal movement, not a third-party scheme.",
       "tool_calls_made": [
         "rule_invoice_no_po_no_contract"
       ],
@@ -426,7 +426,7 @@
     {
       "entity": "RFC:HRF810614GSR",
       "signal": "INVOICE_NO_PO_NO_CONTRACT",
-      "reason": "INVOICE_NO_PO_NO_CONTRACT en INV-00190, $65,932.08. Todas las cuentas y RFC involucrados son de la propia empresa (HRF810614GSR), así que es un movimiento interno, no un esquema con terceros.",
+      "reason": "INVOICE_NO_PO_NO_CONTRACT in INV-00190, $65,932.08. All accounts and RFCs involved belong to the audited company (HRF810614GSR), so this is an internal movement, not a third-party scheme.",
       "tool_calls_made": [
         "rule_invoice_no_po_no_contract"
       ],
@@ -435,7 +435,7 @@
     {
       "entity": "RFC:HRF810614GSR",
       "signal": "INVOICE_NO_PO_NO_CONTRACT",
-      "reason": "INVOICE_NO_PO_NO_CONTRACT en INV-00208, $63,800.00. Todas las cuentas y RFC involucrados son de la propia empresa (HRF810614GSR), así que es un movimiento interno, no un esquema con terceros.",
+      "reason": "INVOICE_NO_PO_NO_CONTRACT in INV-00208, $63,800.00. All accounts and RFCs involved belong to the audited company (HRF810614GSR), so this is an internal movement, not a third-party scheme.",
       "tool_calls_made": [
         "rule_invoice_no_po_no_contract"
       ],
@@ -444,31 +444,31 @@
     {
       "entity": "RFC:HTJ770614HUR",
       "signal": "BANK_CYCLE_2NODE",
-      "reason": "Servicios Logistica 00001301-056 SA de CV (RFC:HTJ770614HUR) solo tiene una señal: el dinero enviado regresó a la cuenta de origen en pocos días (BANK_CYCLE_2NODE en BNK-00109, $46,400.00). Para acusar dinero que da la vuelta (round tripping) buscamos una segunda señal independiente (que el dinero dio la vuelta varias veces dejando siempre una comisión pequeña; o que se facturaron mutuamente montos casi iguales; o que el dinero que regresó a la empresa no aparece en su contabilidad) y ninguna regla la encontró.",
+      "reason": "Servicios Logistica 00001301-056 SA de CV (RFC:HTJ770614HUR) has only one signal: funds sent out returned to the originating account within a few days (BANK_CYCLE_2NODE in BNK-00109, $46,400.00). To accuse round tripping, we require a second independent signal (one that funds circulated repeatedly while leaving a small commission each time; or that the parties invoiced each other for nearly identical amounts; or that funds returned to the company do not appear in its ledger), and no rule found one.",
       "tool_calls_made": [
         "rule_bank_cycle_2node",
-        "consultar_vendors",
-        "consultar_employees"
+        "query_vendors",
+        "query_employees"
       ],
       "closed_by": "investigator"
     },
     {
       "entity": "EMP:00001301-0007",
       "signal": "SAME_APPROVER_SPLIT",
-      "reason": "Ana Ruiz 07 00001301 (EMP:00001301-0007) (junto con Servicios Insumos 00001301-057 SA de CV (RFC:HTK780921HVE)) solo tiene una señal: la misma persona autorizó varias órdenes de compra seguidas al mismo proveedor que juntas superan el límite (SAME_APPROVER_SPLIT en PO-00300, $147,900.00). Para acusar fraccionamiento de compras buscamos una segunda señal independiente (que un solo contrato por el total se pidió en varias órdenes de compra más chicas) y ninguna regla la encontró.",
+      "reason": "Ana Ruiz 07 00001301 (EMP:00001301-0007) (together with Servicios Insumos 00001301-057 SA de CV (RFC:HTK780921HVE)) has only one signal: the same person approved consecutive purchase orders to the same vendor that together exceed the limit (SAME_APPROVER_SPLIT in PO-00300, $147,900.00). To accuse purchase-order splitting, we require a second independent signal (one that one contract was requested through several smaller purchase orders), and no rule found one.",
       "tool_calls_made": [
         "rule_same_approver_split",
-        "consultar_employees"
+        "query_employees"
       ],
       "closed_by": "investigator"
     },
     {
       "entity": "RFC:HRF810614GSR",
       "signal": "INFLATE_AND_CANCEL",
-      "reason": "La factura INV-00208 de RFC:HRF810614GSR por $63,800.00 del 2026-03-23 también está cancelada, pero sus 6 asientos contables se revirtieron y dejan ingreso, IVA y cuentas por cobrar en cero. Es una cancelación bien registrada: no forma parte del inflado de ingresos ni del monto acusado.",
+      "reason": "Invoice INV-00208 from RFC:HRF810614GSR for $63,800.00, dated 2026-03-23, is also cancelled, but its 6 ledger entries were reversed and leave revenue, IVA, and accounts receivable at zero. This is a properly recorded cancellation: it is not part of the revenue inflation or the claimed amount.",
       "tool_calls_made": [
         "rule_inflate_and_cancel",
-        "consultar_ledger"
+        "query_ledger"
       ],
       "closed_by": "investigator"
     }

@@ -7,17 +7,17 @@ from .catalogo import FRASE_FAMILIA, MAX_PALABRAS_NARRATIVA, NOMBRE_ESQUEMA
 from .evidencia import pesos
 
 TABLA_LLANA = {
-    "invoices": "facturas",
-    "bank_txns": "transferencias bancarias",
-    "purchase_orders": "órdenes de compra",
-    "contracts": "contratos",
+    "invoices": "invoices",
+    "bank_txns": "bank transfers",
+    "purchase_orders": "purchase orders",
+    "contracts": "contracts",
 }
 
 CONFIANZA_LLANA = {
-    "proven": "Lo consideramos probado: al menos uno de los registros demuestra el hecho por sí solo.",
+    "proven": "We consider this proven: at least one record independently establishes the fact.",
     "probable": (
-        "Lo consideramos probable: varias señales independientes apuntan a lo mismo, pero hace falta "
-        "confirmar con documentos fuera de la contabilidad que la operación no existió."
+        "We consider this probable: several independent signals point to the same conclusion, but "
+        "documents outside the accounting records are needed to confirm that the transaction did not occur."
     ),
 }
 
@@ -41,19 +41,19 @@ def redactar(
     def armar(max_entidades: int, max_familias: int) -> str:
         nombres = ", ".join(etiquetas[:max_entidades])
         if len(etiquetas) > max_entidades:
-            nombres += f" y {len(etiquetas) - max_entidades} más"
-        hechos = "; además, ".join(FRASE_FAMILIA[f] for f in familias[:max_familias])
+            nombres += f" and {len(etiquetas) - max_entidades} more"
+        hechos = "; additionally, ".join(FRASE_FAMILIA[f] for f in familias[:max_familias])
         periodo = (
-            f"entre el {fechas[0]} y el {fechas[-1]}"
+            f"between {fechas[0]} and {fechas[-1]}"
             if n > 1 and fechas[0] != fechas[-1]
-            else f"el {fechas[0]}"
+            else f"on {fechas[0]}"
         )
         return (
             " ".join(
                 [
-                    f"Posible {NOMBRE_ESQUEMA[esquema]} que involucra a {nombres}.",
-                    f"Los registros muestran que {hechos}." if hechos else "",
-                    f"El monto en juego es {pesos(peso)}, la suma de {n} {TABLA_LLANA[tabla_monto]} ({periodo}).",
+                    f"Potential {NOMBRE_ESQUEMA[esquema]} involving {nombres}.",
+                    f"The records show that it {hechos}." if hechos else "",
+                    f"The amount at issue is {pesos(peso)}, the total of {n} {TABLA_LLANA[tabla_monto]} ({periodo}).",
                     CONFIANZA_LLANA[confidence],
                 ]
             )

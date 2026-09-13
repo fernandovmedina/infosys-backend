@@ -87,22 +87,22 @@ REGLAS_SUFICIENTES_SOLAS = {"EFOS_DIRECT_MATCH", "PAYMENT_TO_EMPLOYEE_ACCOUNT"}
 
 # Frase en lenguaje llano de cada familia, para narrativas y razones de descarte.
 FRASE_FAMILIA = {
-    "lista_sat": "aparece en la lista del SAT de empresas que facturan operaciones simuladas",
-    "alta_reciente": "empezó a facturar casi recién dado de alta",
-    "sin_materialidad": "no tiene ninguna orden de compra ni contrato con la empresa",
-    "cuenta_compartida": "cobra en una cuenta bancaria registrada también por otro proveedor",
-    "pago_a_empleado": "la empresa transfirió dinero directamente a la cuenta bancaria de un empleado",
-    "concentracion_aprobador": "un mismo empleado aprobó muchas de sus facturas",
-    "segregacion": "la misma persona pidió y autorizó sus órdenes de compra",
-    "sobreprecio": "cobró muy por encima de otros proveedores de su categoría",
-    "ciclo_bancario": "el dinero enviado regresó a la cuenta de origen en pocos días",
-    "comision_repetida": "el dinero dio la vuelta varias veces dejando siempre una comisión pequeña",
-    "factura_espejo": "se facturaron mutuamente montos casi iguales",
-    "sin_registro_contable": "el dinero que regresó a la empresa no aparece en su contabilidad",
-    "ordenes_fraccionadas": "la misma persona autorizó varias órdenes de compra seguidas al mismo proveedor que juntas superan el límite",
-    "contrato_fraccionado": "un solo contrato por el total se pidió en varias órdenes de compra más chicas",
-    "cancelada_sin_reversion": "facturas de venta canceladas siguen registradas como ingreso en la contabilidad",
-    "cxc_sin_cobro": "las cuentas por cobrar de esas ventas llevan meses abiertas sin ningún cobro",
+    "lista_sat": "appears on the SAT list of taxpayers suspected of issuing invoices for simulated transactions",
+    "alta_reciente": "began invoicing soon after registration",
+    "sin_materialidad": "has no purchase order or contract with the audited company",
+    "cuenta_compartida": "receives payments into a bank account also registered to another vendor",
+    "pago_a_empleado": "the company transferred funds directly to an employee's bank account",
+    "concentracion_aprobador": "one employee approved many of its invoices",
+    "segregacion": "the same person requested and approved its purchase orders",
+    "sobreprecio": "charged far above other vendors in its category",
+    "ciclo_bancario": "funds sent out returned to the originating account within a few days",
+    "comision_repetida": "funds circulated repeatedly while leaving a small commission each time",
+    "factura_espejo": "the parties invoiced each other for nearly identical amounts",
+    "sin_registro_contable": "funds returned to the company do not appear in its ledger",
+    "ordenes_fraccionadas": "the same person approved consecutive purchase orders to the same vendor that together exceed the limit",
+    "contrato_fraccionado": "one contract was requested through several smaller purchase orders",
+    "cancelada_sin_reversion": "cancelled sales invoices remain recorded as revenue in the ledger",
+    "cxc_sin_cobro": "the receivables from those sales have remained open for months with no collection",
 }
 
 # Familias que se esperan para corroborar cada esquema (para explicar descartes).
@@ -126,20 +126,20 @@ FAMILIAS_ESQUEMA = {
 }
 
 NOMBRE_ESQUEMA = {
-    "phantom_vendor": "proveedor fantasma",
-    "kickback": "soborno o comisión indebida (kickback)",
-    "round_tripping": "dinero que da la vuelta (round tripping)",
-    "threshold_splitting": "fraccionamiento de compras",
-    "revenue_inflation": "inflado de ingresos",
+    "phantom_vendor": "phantom vendor",
+    "kickback": "kickback or improper commission",
+    "round_tripping": "round tripping",
+    "threshold_splitting": "purchase-order splitting",
+    "revenue_inflation": "revenue inflation",
 }
 
 # Norma específica que sostiene la acusación, por esquema.
 RULE_BROKEN = {
-    "phantom_vendor": "CFF Artículo 69-B (operaciones inexistentes amparadas en comprobantes de un EFOS)",
-    "kickback": "LISR Artículo 27, fracción I (erogación no estrictamente indispensable) y Código Penal Federal Artículo 386 (fraude)",
-    "round_tripping": "CFF Artículo 69-B (operaciones simuladas sin sustancia económica)",
-    "threshold_splitting": "Política interna de montos de autorización de compras (fraccionamiento para evadir el control)",
-    "revenue_inflation": "CFF Artículo 28, fracción I (la contabilidad debe registrar operaciones reales)",
+    "phantom_vendor": "Mexican Federal Fiscal Code (CFF), Article 69-B (non-existent transactions supported by EFOS invoices)",
+    "kickback": "Mexican Income Tax Law (LISR), Article 27(I) (expense not strictly necessary) and Federal Criminal Code, Article 386 (fraud)",
+    "round_tripping": "Mexican Federal Fiscal Code (CFF), Article 69-B (simulated transactions without economic substance)",
+    "threshold_splitting": "Internal purchase-approval limit policy (splitting to evade a control)",
+    "revenue_inflation": "Mexican Federal Fiscal Code (CFF), Article 28(I) (accounting must record real transactions)",
 }
 
 # Llave primaria y columna de monto de cada tabla (mismas que usa validate_format.py).

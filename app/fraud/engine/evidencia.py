@@ -38,7 +38,7 @@ def _entero(valor) -> str:
 
 def _txt(valor) -> str:
     return (
-        "sin dato"
+        "no data"
         if valor is None or (isinstance(valor, float) and math.isnan(valor))
         else str(valor).strip()
     )
@@ -95,50 +95,50 @@ def citar_senal(citas: Citas, sig: dict) -> None:
         citas.agregar(
             tabla,
             eid,
-            "emitida por un contribuyente que el SAT declaró EFOS definitivo, por lo que no tiene efecto fiscal",
+            "issued by a taxpayer that SAT has listed as a definitive EFOS, so it has no tax effect",
         )
         citas.agregar("efos_list", sig["entity_id"])
     elif regla == "EFOS_PRESUNTO_MATCH":
-        citas.agregar(tabla, eid, "emitida por un contribuyente que el SAT presume EFOS")
+        citas.agregar(tabla, eid, "issued by a taxpayer that SAT lists as a presumed EFOS")
         citas.agregar("efos_list", sig["entity_id"])
     elif regla == "EFOS_POST_DATED":
         citas.agregar(
             tabla,
             eid,
-            f"emitida {_entero(ctx.get('dias_publicacion_posterior'))} días antes de que el SAT publicara al emisor como EFOS",
+            f"issued {_entero(ctx.get('dias_publicacion_posterior'))} days before SAT listed the issuer as an EFOS",
         )
         citas.agregar("efos_list", sig["entity_id"])
     elif regla == "VENDOR_SHORT_LIFECYCLE":
         citas.agregar(
             tabla,
             eid,
-            f"es la primera factura del proveedor, a {_entero(ctx.get('dias_hasta_primera_factura'))} días de su alta",
+            f"is the vendor's first invoice, issued {_entero(ctx.get('dias_hasta_primera_factura'))} days after registration",
         )
         citas.agregar(
             "vendors",
             sig["entity_id"],
-            f"desde su alta facturó {pesos(ctx.get('monto_acumulado'))} en {_entero(ctx.get('num_facturas'))} facturas",
+            f"has invoiced {pesos(ctx.get('monto_acumulado'))} across {_entero(ctx.get('num_facturas'))} invoices since registration",
         )
     elif regla == "INVOICE_NO_PO_NO_CONTRACT":
         citas.agregar(
-            tabla, eid, "su emisor no tiene ninguna orden de compra ni contrato con la empresa"
+            tabla, eid, "its issuer has no purchase order or contract with the audited company"
         )
     elif regla == "SHARED_CLABE_MULTI_RFC":
         rfcs = _separar(ctx.get("rfcs_involucrados"), ",")
         for rfc in rfcs:
             otros = ", ".join(r for r in rfcs if r != rfc)
-            citas.agregar("vendors", rfc, f"registró la misma CLABE {sig['entity_id']} que {otros}")
+            citas.agregar("vendors", rfc, f"registered the same CLABE {sig['entity_id']} as {otros}")
     elif regla == "OUTBOUND_TO_SUSPECT_ENTITY":
         citas.agregar(
             tabla,
             eid,
-            f"pago a {sig['entity_id']}, proveedor con {_txt(ctx.get('motivo_sospecha'))}",
+            f"payment to {sig['entity_id']}, a vendor with {_txt(ctx.get('motivo_sospecha'))}",
         )
     elif regla == "PAYMENT_TO_EMPLOYEE_ACCOUNT":
         citas.agregar(
             tabla,
             eid,
-            f"llegó a la cuenta bancaria del empleado {sig['entity_id']} ({_txt(ctx.get('nombre_empleado'))}, {_txt(ctx.get('puesto_empleado'))})",
+            f"reached employee {sig['entity_id']}'s bank account ({_txt(ctx.get('nombre_empleado'))}, {_txt(ctx.get('puesto_empleado'))})",
         )
         citas.agregar("employees", sig["entity_id"])
     elif regla == "APPROVER_VENDOR_CONCENTRATION":
@@ -147,37 +147,37 @@ def citar_senal(citas: Citas, sig: dict) -> None:
             citas.agregar(
                 "invoices",
                 uuid,
-                f"una de {len(uuids)} facturas de {_txt(ctx.get('vendor_rfc'))} aprobadas por {sig['entity_id']}",
+                f"one of {len(uuids)} invoices from {_txt(ctx.get('vendor_rfc'))} approved by {sig['entity_id']}",
             )
     elif regla == "NO_SEGREGATION_OF_DUTIES":
-        citas.agregar(tabla, eid, f"{sig['entity_id']} la solicitó y también la aprobó")
+        citas.agregar(tabla, eid, f"was both requested and approved by {sig['entity_id']}")
     elif regla == "PRICE_OUTLIER_BY_CATEGORY":
         citas.agregar(
             tabla,
             eid,
-            f"su subtotal está a {_num(ctx.get('z_score')) or 0:.1f} desviaciones estándar del promedio de la categoría {_txt(ctx.get('categoria'))} ({pesos(ctx.get('prom_categoria'))})",
+            f"its subtotal is {_num(ctx.get('z_score')) or 0:.1f} standard deviations from the {_txt(ctx.get('categoria'))} category average ({pesos(ctx.get('prom_categoria'))})",
         )
     elif regla == "BANK_CYCLE_2NODE":
         retorno = ctx.get("txn_id_retorno")
         citas.agregar(
             tabla,
             eid,
-            f"salida que regresó al origen en {_entero(ctx.get('dias_hasta_retorno'))} días con la transferencia {_txt(retorno)} (fuga de {_pct(ctx.get('tasa_fuga'))})",
+            f"outbound transfer that returned to its origin in {_entero(ctx.get('dias_hasta_retorno'))} days through transfer {_txt(retorno)} (leakage {_pct(ctx.get('tasa_fuga'))})",
         )
-        citas.agregar(tabla, retorno, f"devuelve al origen el dinero de la transferencia {eid}")
+        citas.agregar(tabla, retorno, f"returns the funds from transfer {eid} to the origin")
     elif regla == "BANK_CYCLE_NNODE":
         for txn in _separar(ctx.get("txns_ciclo"), ","):
             citas.agregar(
                 "bank_txns",
                 txn,
-                f"es un salto del ciclo {_txt(ctx.get('ruta_clabes'))}, cerrado en {_entero(ctx.get('dias_ciclo'))} días",
+                f"is a hop in cycle {_txt(ctx.get('ruta_clabes'))}, completed in {_entero(ctx.get('dias_ciclo'))} days",
             )
     elif regla == "CYCLE_LEAKAGE_RATE":
         for txn in _separar(ctx.get("evidence_ids_relacionados"), ","):
             citas.agregar(
                 "bank_txns",
                 txn,
-                f"inicia uno de {_entero(ctx.get('num_ciclos'))} ciclos por {sig['entity_id']} con fuga promedio de {_pct(ctx.get('tasa_fuga_promedio'))}",
+                f"starts one of {_entero(ctx.get('num_ciclos'))} cycles involving {sig['entity_id']} with average leakage of {_pct(ctx.get('tasa_fuga_promedio'))}",
             )
     elif regla == "SAME_APPROVER_SPLIT":
         ordenes = _separar(ctx.get("evidence_ids_relacionados"), ",")
@@ -185,43 +185,43 @@ def citar_senal(citas: Citas, sig: dict) -> None:
             citas.agregar(
                 "purchase_orders",
                 po,
-                f"una de {len(ordenes)} órdenes a {sig['entity_id']} autorizadas por {_txt(ctx.get('approver'))} "
-                f"en menos de una semana, que suman {pesos(ctx.get('monto_acumulado_ventana'))}",
+                f"one of {len(ordenes)} orders to {sig['entity_id']} approved by {_txt(ctx.get('approver'))} "
+                f"within less than a week, totaling {pesos(ctx.get('monto_acumulado_ventana'))}",
             )
     elif regla == "CONTRACT_SPLIT_INTO_POS":
         ordenes = _separar(ctx.get("evidence_ids_relacionados"), ",")
         citas.agregar(
             tabla,
             eid,
-            f"su valor es la suma de las {len(ordenes)} órdenes {', '.join(ordenes)} ({pesos(ctx.get('suma_ordenes'))})",
+            f"its value is the sum of the {len(ordenes)} purchase orders {', '.join(ordenes)} ({pesos(ctx.get('suma_ordenes'))})",
         )
         for po in ordenes:
-            citas.agregar("purchase_orders", po, f"es un pedazo del contrato {eid}")
+            citas.agregar("purchase_orders", po, f"is part of contract {eid}")
     elif regla == "INFLATE_AND_CANCEL":
         citas.agregar(
             tabla,
             eid,
-            f"está cancelada, pero su registro contable no se revirtió ({_txt(ctx.get('saldos_pendientes'))})",
+            f"is cancelled, but its accounting entry was not reversed ({_txt(ctx.get('saldos_pendientes'))})",
         )
     elif regla == "AR_AGING_EXCESSIVE":
         citas.agregar(
             tabla,
             eid,
-            f"cargo a cuentas por cobrar de la factura {_txt(ctx.get('invoice_uuid'))} que sigue abierto "
-            f"{_entero(ctx.get('dias_abierta'))} días después, al corte del {_txt(ctx.get('fecha_corte'))}",
+            f"accounts-receivable debit for invoice {_txt(ctx.get('invoice_uuid'))} that remains open "
+            f"{_entero(ctx.get('dias_abierta'))} days later, as of {_txt(ctx.get('fecha_corte'))}",
         )
         citas.agregar(
             "invoices",
             ctx.get("invoice_uuid"),
-            f"su cuenta por cobrar a {sig['entity_id']} nunca se cobró",
+            f"its receivable from {sig['entity_id']} was never collected",
             solo_si_nuevo=True,
         )
     elif regla == "BANK_TXN_NOT_IN_LEDGER":
-        lado = "entró a" if ctx.get("direccion") == "entrada" else "salió de"
+        lado = "entered" if ctx.get("direccion") == "entrada" else "left"
         citas.agregar(
             tabla,
             eid,
-            f"{lado} la cuenta de la empresa sin ningún asiento contable por ese monto (referencia: {_txt(ctx.get('referencia'))})",
+            f"{lado} the company's account with no ledger entry for that amount (reference: {_txt(ctx.get('referencia'))})",
         )
     elif regla == "INVOICE_BIDIRECTIONAL":
         # Solo se cita una dirección: la factura espejo es el mismo dinero de regreso y
@@ -229,11 +229,11 @@ def citar_senal(citas: Citas, sig: dict) -> None:
         citas.agregar(
             tabla,
             eid,
-            f"su espejo es la factura {_txt(ctx.get('uuid_espejo'))}, emitida en sentido contrario "
-            f"por {pesos(ctx.get('monto_espejo'))} {_entero(ctx.get('dias_entre_facturas'))} días después",
+            f"its mirror is invoice {_txt(ctx.get('uuid_espejo'))}, issued in the opposite direction "
+            f"for {pesos(ctx.get('monto_espejo'))} {_entero(ctx.get('dias_entre_facturas'))} days later",
         )
     else:
-        citas.agregar(tabla, eid, f"señalado por {regla}")
+        citas.agregar(tabla, eid, f"flagged by {regla}")
 
 
 # --- exhibits ---------------------------------------------------------------------
@@ -242,37 +242,37 @@ def citar_senal(citas: Citas, sig: dict) -> None:
 def _describir(tabla: str, f: dict) -> str:
     if tabla == "invoices":
         return (
-            f"Factura {f['uuid']} de {_txt(f.get('issuer_rfc'))} a {_txt(f.get('receiver_rfc'))} "
-            f"por {pesos(f.get('total'))} del {_txt(f.get('issue_date'))} ({_txt(f.get('status'))})"
+            f"Invoice {f['uuid']} from {_txt(f.get('issuer_rfc'))} to {_txt(f.get('receiver_rfc'))} "
+            f"for {pesos(f.get('total'))} dated {_txt(f.get('issue_date'))} ({_txt(f.get('status'))})"
         )
     if tabla == "bank_txns":
         return (
-            f"Transferencia {f['txn_id']} por {pesos(f.get('amount'))} de la CLABE {_txt(f.get('from_clabe'))} "
-            f"a la CLABE {_txt(f.get('to_clabe'))} el {_txt(f.get('date'))}"
+            f"Transfer {f['txn_id']} for {pesos(f.get('amount'))} from CLABE {_txt(f.get('from_clabe'))} "
+            f"to CLABE {_txt(f.get('to_clabe'))} on {_txt(f.get('date'))}"
         )
     if tabla == "purchase_orders":
         return (
-            f"Orden de compra {f['po_id']} a {_txt(f.get('vendor_rfc'))} por {pesos(f.get('amount'))} del "
-            f"{_txt(f.get('date'))}, solicitada por {_txt(f.get('requester'))} y aprobada por {_txt(f.get('approver'))}"
+            f"Purchase order {f['po_id']} to {_txt(f.get('vendor_rfc'))} for {pesos(f.get('amount'))} dated "
+            f"{_txt(f.get('date'))}, requested by {_txt(f.get('requester'))} and approved by {_txt(f.get('approver'))}"
         )
     if tabla == "contracts":
-        return f"Contrato {f['contract_id']} con {_txt(f.get('vendor_rfc'))} por {pesos(f.get('value'))} desde {_txt(f.get('start_date'))}"
+        return f"Contract {f['contract_id']} with {_txt(f.get('vendor_rfc'))} for {pesos(f.get('value'))} from {_txt(f.get('start_date'))}"
     if tabla == "ledger":
         monto = max(_num(f.get("debit")) or 0, _num(f.get("credit")) or 0)
         return (
-            f"Asiento {f['entry_id']} del {_txt(f.get('date'))} en la cuenta {_txt(f.get('account_code'))} "
-            f"por {pesos(monto)}, aprobado por {_txt(f.get('approver'))}"
+            f"Ledger entry {f['entry_id']} dated {_txt(f.get('date'))} in account {_txt(f.get('account_code'))} "
+            f"for {pesos(monto)}, approved by {_txt(f.get('approver'))}"
         )
     if tabla == "vendors":
         return (
-            f"Alta del proveedor {_txt(f.get('rfc'))} ({_txt(f.get('legal_name'))}) el "
-            f"{_txt(f.get('registered_date'))} con CLABE {_txt(f.get('bank_clabe'))}"
+            f"Vendor registration for {_txt(f.get('rfc'))} ({_txt(f.get('legal_name'))}) on "
+            f"{_txt(f.get('registered_date'))} with CLABE {_txt(f.get('bank_clabe'))}"
         )
     if tabla == "efos_list":
-        return f"El SAT publicó a {_txt(f.get('rfc'))} en la lista EFOS con status {_txt(f.get('status'))} el {_txt(f.get('publication_date'))}"
+        return f"SAT listed {_txt(f.get('rfc'))} on the EFOS list with status {_txt(f.get('status'))} on {_txt(f.get('publication_date'))}"
     if tabla == "employees":
-        return f"Empleado {_txt(f.get('emp_id'))} ({_txt(f.get('name'))}, {_txt(f.get('role'))}) con CLABE {_txt(f.get('bank_clabe'))}"
-    raise ValueError(f"Tabla sin descripción: {tabla}")
+        return f"Employee {_txt(f.get('emp_id'))} ({_txt(f.get('name'))}, {_txt(f.get('role'))}) with CLABE {_txt(f.get('bank_clabe'))}"
+    raise ValueError(f"Table without a description: {tabla}")
 
 
 def _fecha(tabla: str, fila: dict) -> str:

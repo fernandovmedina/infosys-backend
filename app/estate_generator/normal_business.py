@@ -27,11 +27,11 @@ from app.estate_generator.models import (
 
 _CATEGORIES = ("Mantenimiento", "Consultoria", "Logistica", "Insumos", "Tecnologia")
 _SCOPES = {
-    "Mantenimiento": "Mantenimiento preventivo de instalaciones",
-    "Consultoria": "Servicios de consultoria operativa",
-    "Logistica": "Servicios de logistica y entrega",
-    "Insumos": "Suministro de insumos de produccion",
-    "Tecnologia": "Soporte y licencias de tecnologia",
+    "Mantenimiento": "Preventive facility maintenance",
+    "Consultoria": "Operational consulting services",
+    "Logistica": "Logistics and delivery services",
+    "Insumos": "Production supplies",
+    "Tecnologia": "Technology support and licences",
 }
 _NAMES = ("Ana Ruiz", "Bruno Garcia", "Carla Soto", "Diego Luna", "Elena Mora", "Fabian Rios")
 _ROLES = ("Compras", "Finanzas", "Operaciones", "Contraloria", "Direccion")
@@ -124,7 +124,7 @@ class EstateEventBuilder:
         vendor = Vendor(
             rfc=vendor_rfc,
             legal_name=legal_name
-            or f"Servicios {category} {self._identity_code:08d}-{index:03d} SA de CV",
+            or f"{category} Services {self._identity_code:08d}-{index:03d} SA de CV",
             registered_date=f"202{index % 5}-0{(index % 9) + 1}-15",
             address=f"Av. Industria {100 + index}, Monterrey, Nuevo Leon",
             bank_clabe=vendor_clabe,
@@ -260,11 +260,11 @@ class EstateEventBuilder:
             date_value=reversal_date.isoformat(),
             invoice_uuid=invoice.uuid,
             approver=approver or self.estate.employees[1].name,
-            description=f"Reversion de venta cancelada {invoice.uuid}",
+            description=f"Cancelled sale reversal {invoice.uuid}",
             amounts=(
-                ("4000", "Ingresos por servicios", invoice.subtotal_centavos, 0),
+                ("4000", "Service revenue", invoice.subtotal_centavos, 0),
                 ("2080", "IVA trasladado", invoice.iva_centavos, 0),
-                ("1050", "Cuentas por cobrar", 0, invoice.total_centavos),
+                ("1050", "Accounts receivable", 0, invoice.total_centavos),
             ),
         )
         assert_balanced(lines)
@@ -292,8 +292,8 @@ class EstateEventBuilder:
             approver=self.estate.employees[1].name,
             description=f"Reembolso proveedor {invoice.uuid}",
             amounts=(
-                ("1020", "Bancos", amount_centavos, 0),
-                ("5000", "Gastos operativos", 0, expense_refund),
+                ("1020", "Banks", amount_centavos, 0),
+                ("5000", "Operating expenses", 0, expense_refund),
                 ("1180", "IVA acreditable", 0, iva_refund),
             ),
         )
@@ -422,7 +422,7 @@ class EstateEventBuilder:
                 customer_clabe=customer_clabe,
                 event_date=min(event_date + timedelta(days=index * 17), self.end_date),
                 subtotal_centavos=subtotal,
-                description=f"Venta a credito de servicios operativos {index}",
+                description=f"Credit sale of operational services {index}",
                 settle=False,
             )
             receipt_date = min(
@@ -538,11 +538,11 @@ class EstateEventBuilder:
             date_value=invoice.issue_date,
             invoice_uuid=invoice.uuid,
             approver=approver,
-            description=f"Registro factura {invoice.uuid}",
+            description=f"Invoice recorded {invoice.uuid}",
             amounts=(
-                ("5000", "Gastos operativos", invoice.subtotal_centavos, 0),
+                ("5000", "Operating expenses", invoice.subtotal_centavos, 0),
                 ("1180", "IVA acreditable", invoice.iva_centavos, 0),
-                ("2100", "Cuentas por pagar", 0, invoice.total_centavos),
+                ("2100", "Accounts payable", 0, invoice.total_centavos),
             ),
         )
         assert_balanced(lines)
@@ -560,10 +560,10 @@ class EstateEventBuilder:
             date_value=payment_date.isoformat(),
             invoice_uuid=invoice.uuid,
             approver=self.estate.employees[1].name,
-            description=f"Pago factura {invoice.uuid}",
+            description=f"Invoice payment {invoice.uuid}",
             amounts=(
-                ("2100", "Cuentas por pagar", amount_centavos, 0),
-                ("1020", "Bancos", 0, amount_centavos),
+                ("2100", "Accounts payable", amount_centavos, 0),
+                ("1020", "Banks", 0, amount_centavos),
             ),
         )
         assert_balanced(lines)
@@ -574,7 +574,7 @@ class EstateEventBuilder:
             from_clabe=self.estate.company_clabe,
             to_clabe=vendor.bank_clabe,
             amount_centavos=amount_centavos,
-            reference=f"Pago factura {invoice.uuid}",
+            reference=f"Invoice payment {invoice.uuid}",
         )
 
     def _post_purchase_reversal(self, invoice: Invoice, reversal_date: date, approver: str) -> None:
@@ -583,10 +583,10 @@ class EstateEventBuilder:
             date_value=reversal_date.isoformat(),
             invoice_uuid=invoice.uuid,
             approver=approver,
-            description=f"Reversion de factura cancelada {invoice.uuid}",
+            description=f"Cancelled invoice reversal {invoice.uuid}",
             amounts=(
-                ("2100", "Cuentas por pagar", invoice.total_centavos, 0),
-                ("5000", "Gastos operativos", 0, invoice.subtotal_centavos),
+                ("2100", "Accounts payable", invoice.total_centavos, 0),
+                ("5000", "Operating expenses", 0, invoice.subtotal_centavos),
                 ("1180", "IVA acreditable", 0, invoice.iva_centavos),
             ),
         )
@@ -603,8 +603,8 @@ class EstateEventBuilder:
             approver=approver,
             description=f"Registro venta {invoice.uuid}",
             amounts=(
-                ("1050", "Cuentas por cobrar", invoice.total_centavos, 0),
-                ("4000", "Ingresos por servicios", 0, invoice.subtotal_centavos),
+                ("1050", "Accounts receivable", invoice.total_centavos, 0),
+                ("4000", "Service revenue", 0, invoice.subtotal_centavos),
                 ("2080", "IVA trasladado", 0, invoice.iva_centavos),
             ),
         )
@@ -621,10 +621,10 @@ class EstateEventBuilder:
             date_value=payment_date.isoformat(),
             invoice_uuid=invoice.uuid,
             approver=self.estate.employees[1].name,
-            description=f"Cobro factura {invoice.uuid}",
+            description=f"Invoice collection {invoice.uuid}",
             amounts=(
-                ("1020", "Bancos", amount_centavos, 0),
-                ("1050", "Cuentas por cobrar", 0, amount_centavos),
+                ("1020", "Banks", amount_centavos, 0),
+                ("1050", "Accounts receivable", 0, amount_centavos),
             ),
         )
         assert_balanced(lines)
@@ -635,7 +635,7 @@ class EstateEventBuilder:
             from_clabe=customer_clabe,
             to_clabe=self.estate.company_clabe,
             amount_centavos=amount_centavos,
-            reference=f"Cobro factura {invoice.uuid}",
+            reference=f"Invoice collection {invoice.uuid}",
         )
 
     def _ledger_lines(

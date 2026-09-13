@@ -73,22 +73,22 @@ def validar_archivos(archivos: dict[str, Path]) -> list[ErrorIngesta]:
         nombre = f"{tabla}.csv"
         ruta = archivos.get(tabla)
         if ruta is None or not Path(ruta).is_file():
-            errores.append(ErrorIngesta(nombre, None, "falta el archivo"))
+            errores.append(ErrorIngesta(nombre, None, "file is missing"))
             continue
         encabezado = _encabezado(Path(ruta))
         if encabezado is None:
             errores.append(
-                ErrorIngesta(nombre, None, "no se pudo leer como CSV UTF-8 con encabezado")
+                ErrorIngesta(nombre, None, "could not be read as a UTF-8 CSV with a header")
             )
             continue
         for col in esperadas:
             if col not in encabezado:
-                errores.append(ErrorIngesta(nombre, col, "falta la columna"))
+                errores.append(ErrorIngesta(nombre, col, "column is missing"))
         for col in encabezado:
             if col not in esperadas:
-                errores.append(ErrorIngesta(nombre, col, "columna que no existe en el esquema"))
+                errores.append(ErrorIngesta(nombre, col, "column does not exist in the schema"))
         if len(set(encabezado)) != len(encabezado):
-            errores.append(ErrorIngesta(nombre, None, "encabezado con columnas repetidas"))
+            errores.append(ErrorIngesta(nombre, None, "header has repeated columns"))
     extra = sorted(set(archivos) - set(TABLES))
     for tabla in extra:
         errores.append(
@@ -143,11 +143,11 @@ def _revisar_contenido(
             filas = con.execute(f"SELECT COUNT(*) FROM {LECTURA_CSV}", [ruta]).fetchone()[0]
         except duckdb.Error as exc:
             errores.append(
-                ErrorIngesta(nombre, None, f"no se pudo leer: {str(exc).splitlines()[0]}")
+                ErrorIngesta(nombre, None, f"could not be read: {str(exc).splitlines()[0]}")
             )
             continue
         if max_filas is not None and filas > max_filas:
-            errores.append(ErrorIngesta(nombre, None, f"{filas} filas; el máximo es {max_filas}"))
+            errores.append(ErrorIngesta(nombre, None, f"{filas} rows; maximum is {max_filas}"))
             continue
         for columna, tipo in columnas:
             if tipo in ("VARCHAR", "TEXT"):
@@ -160,6 +160,6 @@ def _revisar_contenido(
             ).fetchone()
             if malo:
                 errores.append(
-                    ErrorIngesta(nombre, columna, f"valor {malo[0]!r} no es un {tipo} válido")
+                    ErrorIngesta(nombre, columna, f"value {malo[0]!r} is not valid {tipo}")
                 )
     return errores

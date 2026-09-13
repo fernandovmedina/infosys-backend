@@ -122,8 +122,8 @@ def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateSc
             subtotal_centavos=84_000_00 + amount_jitter,
             description=builder.random.choice(
                 (
-                    "Servicios especializados de planeacion operativa",
-                    "Asistencia tecnica de planeacion",
+                    "Specialized operational-planning services",
+                    "Technical planning assistance",
                 )
             ),
             create_purchase_order=False,
@@ -152,8 +152,8 @@ def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateSc
             subtotal_centavos=120_000_00 + amount_jitter,
             description=builder.random.choice(
                 (
-                    "Mantenimiento correctivo de linea de produccion",
-                    "Reparacion urgente de equipo de manufactura",
+                    "Corrective maintenance for the production line",
+                    "Urgent repair of manufacturing equipment",
                 )
             ),
             requester=employee,
@@ -168,7 +168,7 @@ def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateSc
                 from_clabe=vendor.bank_clabe,
                 to_clabe=employee.bank_clabe,
                 amount_centavos=benefit,
-                reference=f"Servicios profesionales {invoice.uuid}",
+                reference=f"Professional services {invoice.uuid}",
             )
         )
         return _scenario(
@@ -193,8 +193,8 @@ def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateSc
             subtotal_centavos=75_000_00 + amount_jitter,
             description=builder.random.choice(
                 (
-                    "Coordinacion de entregas regionales",
-                    "Gestion extraordinaria de rutas y embarques",
+                    "Regional delivery coordination",
+                    "Exceptional route and shipment management",
                 )
             ),
         )
@@ -205,14 +205,14 @@ def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateSc
             from_clabe=vendor.bank_clabe,
             to_clabe=intermediary,
             amount_centavos=invoice.total_centavos,
-            reference=f"Liquidacion operativa {invoice.uuid}",
+            reference=f"Operational settlement {invoice.uuid}",
         )
         second = builder.record_transfer(
             transfer_date=event_date + timedelta(days=14),
             from_clabe=intermediary,
             to_clabe=builder.estate.company_clabe,
             amount_centavos=invoice.total_centavos - 500_00,
-            reference=f"Ajuste de tesoreria {invoice.uuid}",
+            reference=f"Treasury adjustment {invoice.uuid}",
         )
         return _scenario(
             builder,
@@ -236,8 +236,8 @@ def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateSc
             start_date=event_date,
             value_centavos=aggregate_gross,
             scope_text=(
-                "Obligacion consolidada de adecuacion de planta; montos conjuntos "
-                "mayores a MXN 100,000 requieren aprobacion conjunta"
+                "Consolidated facility-upgrade obligation; combined amounts above MXN 100,000 "
+                "require joint approval"
             ),
         )
         invoices: list[Invoice] = []
@@ -247,7 +247,7 @@ def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateSc
                     vendor=vendor,
                     event_date=event_date + timedelta(days=part),
                     subtotal_centavos=subtotal,
-                    description="Paquete integrado de adecuacion de planta zona norte",
+                    description="Integrated facility-upgrade package for the northern site",
                     requester=employee,
                     approver=employee,
                     contract=contract,
@@ -267,8 +267,8 @@ def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateSc
         base_subtotal = builder.random.randrange(49_000, 62_001) * 100
         description = builder.random.choice(
             (
-                "Servicios comerciales facturados a credito",
-                "Proyecto de expansion comercial facturado a credito",
+                "Commercial services invoiced on credit",
+                "Business-expansion project invoiced on credit",
             )
         )
         invoices = [
@@ -313,7 +313,7 @@ def _add_decoy(
             vendor=vendor,
             start_date=event_date,
             value_centavos=150_000_00,
-            scope_text="Asesoria documentada",
+            scope_text="Documented advisory services",
         )
         invoice = builder.record_purchase(
             vendor=vendor, event_date=event_date, subtotal_centavos=75_000_00, contract=contract
@@ -321,7 +321,7 @@ def _add_decoy(
         return PrivateDecoy(
             f"RFC:{vendor.rfc}",
             "new_vendor",
-            "Contrato, PO, factura y pago consistentes.",
+            "Consistent contract, purchase order, invoice, and payment.",
             (invoice.uuid,),
         )
     if kind == "kickback":
@@ -338,7 +338,7 @@ def _add_decoy(
         return PrivateDecoy(
             f"RFC:{vendor.rfc}",
             "return_payment",
-            "El retorno va a la empresa y se identifica como reembolso.",
+            "The return goes to the company and is identified as a refund.",
             (invoice.uuid,),
         )
     if kind == "round_tripping":
@@ -355,14 +355,14 @@ def _add_decoy(
         return PrivateDecoy(
             f"RFC:{vendor.rfc}",
             "return_path",
-            "Factura cancelada con reversion contable visible.",
+            "Cancelled invoice with a visible accounting reversal.",
             (invoice.uuid,),
         )
     if kind == "threshold_splitting":
         invoices = []
         vendor = builder.add_vendor(category="Insumos")
         for part, scope in enumerate(
-            ("Mantenimiento mensual", "Licencia anual", "Insumo de seguridad")
+            ("Monthly maintenance", "Annual licence", "Safety supply")
         ):
             contract = builder.add_contract(
                 vendor=vendor, start_date=event_date, value_centavos=42_500_00, scope_text=scope
@@ -381,7 +381,7 @@ def _add_decoy(
         return PrivateDecoy(
             employee.emp_id,
             "near_limit_purchases",
-            "POs del mismo proveedor muestran obligaciones y contratos independientes.",
+            "Purchase orders from the same vendor show independent obligations and contracts.",
             tuple(i.uuid for i in invoices),
         )
     customer_rfc, clabe = builder._rfc(950_000 + index), builder._clabe(950_000 + index)
@@ -390,7 +390,7 @@ def _add_decoy(
         customer_clabe=clabe,
         event_date=event_date,
         subtotal_centavos=55_000_00,
-        description="Venta cancelada con reversion",
+        description="Cancelled sale with reversal",
         settle=False,
         status="cancelado",
     )
@@ -398,7 +398,7 @@ def _add_decoy(
     return PrivateDecoy(
         f"RFC:{builder.estate.company_rfc}",
         "cancelled_revenue",
-        "La cancelacion tiene reversion de ingresos, IVA y cuentas por cobrar.",
+        "The cancellation reverses revenue, IVA, and accounts receivable.",
         (invoice.uuid,),
     )
 

@@ -85,7 +85,7 @@ def validate_entity_coverage(
             )
             if not supported:
                 failures.append(
-                    EntityCoverageFailure(entity, "un registro que lo vincule a la operación")
+                    EntityCoverageFailure(entity, "a record linking it to the transaction")
                 )
         elif entity.tipo == "employee":
             employee_id = _employee_id(entity.canonico)
@@ -107,11 +107,11 @@ def validate_entity_coverage(
             )
             if not identified or not acted:
                 requirement = (
-                    "su ficha de empleado y un pago, aprobación o solicitud vinculada"
+                    "their employee profile and a linked payment, approval, or request"
                     if not identified and not acted
-                    else "su ficha de empleado"
+                    else "their employee profile"
                     if not identified
-                    else "un pago, aprobación o solicitud vinculada"
+                    else "a linked payment, approval, or request"
                 )
                 failures.append(EntityCoverageFailure(entity, requirement))
     return failures

@@ -142,7 +142,7 @@ def test_broken_rule_is_reported_and_the_rest_still_run(monkeypatch: pytest.Monk
     assert [f.model_dump() for f in analysis.rule_failures] == [
         {"rule": "rule_broken", "status": "error", "error": "RuntimeError: boom"}
     ]
-    assert analysis.warnings == ["El detector rule_broken falló y se omitió: RuntimeError: boom"]
+    assert analysis.warnings == ["Detector rule_broken failed and was omitted: RuntimeError: boom"]
     assert analysis.rules_evaluated == 24
     assert _without_clock(analysis.submission.model_dump(mode="json")) == ESPERADO
 

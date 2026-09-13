@@ -89,7 +89,7 @@ class RunNotFoundError(AppError):
 
     status_code = status.HTTP_404_NOT_FOUND
     code = "run_not_found"
-    message = "No encontramos esta corrida."
+    message = "We could not find this run."
 
 
 class ValidationBlockedError(AppError):
@@ -97,7 +97,7 @@ class ValidationBlockedError(AppError):
 
     status_code = status.HTTP_409_CONFLICT
     code = "validation_blocked"
-    message = "El diagnóstico tiene errores bloqueantes; corrige el dataset y vuelve a subirlo."
+    message = "The diagnostics contain blocking errors; correct the dataset and upload it again."
 
 
 class InvalidRunStateError(AppError):
@@ -105,7 +105,7 @@ class InvalidRunStateError(AppError):
 
     status_code = status.HTTP_409_CONFLICT
     code = "invalid_state"
-    message = "La corrida no está en un estado que permita esta acción."
+    message = "The run is not in a state that permits this action."
 
 
 class RunResultNotAvailableError(AppError):
@@ -113,7 +113,7 @@ class RunResultNotAvailableError(AppError):
 
     status_code = status.HTTP_409_CONFLICT
     code = "result_not_available"
-    message = "La corrida todavía no tiene resultados de la investigación."
+    message = "The run does not yet have investigation results."
 
 
 class RecordNotFoundError(AppError):
@@ -121,7 +121,7 @@ class RecordNotFoundError(AppError):
 
     status_code = status.HTTP_404_NOT_FOUND
     code = "record_not_found"
-    message = "No encontramos ese registro en el dataset de la corrida."
+    message = "We could not find that record in the run's dataset."
 
 
 class EntityNotFoundError(AppError):
@@ -129,7 +129,7 @@ class EntityNotFoundError(AppError):
 
     status_code = status.HTTP_404_NOT_FOUND
     code = "entity_not_found"
-    message = "No encontramos esa entidad en la corrida."
+    message = "We could not find that entity in the run."
 
 
 class FraudDatasetInvalidError(AppError):
@@ -140,7 +140,7 @@ class FraudDatasetInvalidError(AppError):
 
     status_code = status.HTTP_422_UNPROCESSABLE_CONTENT
     code = "invalid_dataset"
-    message = "Los CSV no cumplen el esquema del estate."
+    message = "The CSV files do not match the estate schema."
 
 
 class FraudEngineOutputInvalidError(AppError):
@@ -151,7 +151,7 @@ class FraudEngineOutputInvalidError(AppError):
 
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
     code = "engine_output_invalid"
-    message = "El resultado del motor no pasó el validador oficial; no se entrega."
+    message = "The engine output did not pass the official validator and was not delivered."
 
 
 def error_response(

@@ -117,8 +117,8 @@ def _validate_dates(estate: GeneratedEstate) -> None:
         ):
             raise ValueError(f"ledger date precedes invoice for {line.invoice_uuid}")
     for txn in estate.bank_transactions:
-        if txn.reference.startswith("Pago factura "):
-            invoice_id = txn.reference.removeprefix("Pago factura ")
+        if txn.reference.startswith("Invoice payment "):
+            invoice_id = txn.reference.removeprefix("Invoice payment ")
             if date.fromisoformat(txn.date) < date.fromisoformat(invoices[invoice_id].issue_date):
                 raise ValueError(f"payment date precedes invoice for {invoice_id}")
 

@@ -216,13 +216,14 @@ def render_case_file(submission: dict, anexos: list[dict], contexto: dict) -> st
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Case file · seed {_e(submission["seed"])}</title>
+<title>Static forensic case file · seed {_e(submission["seed"])}</title>
 <style>{ESTILO}</style>
 </head>
 <body>
 <main>
 <header>
-  <h1>Forensic case file · {_e(empresa)}</h1>
+  <h1>Static forensic case file · {_e(empresa)}</h1>
+  <p class="sub">Legacy standalone export — the interactive case file is presented in the application.</p>
   <p class="sub">RFC {_e(contexto.get("empresa_rfc") or "not identified")} · Audited period {_e(inicio or "?")} to {_e(fin or "?")} · Seed {_e(submission["seed"])}</p>
   <div class="metricas">
     <div class="metrica"><b>{_e(meta["llm_calls"])}</b><span>LLM calls</span></div>
@@ -232,7 +233,7 @@ def render_case_file(submission: dict, anexos: list[dict], contexto: dict) -> st
   </div>
 </header>
 
-<h2>2. Executive summary</h2>
+<h2>Executive summary</h2>
 <p>{_e(resumen)}</p>
 <div class="tabla"><table><tbody>
   <tr><th>Findings</th><td>{len(findings)} ({probados} proven, {len(findings) - probados} probable)</td></tr>
@@ -241,29 +242,29 @@ def render_case_file(submission: dict, anexos: list[dict], contexto: dict) -> st
 </tbody></table></div>
 <p class="sub">If two findings share an entity (intertwined schemes), some money may appear in both.</p>
 
-<h2>3. Findings</h2>
+<h2>Findings</h2>
 {secciones_findings}
 
-<h2>4. Leads not pursued</h2>
+<h2>Leads reviewed and closed</h2>
 {_seccion_leads(leads, contexto.get("nombres_pistas") or {})}
 
-<h2>5. Method and limits</h2>
+<h2>Method and limitations</h2>
 <p><b>Architecture.</b> {len(contexto.get("reglas_ejecutadas", []))} deterministic SQL detectors run against the DuckDB
 estate and emit signals. An assembler groups signals by entity and scheme, and accuses only when there are at least two
 independent evidence families (or one independently sufficient rule, such as a definitive EFOS listing or a payment to an
 employee account) and no document explains the relationship. Each accusation cites at least 3 verified records and
 reconciles its amount by table. Narratives are template-generated: no LLM is used anywhere in the process.</p>
-<p><b>Out of scope for this run.</b> Text-similarity rules (generic descriptions, incompatible business activity, or a
-vendor name similar to an employee name). Purchase-order splitting and revenue-inflation detectors are implemented.</p>
+<p><b>Coverage exclusions.</b> Text-similarity rules (generic descriptions, incompatible business activity, or a
+vendor name similar to an employee name) are not implemented. Purchase-order splitting and revenue-inflation detectors
+are implemented.</p>
 <p><b>What it cannot detect.</b> Schemes that leave no trace in the 8 tables; phantom vendors with complete purchase orders
 and contracts and no other signal; money cycles through accounts outside the catalogs; or unrecorded cash payments. A
 single signal is never enough to accuse, so a scheme with only one footprint remains a lead.</p>
 {texto_fallidas}
 <p><b>Data quality.</b> Issues found in the estate (they are not accusations, but may hide evidence):</p>
 <div class="tabla"><table><thead><tr><th>Rule</th><th>Records</th></tr></thead><tbody>{filas_calidad}</tbody></table></div>
-<p><b>Reproducibility.</b> Offline replay:
-<code>uv run python -m app.fraud.engine.cli --input-dir &lt;csv-directory&gt; --seed {_e(submission["seed"])} --output-dir &lt;output-directory&gt;</code>.
-The same CSV estate and seed produce the same findings and leads; only execution time changes.</p>
+<p><b>Determinism.</b> The analysis runs offline and uses no LLM. The same CSV estate and seed produce the same
+findings and leads; only execution time changes. This static export is a snapshot, not the supported replay interface.</p>
 </main>
 </body>
 </html>

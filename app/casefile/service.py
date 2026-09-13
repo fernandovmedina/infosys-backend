@@ -150,7 +150,7 @@ async def search(pool: asyncpg.Pool, *, run_id: str, user_id: int, query: str) -
 async def export_case_file(
     pool: asyncpg.Pool, *, run_id: str, user_id: int, format: ExportFormat
 ) -> str:
-    """The case file as a self-contained document: the engine's HTML, or Markdown."""
+    """Export the legacy static HTML snapshot or the current Markdown case file."""
     index = await _completed_index(pool, run_id=run_id, user_id=user_id)
     if format == "html":
         return index.analysis.case_file_html

@@ -308,13 +308,13 @@ Never read ground-truth or private files from `app/`. `tests/test_fraud` greps
 | Auth | `X-API-Key` = `MOTOR_API_KEY` | Session cookie (`/fraud/analyze`, runs). `rules` and `health` are public. | Uses this API's auth model. |
 | Routes | `/v1/auditorias`, `/v1/reglas`, `/v1/salud` | `/api/v1/fraud/analyze`, `/fraud/rules`, `/fraud/health` | Matches this API's URL convention. |
 | Error format | `400 {detalle, errores:[{archivo,columna,mensaje}]}`, `413`, `500 {detalle, errores_validacion}` | Project envelope: `422 invalid_dataset` with details `{file,column,message}`, `413 file_too_large`, `500 engine_output_invalid` | One error shape across the API; 422 is what this API uses for unusable input. |
-| Response envelope | `filas_por_tabla`, `calidad_datos`, `senales_por_regla`, `avisos` | `rows_per_table`, `data_quality`, `signals_per_rule`, `warnings`, plus `signals`, `rule_failures` and summary counters | English field names; the added fields expose the evidence the engine already computed. `submission` and `case_file_html` are unchanged. |
+| Response envelope | `filas_por_tabla`, `calidad_datos`, `senales_por_regla`, `avisos` | `rows_per_table`, `data_quality`, `signals_per_rule`, `warnings`, plus `signals`, `rule_failures` and summary counters | English field names; the added fields expose the evidence the engine already computed. The submission's generated prose and legacy HTML export are English. |
 | Rule loading | `importlib` over numbered folders | Explicit package registry, same order | The numbered folders couldn't be imported normally. |
 | CLI / signals table | `python -m agente`, `agente.runner` writing a `signals` table to a `.duckdb` file | Removed; signals go to `fraud_signal` in PostgreSQL | The API is the entry point here. |
 | Runs | — | Tolerant loader (see above) | Warnings accepted at upload must not become blocking. |
 
-The detection rules, thresholds, scoring, family and sufficiency logic, narratives and
-case file are unchanged.
+The detection rules, thresholds, scoring, family and sufficiency logic are unchanged.
+Generated narratives and the legacy static HTML export have been translated to English.
 
 ## Known limitations
 
@@ -330,7 +330,8 @@ case file are unchanged.
 - The engine uses the `efos_list` table from the uploaded estate, not the real SAT
   69-B blacklist in PostgreSQL (`sat_blacklist_record`). Linking the two would change
   detection behavior and needs a product decision.
-- The case file's reproduction line still names the reference CLI
-  (`python -m agente --estate carga_api ...`), which is kept so the output stays identical.
+- The standalone HTML is a legacy static export. The report JSON endpoints are the
+  canonical contract for the interactive frontend; a supported offline replay CLI
+  remains deferred.
 - The engine's calibration (the 2-family threshold, rules that are sufficient alone,
   materiality) was tuned on the reference's tuning seeds only.

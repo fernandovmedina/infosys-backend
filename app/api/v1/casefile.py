@@ -62,7 +62,7 @@ async def get_submission(run_id: str, pool: Pool, user: CurrentUser) -> Response
 
 @router.get(
     "/export",
-    summary="The case file as a self-contained HTML or Markdown document",
+    summary="Export the legacy static HTML snapshot or the current Markdown case file",
     responses={200: {"content": {"text/html": {}, "text/markdown": {}}}},
 )
 async def export_case_file(

@@ -35,6 +35,8 @@ def test_resultado_igual_a_referencia(con_1301):
     assert resultado.case_file_html.startswith("<!doctype html>") or (
         "<html" in resultado.case_file_html
     )
+    assert "Static forensic case file" in resultado.case_file_html
+    assert "app.fraud.engine.cli" not in resultado.case_file_html
 
 
 def test_determinista(con_1301):

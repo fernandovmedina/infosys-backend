@@ -37,6 +37,21 @@ class Settings(BaseSettings):
         description="Minimum pg_trgm similarity for a fuzzy company-name match.",
     )
 
+    auth_session_ttl_days: int = Field(
+        default=7,
+        ge=1,
+        description="How long a session cookie stays valid after sign-in.",
+    )
+    auth_session_cookie_name: str = Field(default="infosys_session")
+    auth_session_cookie_secure: bool = Field(
+        default=False,
+        description="Set the session cookie's Secure flag. Enable once served over HTTPS.",
+    )
+    cors_allowed_origins: list[str] = Field(
+        default_factory=lambda: ["http://localhost:3000"],
+        description="Origins allowed to call the API with credentials (the frontend's dev URL).",
+    )
+
 
 @lru_cache
 def get_settings() -> Settings:

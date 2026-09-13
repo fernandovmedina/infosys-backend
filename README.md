@@ -4,7 +4,9 @@ Backend de infosys. FastAPI + PostgreSQL.
 
 Currently implements the **SAT blacklist check**: an endpoint that tells you
 whether one or many Mexican taxpayers appear in the SAT *Artículo 69-B del CFF*
-listing, searching by RFC, by company name, or both.
+listing, searching by RFC, by company name, or both. It also implements a
+basic **email/password auth flow** (register, login, session cookie) for the
+frontend — see [Auth](#auth).
 
 It also contains the foundation for the **synthetic estate generator** used by
 the Forensic Auditor project. The generator is intentionally a separate,
@@ -159,6 +161,35 @@ Every failure uses one envelope:
 
 ---
 
+## Auth
+
+A basic email/password flow for the frontend: register, sign in, and a
+session cookie for everything after that. Postgres is the store for all of
+this (`app_user`, `auth_session`); DuckDB is unrelated to auth — it's there
+for the fraud-detection side of the project.
+
+There is no email verification: registering logs the account in immediately,
+the same way signing in does.
+
+| Endpoint | What it does |
+| --- | --- |
+| `POST /api/v1/auth/register` | Create an account (`name`, `email`, `password`) and start a session right away. |
+| `POST /api/v1/auth/login` | `{email, password}`. |
+| `POST /api/v1/auth/logout` | Revoke the current session. |
+| `GET /api/v1/auth/me` | The signed-in user, or `not_authenticated`. |
+
+The session is an httpOnly, `SameSite=Lax` cookie (`infosys_session` by
+default); only its SHA-256 hash is stored server-side. Passwords are hashed
+with PBKDF2-HMAC-SHA256 (stdlib `hashlib`, 600k iterations) — no new
+dependency for that.
+
+Because the frontend and API run on different ports in development, the API
+sends CORS headers (`CORS_ALLOWED_ORIGINS`, credentials allowed) so the
+browser will both send and store the session cookie across `localhost:3000` →
+`localhost:8000` calls.
+
+---
+
 ## Search strategy
 
 The task allowed several approaches; this is what was chosen and why.
@@ -289,6 +320,9 @@ key. `situacion` is free text rather than an ENUM or CHECK constraint so that an
 automated refresh does not fail wholesale if SAT introduces a new status value;
 unknown statuses fail safe by counting as *not* cleared.
 
+`alter.sql` also carries the auth schema: `app_user` and `auth_session`
+(see [Auth](#auth) above).
+
 ---
 
 ## Development
@@ -309,14 +343,22 @@ the pure-Python suite still runs without Docker.
 
 ```
 app/
-├── main.py               # app factory, lifespan, pool wiring
+├── main.py               # app factory, lifespan, pool wiring, CORS
 ├── api/
 │   ├── router.py         # /api/v1
-│   └── v1/sat.py         # the endpoint
+│   └── v1/
+│       ├── auth.py       # register/login/verify/logout/me
+│       └── sat.py        # the blacklist endpoint
 ├── core/
 │   ├── config.py         # settings
 │   ├── database.py       # asyncpg pool
+│   ├── session.py        # session-cookie dependency
 │   └── errors.py         # error envelope + handlers
+├── auth/
+│   ├── security.py       # password hashing, codes, session tokens
+│   ├── repository.py     # app_user / auth_session queries
+│   ├── service.py        # register/login/verify/session business logic
+│   └── schemas.py        # request/response models
 └── sat/
     ├── normalization.py  # shared by importer and search
     ├── importer.py       # CSV -> staging -> merge

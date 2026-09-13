@@ -1,0 +1,25 @@
+{
+  "decoys": [],
+  "observation_note": "challenge_wide includes the configured counterparty transfers needed for complete evidence.",
+  "observation_profile": "challenge_wide",
+  "scenarios": [
+    {
+      "amount_basis": "aggregate gross value of the linked consolidated obligation",
+      "hidden_transaction_ids": [],
+      "illicit_benefit": null,
+      "maximum_public_confidence": "proven",
+      "public_peso_amount": 145553.32,
+      "scheme_id": "S1_threshold_splitting",
+      "visible_invoice_ids": [
+        "INV-00341",
+        "INV-00272",
+        "INV-00038"
+      ],
+      "visible_transaction_ids": [
+        "BNK-00282",
+        "BNK-00233",
+        "BNK-00011"
+      ]
+    }
+  ]
+}

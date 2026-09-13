@@ -1,0 +1,104 @@
+{
+  "decoys": [
+    {
+      "entity": "RFC:DHQ981115FIG",
+      "public_explanation": "Contrato, PO, factura y pago consistentes.",
+      "public_invoice_ids": [
+        "INV-00021"
+      ]
+    },
+    {
+      "entity": "RFC:DHR990222FIT",
+      "public_explanation": "Factura cancelada con reversion contable visible.",
+      "public_invoice_ids": [
+        "INV-00284"
+      ]
+    },
+    {
+      "entity": "RFC:DFO740501EHG",
+      "public_explanation": "La cancelacion tiene reversion de ingresos, IVA y cuentas por cobrar.",
+      "public_invoice_ids": [
+        "INV-00126"
+      ]
+    },
+    {
+      "entity": "RFC:DHS700501FJG",
+      "public_explanation": "El retorno va a la empresa y se identifica como reembolso.",
+      "public_invoice_ids": [
+        "INV-00018"
+      ]
+    },
+    {
+      "entity": "EMP:00001204-0008",
+      "public_explanation": "POs del mismo proveedor muestran obligaciones y contratos independientes.",
+      "public_invoice_ids": [
+        "INV-00193",
+        "INV-00219",
+        "INV-00317"
+      ]
+    }
+  ],
+  "observation_note": "challenge_wide includes the configured counterparty transfers needed for complete evidence.",
+  "observation_profile": "challenge_wide",
+  "scenarios": [
+    {
+      "amount_basis": "gross unsupported paid invoice exposure",
+      "hidden_transaction_ids": [],
+      "illicit_benefit": null,
+      "maximum_public_confidence": "proven",
+      "public_peso_amount": 99661.4,
+      "scheme_id": "S1_phantom_vendor",
+      "visible_invoice_ids": [
+        "INV-00373"
+      ],
+      "visible_transaction_ids": [
+        "BNK-00307"
+      ]
+    },
+    {
+      "amount_basis": "principal paid from the company, not cycle volume",
+      "hidden_transaction_ids": [],
+      "illicit_benefit": null,
+      "maximum_public_confidence": "proven",
+      "public_peso_amount": 85242.6,
+      "scheme_id": "S2_round_tripping",
+      "visible_invoice_ids": [
+        "INV-00122"
+      ],
+      "visible_transaction_ids": [
+        "BNK-00293",
+        "BNK-00253",
+        "BNK-00375"
+      ]
+    },
+    {
+      "amount_basis": "gross cancelled invoices left unreversed",
+      "hidden_transaction_ids": [],
+      "illicit_benefit": null,
+      "maximum_public_confidence": "proven",
+      "public_peso_amount": 185668.44,
+      "scheme_id": "S3_revenue_inflation",
+      "visible_invoice_ids": [
+        "INV-00288",
+        "INV-00161",
+        "INV-00287"
+      ],
+      "visible_transaction_ids": []
+    },
+    {
+      "amount_basis": "illicit benefit visible in the vendor-to-employee return transfer",
+      "hidden_transaction_ids": [],
+      "illicit_benefit": 13986.35,
+      "maximum_public_confidence": "proven",
+      "public_peso_amount": 13986.35,
+      "scheme_id": "S4_kickback",
+      "visible_invoice_ids": [
+        "INV-00151"
+      ],
+      "visible_transaction_ids": [
+        "BNK-00319",
+        "BNK-00369"
+      ]
+    }
+  ]
+}

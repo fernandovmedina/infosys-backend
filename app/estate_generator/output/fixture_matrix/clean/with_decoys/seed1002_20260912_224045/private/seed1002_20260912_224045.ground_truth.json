@@ -1,0 +1,49 @@
+{
+  "company_rfc": "TYS820723ZFE",
+  "decoys": [
+    {
+      "entity": "RFC:TYS820723ZFE",
+      "invoices": [
+        "INV-00157"
+      ],
+      "signal": "cancelled_revenue",
+      "why_innocent": "La cancelacion tiene reversion de ingresos, IVA y cuentas por cobrar."
+    },
+    {
+      "entity": "RFC:UAR730416AER",
+      "invoices": [
+        "INV-00079"
+      ],
+      "signal": "return_path",
+      "why_innocent": "Factura cancelada con reversion contable visible."
+    },
+    {
+      "entity": "RFC:UAS740723AFE",
+      "invoices": [
+        "INV-00138"
+      ],
+      "signal": "return_payment",
+      "why_innocent": "El retorno va a la empresa y se identifica como reembolso."
+    },
+    {
+      "entity": "RFC:UAT751002AFR",
+      "invoices": [
+        "INV-00312"
+      ],
+      "signal": "new_vendor",
+      "why_innocent": "Contrato, PO, factura y pago consistentes."
+    },
+    {
+      "entity": "EMP:00001002-0008",
+      "invoices": [
+        "INV-00181",
+        "INV-00027",
+        "INV-00276"
+      ],
+      "signal": "near_limit_purchases",
+      "why_innocent": "POs del mismo proveedor muestran obligaciones y contratos independientes."
+    }
+  ],
+  "schemes": [],
+  "seed": 1002
+}

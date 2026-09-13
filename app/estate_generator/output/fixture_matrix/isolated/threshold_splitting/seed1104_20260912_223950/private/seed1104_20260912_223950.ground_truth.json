@@ -1,0 +1,27 @@
+{
+  "company_rfc": "YQI940113BTW",
+  "decoys": [],
+  "schemes": [
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:YSH851006CTJ",
+        "EMP:00001104-0002"
+      ],
+      "peso_amount": 145553.32,
+      "scheme_id": "S1_threshold_splitting",
+      "supporting_invoices": [
+        "INV-00341",
+        "INV-00272",
+        "INV-00038"
+      ],
+      "supporting_txns": [
+        "BNK-00282",
+        "BNK-00233",
+        "BNK-00011"
+      ],
+      "type": "threshold_splitting"
+    }
+  ],
+  "seed": 1104
+}

@@ -1,0 +1,22 @@
+{
+  "company_rfc": "YRN950214BUN",
+  "decoys": [],
+  "schemes": [
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:YRN950214BUN"
+      ],
+      "peso_amount": 181259.28,
+      "scheme_id": "S1_revenue_inflation",
+      "supporting_invoices": [
+        "INV-00045",
+        "INV-00034",
+        "INV-00121"
+      ],
+      "supporting_txns": [],
+      "type": "revenue_inflation"
+    }
+  ],
+  "seed": 1105
+}

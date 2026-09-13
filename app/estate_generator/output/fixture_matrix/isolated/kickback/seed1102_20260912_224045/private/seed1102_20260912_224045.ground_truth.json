@@ -1,0 +1,24 @@
+{
+  "company_rfc": "YNY921111BSO",
+  "decoys": [],
+  "schemes": [
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:YPX830804CSB",
+        "EMP:00001102-0002"
+      ],
+      "peso_amount": 14179.84,
+      "scheme_id": "S1_kickback",
+      "supporting_invoices": [
+        "INV-00031"
+      ],
+      "supporting_txns": [
+        "BNK-00178",
+        "BNK-00110"
+      ],
+      "type": "kickback"
+    }
+  ],
+  "seed": 1102
+}

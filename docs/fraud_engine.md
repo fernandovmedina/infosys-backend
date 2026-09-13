@@ -331,7 +331,9 @@ Generated narratives and the legacy static HTML export have been translated to E
   69-B blacklist in PostgreSQL (`sat_blacklist_record`). Linking the two would change
   detection behavior and needs a product decision.
 - The standalone HTML is a legacy static export. The report JSON endpoints are the
-  canonical contract for the interactive frontend; a supported offline replay CLI
-  remains deferred.
+  canonical contract for the interactive frontend. Local replay is supported with
+  `fraud-replay --input-dir <csv-directory> --seed <seed> --output-dir <new-directory>`;
+  it writes `submission.json`, `case-file.html`, and `audit-log.json` and refuses to
+  overwrite an existing artifact directory.
 - The engine's calibration (the 2-family threshold, rules that are sufficient alone,
   materiality) was tuned on the reference's tuning seeds only.

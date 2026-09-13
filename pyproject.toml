@@ -24,6 +24,7 @@ build-backend = "setuptools.build_meta"
 [project.scripts]
 sat-blacklist-import = "app.sat.importer:main"
 estate-generate = "app.estate_generator.cli:main"
+fraud-replay = "app.fraud.engine.cli:main"
 
 [dependency-groups]
 dev = [

@@ -263,8 +263,9 @@ single signal is never enough to accuse, so a scheme with only one footprint rem
 {texto_fallidas}
 <p><b>Data quality.</b> Issues found in the estate (they are not accusations, but may hide evidence):</p>
 <div class="tabla"><table><thead><tr><th>Rule</th><th>Records</th></tr></thead><tbody>{filas_calidad}</tbody></table></div>
-<p><b>Determinism.</b> The analysis runs offline and uses no LLM. The same CSV estate and seed produce the same
-findings and leads; only execution time changes. This static export is a snapshot, not the supported replay interface.</p>
+<p><b>Determinism.</b> The analysis runs offline and uses no LLM. Replay the same CSV estate and seed with
+<code>fraud-replay --input-dir &lt;csv-directory&gt; --seed {_e(submission["seed"])} --output-dir &lt;new-artifact-directory&gt;</code>.
+The same inputs produce the same findings and leads; execution time is observed operational metadata, not a deterministic result.</p>
 </main>
 </body>
 </html>

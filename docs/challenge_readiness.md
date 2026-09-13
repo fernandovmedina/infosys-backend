@@ -63,8 +63,8 @@ would otherwise make entity-level false-accusation scoring ambiguous.
 
 The following are intentionally not part of the current implementation:
 
-- Final frontend case-file presentation and correction of legacy HTML export
-  wording.
+- Final frontend case-file presentation. The backend report JSON is ready; the
+  legacy static HTML export wording has been corrected.
 - Immutable audit dossier and constrained local/offline LLM Q&A for judge
   questions.
 - Adversarial reviewer/challenger stage.
@@ -74,8 +74,8 @@ The following are intentionally not part of the current implementation:
   evidence of real-world robustness. Add hard decoys with multiple suspicious
   signals, noisy/partial evidence, near-threshold values, and stricter
   entity/evidence/amount matching before making quality claims.
-- Supported offline replay CLI and immutable artifact caching for stable
-  wall-clock metadata.
+- Artifact caching is not required for the same-machine demo. Execution time is
+  operational metadata rather than part of the deterministic-result claim.
 - Production hardening: durable jobs/recovery, concurrency control, data
   retention/security, enterprise identity, observability, deployment image,
   and detector-degradation alerts.

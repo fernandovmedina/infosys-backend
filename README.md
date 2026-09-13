@@ -47,6 +47,15 @@ CSV tables are the default; pass `--sqlite` to write only `estate.db`. Keep
 `evaluation/` and generated private ground-truth/provenance sidecars out of the
 investigator deployment.
 
+Replay a CSV estate locally, without the API, database, authentication, or network:
+
+```bash
+uv run fraud-replay --input-dir <csv-directory> --seed 7 --output-dir <new-artifact-directory>
+```
+
+The output directory is created once and contains `submission.json`,
+`case-file.html`, and `audit-log.json` with input and deterministic-result checksums.
+
 ---
 
 ## Getting started

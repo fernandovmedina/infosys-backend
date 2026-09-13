@@ -3,7 +3,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import Path
+from datetime import date
+from enum import StrEnum
+
+
+class ObservationProfile(StrEnum):
+    """Which bank transfers are visible in the exported public estate."""
+
+    CHALLENGE_WIDE = "challenge_wide"
+    COMPANY_ONLY = "company_only"
 
 
 @dataclass(frozen=True, slots=True)
@@ -16,8 +24,9 @@ class EstateGeneratorConfig:
     """
 
     seed: int
-    output_path: Path
-    start_date: str = "2026-01-01"
-    end_date: str = "2026-06-30"
+    start_date: date = date(2026, 1, 1)
+    end_date: date = date(2026, 6, 30)
     vendor_count: int = 50
     employee_count: int = 10
+    normal_event_count: int = 360
+    observation_profile: ObservationProfile = ObservationProfile.CHALLENGE_WIDE

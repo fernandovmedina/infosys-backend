@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
 CHALLENGE_MATERIAL_DIR = BACKEND_ROOT / "public" / "material"
 ESTATE_SCHEMA_PATH = CHALLENGE_MATERIAL_DIR / "estate_schema.sql"

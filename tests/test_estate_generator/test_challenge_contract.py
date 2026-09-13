@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-
-from app.estate_generator import EstateGeneratorConfig
+from app.estate_generator import EstateGeneratorConfig, ObservationProfile
 from app.estate_generator.challenge_contract import ESTATE_SCHEMA_PATH, load_estate_schema
 
 
@@ -17,10 +15,9 @@ def test_estate_schema_is_available_from_one_canonical_path() -> None:
     assert "CREATE TABLE efos_list" in schema
 
 
-def test_public_generator_config_has_no_evaluator_fields(tmp_path: Path) -> None:
+def test_public_generator_config_has_no_evaluator_fields() -> None:
     """Public configuration is limited to reproducible generation controls."""
-    output_path = tmp_path / "estate.db"
-    config = EstateGeneratorConfig(seed=7, output_path=output_path)
+    config = EstateGeneratorConfig(seed=7)
 
     assert config.seed == 7
-    assert config.output_path.name == "estate.db"
+    assert config.observation_profile is ObservationProfile.CHALLENGE_WIDE

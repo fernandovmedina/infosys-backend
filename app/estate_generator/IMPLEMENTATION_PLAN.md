@@ -4,6 +4,14 @@ This is the active task contract for the synthetic estate generator. It turns
 the research design into small reviewable changes and keeps public generator
 code separate from private evaluation material.
 
+**Implementation status:** Milestones A and B and the Milestone C fixture
+harness are implemented. Focused tests cover deterministic schema projection,
+accounting and chronology invariants, both observation profiles, all five
+scenario families, matched decoys, private sidecars, and the supplied format
+validator. Six seeds are reserved in the private held-out manifest. Empirical
+calibration and held-out benchmark results remain future evaluation work; they
+are not claimed by this implementation.
+
 ## Team roles
 
 | Role | Owner | Authority |
@@ -29,7 +37,8 @@ the next task starts.
    paths.
 4. Project records through the supplied `estate_schema.sql` into standalone
    SQLite, with deterministic IDs and insertion order.
-5. Provide an offline `estate-generate --seed … --output …` CLI.
+5. Provide an offline `estate-generate --seed …` CLI that writes timestamped
+   CSV run folders, with an optional SQLite-only mode.
 
 **Milestone A gates**
 
@@ -86,6 +95,12 @@ imports it.
 The evaluator then runs the supplied format validator against known-valid
 findings and estates. The final held-out suite uses at least five seeds not
 used to tune prompts, thresholds, scenario parameters, or investigator logic.
+
+**Status:** private fixture generation now exists under
+`evaluation/estate_generator/`, including public/private sidecar separation,
+both observation profiles, and supplied-validator fixture checks. It remains a
+synthetic development tool; a six-seed manifest is frozen, while empirical
+calibration and held-out reporting are still future work.
 
 ## Review checkpoints
 

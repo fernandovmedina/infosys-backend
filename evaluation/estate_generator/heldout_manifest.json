@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "policy": "Do not inspect private sidecars or tune against these seeds before final evaluation.",
+  "cases": [
+    {
+      "seed": 17011,
+      "observation_profile": "challenge_wide",
+      "all_five": true,
+      "decoy_count": 5
+    },
+    {
+      "seed": 28429,
+      "observation_profile": "company_only",
+      "all_five": true,
+      "decoy_count": 6
+    },
+    {
+      "seed": 39133,
+      "observation_profile": "challenge_wide",
+      "all_five": true,
+      "decoy_count": 7
+    },
+    {
+      "seed": 46757,
+      "observation_profile": "company_only",
+      "all_five": true,
+      "decoy_count": 8
+    },
+    {
+      "seed": 58309,
+      "observation_profile": "challenge_wide",
+      "all_five": true,
+      "decoy_count": 9
+    },
+    {
+      "seed": 69403,
+      "observation_profile": "company_only",
+      "all_five": true,
+      "decoy_count": 10
+    }
+  ]
+}

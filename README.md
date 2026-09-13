@@ -10,12 +10,35 @@ frontend — see [Auth](#auth).
 
 It also contains the foundation for the **synthetic estate generator** used by
 the Forensic Auditor project. The generator is intentionally a separate,
-offline Python package: it will export challenge-compatible SQLite estates and
+offline Python package: it will export challenge-compatible CSV estates (or
+SQLite on request) and
 must not require the API, PostgreSQL, a live SAT lookup, or network access.
 
 See [app/estate_generator/README.md](app/estate_generator/README.md) for its
 module boundaries and [evaluation/estate_generator/README.md](evaluation/estate_generator/README.md)
 for the separation between public estates and private evaluation material.
+
+For the complete generator workflow, see the
+[Synthetic estate generator guide](docs/synthetic_estate_generator_guide.md).
+
+Generate a public normal-business estate with:
+
+```bash
+uv run estate-generate --seed 7
+```
+
+Generate a private training/evaluation fixture, including the five synthetic
+scheme families and paired decoys, with:
+
+```bash
+uv run python -m evaluation.estate_generator.cli \
+  --seed 7 --all-five --decoy-count 5
+```
+
+Both commands create timestamped folders under `app/estate_generator/output/`.
+CSV tables are the default; pass `--sqlite` to write only `estate.db`. Keep
+`evaluation/` and generated private ground-truth/provenance sidecars out of the
+investigator deployment.
 
 ---
 

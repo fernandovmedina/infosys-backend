@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "policy": "Reserved mixed adversarial held-out seeds. Do not tune against these cases after this final evaluation.",
+  "cases": [
+    {"seed": 91011, "observation_profile": "challenge_wide", "all_five": true, "decoy_count": 0, "adversarial": true},
+    {"seed": 92357, "observation_profile": "company_only", "all_five": true, "decoy_count": 0, "adversarial": true},
+    {"seed": 93693, "observation_profile": "challenge_wide", "all_five": true, "decoy_count": 0, "adversarial": true},
+    {"seed": 94971, "observation_profile": "company_only", "all_five": true, "decoy_count": 0, "adversarial": true},
+    {"seed": 96243, "observation_profile": "challenge_wide", "all_five": true, "decoy_count": 0, "adversarial": true},
+    {"seed": 97509, "observation_profile": "company_only", "all_five": true, "decoy_count": 0, "adversarial": true}
+  ]
+}

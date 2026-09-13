@@ -31,6 +31,12 @@ from evaluation.fraud_evaluator.scoring import (
 
 EVALUATION_ROOT = Path(__file__).resolve().parents[1]
 HELDOUT_MANIFEST = EVALUATION_ROOT / "estate_generator" / "heldout_manifest.json"
+ADVERSARIAL_HELDOUT_MANIFEST = (
+    EVALUATION_ROOT / "estate_generator" / "adversarial_heldout_manifest.json"
+)
+ADVERSARIAL_MIXED_HELDOUT_MANIFEST = (
+    EVALUATION_ROOT / "estate_generator" / "adversarial_mixed_heldout_manifest.json"
+)
 DEFAULT_OUTPUT_ROOT = EVALUATION_ROOT.parent / "generated" / "evaluation"
 
 Mode = Literal["heldout", "tuning"]
@@ -44,12 +50,20 @@ class EvaluationCase:
 
 
 def _heldout_seeds() -> set[int]:
-    document = json.loads(HELDOUT_MANIFEST.read_text(encoding="utf-8"))
-    return {int(case["seed"]) for case in document["cases"]}
+    manifests = (
+        HELDOUT_MANIFEST,
+        ADVERSARIAL_HELDOUT_MANIFEST,
+        ADVERSARIAL_MIXED_HELDOUT_MANIFEST,
+    )
+    return {
+        int(case["seed"])
+        for manifest in manifests
+        for case in json.loads(manifest.read_text(encoding="utf-8"))["cases"]
+    }
 
 
-def _prepare_heldout(output_root: Path) -> list[EvaluationCase]:
-    document = json.loads(HELDOUT_MANIFEST.read_text(encoding="utf-8"))
+def _prepare_heldout(output_root: Path, manifest_path: Path) -> list[EvaluationCase]:
+    document = json.loads(manifest_path.read_text(encoding="utf-8"))
     public_root, private_root = output_root / "public", output_root / "private"
     cases: list[EvaluationCase] = []
     for item in document["cases"]:
@@ -60,8 +74,10 @@ def _prepare_heldout(output_root: Path) -> list[EvaluationCase]:
         )
         run = build_scenario_run(
             config,
-            all_five=bool(item["all_five"]),
-            decoy_count=int(item["decoy_count"]),
+            all_five=bool(item.get("all_five", False)),
+            scheme_count=item.get("scheme_count"),
+            decoy_count=int(item.get("decoy_count", 0)),
+            adversarial=bool(item.get("adversarial", False)),
         )
         public_directory = public_root / f"seed{seed}"
         _, truth_path, provenance_path = render_fixture_run(run, config, public_directory)
@@ -153,6 +169,7 @@ def evaluate(
     mode: Mode,
     output_root: Path,
     manifest_path: Path | None = None,
+    heldout_manifest_path: Path | None = None,
     start_at: int = 0,
     max_cases: int | None = None,
 ) -> Path:
@@ -166,7 +183,7 @@ def evaluate(
     if start_at < 0:
         raise ValueError("--start-at cannot be negative")
     if mode == "heldout":
-        cases = _prepare_heldout(output_root)
+        cases = _prepare_heldout(output_root, heldout_manifest_path or HELDOUT_MANIFEST)
     else:
         if manifest_path is None:
             raise ValueError("--manifest is required for tuning mode")
@@ -211,6 +228,9 @@ def main() -> None:
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--manifest", type=Path, help="Required only for tuning mode.")
     parser.add_argument(
+        "--heldout-manifest", type=Path, help="Optional frozen manifest for held-out mode."
+    )
+    parser.add_argument(
         "--max-cases", type=int, help="Evaluate the first N seed-sorted tuning cases only."
     )
     parser.add_argument(
@@ -222,6 +242,7 @@ def main() -> None:
             mode=args.mode,
             output_root=args.output_root,
             manifest_path=args.manifest,
+            heldout_manifest_path=args.heldout_manifest,
             start_at=args.start_at,
             max_cases=args.max_cases,
         )

@@ -273,6 +273,24 @@ def test_variable_mix_allows_a_zero_scheme_zero_decoy_estate() -> None:
     assert run.decoys == []
 
 
+def test_adversarial_decoys_are_innocent_lookalikes_and_do_not_overlap_schemes() -> None:
+    run = build_scenario_run(
+        EstateGeneratorConfig(seed=71_001, normal_event_count=30),
+        scheme_count=0,
+        decoy_count=0,
+        adversarial=True,
+    )
+
+    assert run.scenarios == []
+    assert {item.signal for item in run.decoys} == {
+        "documented_presumed_efos",
+        "independent_near_threshold_orders",
+        "partial_procurement_evidence_with_noisy_text",
+    }
+    assert len({item.entity for item in run.decoys}) == len(run.decoys)
+    validate_public_estate(run.estate)
+
+
 def test_explicit_scheme_selection_supports_named_subset_and_rejects_conflicts() -> None:
     config = EstateGeneratorConfig(seed=12, normal_event_count=30)
     run = build_scenario_run(

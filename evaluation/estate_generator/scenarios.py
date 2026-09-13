@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date, timedelta
 from random import Random
 
@@ -56,6 +56,7 @@ def build_scenario_run(
     scheme_count: int | None = None,
     scheme_types: Sequence[str] | None = None,
     decoy_count: int | None = None,
+    adversarial: bool = False,
 ) -> ScenarioRun:
     """Build a variable private fixture and its public estate, offline and seeded."""
     if all_five and (scheme_count is not None or scheme_types is not None):
@@ -103,7 +104,125 @@ def build_scenario_run(
         )
         decoys.append(decoy)
         protected_entities.add(decoy.entity)
+    if adversarial:
+        for decoy in _add_adversarial_decoys(builder, excluded_entities=protected_entities):
+            decoys.append(decoy)
+            protected_entities.add(decoy.entity)
     return ScenarioRun(estate=builder.estate, scenarios=scenarios, decoys=decoys)
+
+
+def _add_adversarial_decoys(
+    builder: EstateEventBuilder, *, excluded_entities: set[str]
+) -> list[PrivateDecoy]:
+    """Innocent cases that deliberately satisfy one or more suspicious rule patterns.
+
+    These are evaluator-only calibration fixtures.  They must remain disjoint
+    from planted fraud entities so an accusation can be scored unambiguously.
+    """
+    event_date = _event_date(builder, 30)
+    available = [
+        employee
+        for employee in builder.estate.employees
+        if employee.emp_id not in excluded_entities
+    ]
+    if len(available) < 2:
+        raise ValueError("not enough employees for adversarial decoys")
+
+    documented = builder.add_vendor(category="Consultoria")
+    # The recent registration plus a presumed-EFOS listing produces two
+    # independent phantom-vendor signals, while the contract and PO document
+    # a legitimate service relationship.
+    builder.estate.vendors[-1] = replace(
+        documented, registered_date=(event_date - timedelta(days=5)).isoformat()
+    )
+    documented = builder.estate.vendors[-1]
+    contract = builder.add_contract(
+        vendor=documented,
+        start_date=event_date,
+        value_centavos=90_000_00,
+        scope_text="Documented operational-planning engagement",
+    )
+    invoice = builder.record_purchase(
+        vendor=documented,
+        event_date=event_date,
+        subtotal_centavos=75_000_00,
+        contract=contract,
+        description="Documented operational-planning deliverable",
+    )
+    builder.add_efos_context(vendor=documented, status="presunto", publication_date=event_date)
+
+    split_vendor = builder.add_vendor(category="Insumos")
+    split_invoices = []
+    for offset, scope in enumerate(
+        ("Safety equipment", "Production consumables", "Annual software licence")
+    ):
+        contract = builder.add_contract(
+            vendor=split_vendor,
+            start_date=event_date + timedelta(days=offset),
+            value_centavos=54_520_00,
+            scope_text=f"Independent obligation: {scope}",
+        )
+        split_invoices.append(
+            builder.record_purchase(
+                vendor=split_vendor,
+                event_date=event_date + timedelta(days=offset),
+                subtotal_centavos=47_000_00,
+                contract=contract,
+                requester=available[0],
+                approver=available[1],
+                description=scope,
+            )
+        )
+
+    incomplete_vendor = builder.add_vendor(category="Tecnologia")
+    incomplete_invoice = builder.record_purchase(
+        vendor=incomplete_vendor,
+        event_date=event_date + timedelta(days=8),
+        subtotal_centavos=68_000_00,
+        create_purchase_order=False,
+        description="Urgent continuity service; procurement attachment unavailable",
+    )
+    builder.estate.invoices = [
+        replace(
+            item,
+            concepto_text=(
+                f"URGENT//manual intake; reconciliation pending; source-ref={item.uuid}"
+            ),
+        )
+        if item.uuid == incomplete_invoice.uuid
+        else item
+        for item in builder.estate.invoices
+    ]
+    builder.estate.ledger = [
+        replace(item, description=f"Manual intake ?? {incomplete_invoice.uuid} // follow-up")
+        if item.invoice_uuid == incomplete_invoice.uuid
+        else item
+        for item in builder.estate.ledger
+    ]
+
+    return [
+        PrivateDecoy(
+            f"RFC:{documented.rfc}",
+            "documented_presumed_efos",
+            "A recent vendor with a presumed-EFOS screening hit has a matching contract, "
+            "purchase order, invoice, and payment.",
+            (invoice.uuid,),
+        ),
+        PrivateDecoy(
+            f"RFC:{split_vendor.rfc}",
+            "independent_near_threshold_orders",
+            "Several near-threshold orders share an approver but each has its own contract "
+            "and independent business scope.",
+            tuple(item.uuid for item in split_invoices),
+        ),
+        PrivateDecoy(
+            f"RFC:{incomplete_vendor.rfc}",
+            "partial_procurement_evidence_with_noisy_text",
+            "A legitimate urgent service has noisy but valid documentation, an invoice, "
+            "and payment but no available purchase-order attachment.",
+            (incomplete_invoice.uuid,),
+        ),
+    ]
 
 
 def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateScenario:

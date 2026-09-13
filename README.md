@@ -27,6 +27,8 @@ are documented in [docs/challenge_readiness.md](docs/challenge_readiness.md).
 
 For the complete generator workflow, see the
 [Synthetic estate generator guide](docs/synthetic_estate_generator_guide.md).
+For the data model, study case, scenario mechanics, and evaluation design, see
+the [SDG technical documentation](docs/synthetic_estate_generator_technical.md).
 
 Generate a public normal-business estate with:
 

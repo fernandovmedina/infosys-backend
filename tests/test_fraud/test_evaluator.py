@@ -71,6 +71,29 @@ def test_total_recomputes_rates_from_counts() -> None:
     assert total["peso_reconciles"] == "false"
 
 
+def test_scoring_excludes_a_scheme_expected_to_remain_a_lead() -> None:
+    row = score_submission(
+        truth={
+            "seed": 1,
+            "schemes": [
+                {
+                    "type": "round_tripping",
+                    "entities": ["RFC:V1"],
+                    "peso_amount": 1,
+                    "expected_published_finding": False,
+                }
+            ],
+            "decoys": [],
+        },
+        submission=_submission(),
+        output_valid=True,
+    )
+
+    assert row.schemes_planted == 0
+    assert row.schemes_found == 0
+    assert row.recall_pct == 100.0
+
+
 def test_false_positive_diagnostics_include_the_decoy_explanation_and_rules() -> None:
     truth = {
         "seed": 7,

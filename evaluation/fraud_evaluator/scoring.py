@@ -10,6 +10,8 @@ RESULT_COLUMNS = (
     "schemes_planted",
     "schemes_found",
     "recall_pct",
+    "strictly_supported_found",
+    "strict_recall_pct",
     "decoys_planted",
     "decoys_accused",
     "false_accusation_rate_pct",
@@ -40,6 +42,8 @@ class ScoreRow:
     schemes_planted: int
     schemes_found: int
     recall_pct: float
+    strictly_supported_found: int
+    strict_recall_pct: float
     decoys_planted: int
     decoys_accused: int
     false_accusation_rate_pct: float
@@ -87,13 +91,16 @@ def _matches(scheme: dict[str, Any], finding: dict[str, Any]) -> bool:
     )
 
 
-def _maximum_matches(schemes: list[dict[str, Any]], findings: list[dict[str, Any]]) -> int:
+def _maximum_matches(
+    schemes: list[dict[str, Any]], findings: list[dict[str, Any]], *, strict: bool = False
+) -> int:
     """One-to-one maximum bipartite matching, with deterministic traversal order."""
     assigned: dict[int, int] = {}
 
     def visit(scheme_index: int, seen: set[int]) -> bool:
         for finding_index, finding in enumerate(findings):
-            if finding_index in seen or not _matches(schemes[scheme_index], finding):
+            matcher = _strict_match if strict else _matches
+            if finding_index in seen or not matcher(schemes[scheme_index], finding):
                 continue
             seen.add(finding_index)
             owner = assigned.get(finding_index)
@@ -105,6 +112,25 @@ def _maximum_matches(schemes: list[dict[str, Any]], findings: list[dict[str, Any
     return sum(1 for index in range(len(schemes)) if visit(index, set()))
 
 
+def _strict_match(scheme: dict[str, Any], finding: dict[str, Any]) -> bool:
+    if not _matches(scheme, finding) or not _entities(scheme) <= _entities(finding):
+        return False
+    exhibits = list(finding.get("exhibits", []))
+    evidence_ids = {str(exhibit.get("record_id")) for exhibit in exhibits}
+    expected_ids = {
+        *(str(value) for value in scheme.get("supporting_invoices", [])),
+        *(str(value) for value in scheme.get("supporting_txns", [])),
+    }
+    threshold_evidence = scheme.get("type") == "threshold_splitting" and any(
+        exhibit.get("source_table") in {"purchase_orders", "contracts"} for exhibit in exhibits
+    )
+    if expected_ids and not evidence_ids & expected_ids and not threshold_evidence:
+        return False
+    expected_amount = float(scheme["peso_amount"])
+    actual_amount = float(finding["peso_amount"])
+    return abs(actual_amount - expected_amount) <= 0.02 * max(expected_amount, 1.0)
+
+
 def score_submission(
     *,
     truth: dict[str, Any],
@@ -112,19 +138,28 @@ def score_submission(
     output_valid: bool,
 ) -> ScoreRow:
     """Score one validated production submission against one private answer key."""
-    schemes = list(truth.get("schemes", []))
+    schemes = [
+        scheme
+        for scheme in truth.get("schemes", [])
+        if scheme.get("expected_published_finding", True)
+    ]
     decoys = list(truth.get("decoys", []))
     findings = list(submission.get("findings", []))
     metadata = submission["run_metadata"]
     accused_entities = {entity for finding in findings for entity in _entities(finding)}
     decoy_entities = {str(decoy["entity"]) for decoy in decoys}
     found = _maximum_matches(schemes, findings)
+    strictly_supported = _maximum_matches(schemes, findings, strict=True)
     decoys_accused = len(accused_entities & decoy_entities)
     return ScoreRow(
         seed=int(truth["seed"]),
         schemes_planted=len(schemes),
         schemes_found=found,
         recall_pct=round(100 * found / len(schemes), 2) if schemes else 100.0,
+        strictly_supported_found=strictly_supported,
+        strict_recall_pct=(
+            round(100 * strictly_supported / len(schemes), 2) if schemes else 100.0
+        ),
         decoys_planted=len(decoys),
         decoys_accused=decoys_accused,
         false_accusation_rate_pct=(
@@ -178,6 +213,7 @@ def total_row(rows: list[ScoreRow]) -> dict[str, str | int | float]:
     """Aggregate counts and recompute rates; never average per-seed percentages."""
     schemes_planted = sum(row.schemes_planted for row in rows)
     schemes_found = sum(row.schemes_found for row in rows)
+    strictly_supported_found = sum(row.strictly_supported_found for row in rows)
     decoys_planted = sum(row.decoys_planted for row in rows)
     decoys_accused = sum(row.decoys_accused for row in rows)
     return {
@@ -185,6 +221,10 @@ def total_row(rows: list[ScoreRow]) -> dict[str, str | int | float]:
         "schemes_planted": schemes_planted,
         "schemes_found": schemes_found,
         "recall_pct": round(100 * schemes_found / schemes_planted, 2)
+        if schemes_planted
+        else 100.0,
+        "strictly_supported_found": strictly_supported_found,
+        "strict_recall_pct": round(100 * strictly_supported_found / schemes_planted, 2)
         if schemes_planted
         else 100.0,
         "decoys_planted": decoys_planted,

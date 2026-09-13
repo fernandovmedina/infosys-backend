@@ -70,10 +70,12 @@ The following are intentionally not part of the current implementation:
 - Adversarial reviewer/challenger stage.
 - Decoy-driven threshold calibration and other false-positive reduction work.
 - Independent adversarial benchmark fixtures and stricter evaluation metrics.
-  The current generator/engine alignment is a self-consistency check, not
-  evidence of real-world robustness. Add hard decoys with multiple suspicious
-  signals, noisy/partial evidence, near-threshold values, and stricter
-  entity/evidence/amount matching before making quality claims.
+  Adversarial tuning fixtures now cover documented presumed-EFOS vendors,
+  independent near-threshold orders, and partial procurement evidence. Freeze
+  a separate seed range before reporting independent results. The current
+  generator/engine alignment is a self-consistency check, not evidence of
+  real-world robustness; add noisy records and stricter entity/evidence/amount
+  matching before making quality claims.
 - Artifact caching is not required for the same-machine demo. Execution time is
   operational metadata rather than part of the deterministic-result claim.
 - Production hardening: durable jobs/recovery, concurrency control, data

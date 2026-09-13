@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "policy": "Reserved adversarial held-out seeds. Do not generate, inspect, or tune against their private sidecars before final reporting.",
+  "cases": [
+    {"seed": 81011, "observation_profile": "challenge_wide", "scheme_count": 0, "decoy_count": 0, "adversarial": true},
+    {"seed": 82357, "observation_profile": "company_only", "scheme_count": 0, "decoy_count": 0, "adversarial": true},
+    {"seed": 83693, "observation_profile": "challenge_wide", "scheme_count": 0, "decoy_count": 0, "adversarial": true},
+    {"seed": 84971, "observation_profile": "company_only", "scheme_count": 0, "decoy_count": 0, "adversarial": true},
+    {"seed": 86243, "observation_profile": "challenge_wide", "scheme_count": 0, "decoy_count": 0, "adversarial": true},
+    {"seed": 87509, "observation_profile": "company_only", "scheme_count": 0, "decoy_count": 0, "adversarial": true}
+  ]
+}

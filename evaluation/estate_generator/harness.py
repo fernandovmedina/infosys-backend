@@ -213,6 +213,10 @@ def truth_document(run: ScenarioRun, config: EstateGeneratorConfig) -> dict[str,
                 "supporting_txns": list(item.transactions),
                 "peso_amount": item.peso_centavos / 100,
                 "difficulty": item.difficulty,
+                "expected_published_finding": not (
+                    config.observation_profile is ObservationProfile.COMPANY_ONLY
+                    and item.scheme_type == "round_tripping"
+                ),
             }
             for item in run.scenarios
         ],

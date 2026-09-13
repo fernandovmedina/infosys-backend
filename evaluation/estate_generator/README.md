@@ -21,6 +21,36 @@ scheme in isolation, mixed scheme counts, and all five schemes together, run:
 uv run python -m evaluation.estate_generator.generate_matrix
 ```
 
+Generate adversarial *tuning* fixtures—innocent lookalikes with multiple
+suspicious signals, partial procurement evidence, and near-threshold purchase
+patterns—with:
+
+```bash
+uv run python -m evaluation.estate_generator.generate_adversarial_matrix \
+  --output-root generated/adversarial-tuning \
+  --replicates 10 \
+  --include-fraud
+```
+
+Evaluate that manifest with `evaluation.fraud_evaluator.cli --mode tuning`.
+With `--include-fraud`, alternating cases contain all five planted schemes so
+the same run measures difficult-case recall and false accusations. The partial
+procurement decoy remains an expected lead, not an accusation. These fixtures
+are for diagnosing and calibrating only. Freeze a separate seed range before
+reporting independent adversarial results.
+
+`adversarial_heldout_manifest.json` reserves that separate seed range. Do not
+generate or inspect it during tuning; evaluate it only with:
+
+```bash
+uv run python -m evaluation.fraud_evaluator.cli --mode heldout \
+  --heldout-manifest evaluation/estate_generator/adversarial_heldout_manifest.json \
+  --output-root generated/evaluation/adversarial-heldout
+```
+
+`adversarial_mixed_heldout_manifest.json` similarly reserves mixed fraud and
+lookalike cases for one final strict-recall and false-accusation measurement.
+
 The implementation is a configurable Python CLI:
 
 ```bash

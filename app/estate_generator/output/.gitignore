@@ -1,0 +1,4 @@
+# Generated estate runs are local artifacts; keep only the documentation.
+*
+!.gitignore
+!README.md

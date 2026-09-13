@@ -18,7 +18,16 @@ For a ready-made matrix covering a clean baseline, clean data with decoys, each
 scheme in isolation, mixed scheme counts, and all five schemes together, run:
 
 ```bash
-./evaluation/estate_generator/generate.sh
+uv run python -m evaluation.estate_generator.generate_matrix
+```
+
+The implementation is a configurable Python CLI:
+
+```bash
+uv run python -m evaluation.estate_generator.generate_matrix \
+  --replicates 5 \
+  --report-replicates 1 \
+  --first-seed 2001
 ```
 
 The script uses distinct seed ranges for each case and prints the label and
@@ -27,14 +36,15 @@ already synchronized. It writes CSV estates and private sidecars under a
 discoverable category tree:
 
 ```text
-app/estate_generator/output/fixture_matrix/
-├── clean/no_schemes/
-├── clean/with_decoys/
-├── isolated/{phantom_vendor,kickback,round_tripping,
-│             threshold_splitting,revenue_inflation}/
-├── mixed/{seed_driven,three_schemes_with_decoys}/
-└── all_five/with_decoys/
+tuning/
+└── <category>/<variant>/seed<seed>_<timestamp>/
+report/
+└── <category>/<variant>/seed<seed>_<timestamp>/
 ```
+
+The default is five tuning replicas and one report replica per category/variant.
+Use `--replicates` and `--report-replicates` to change those counts. Every case
+gets a globally unique seed, avoiding collisions in seed-keyed evaluators.
 
 Without `--all-five`, the default deterministic mix contains 0–5 schemes and
 0–10 decoys. `--scheme-count` and `--decoy-count` override that mix. To choose

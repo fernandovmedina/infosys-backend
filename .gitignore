@@ -53,3 +53,6 @@ generated/*
 # file-backed DuckDB analysis databases
 *.duckdb
 *.duckdb.wal
+
+# Uploaded datasets of investigation runs
+storage/

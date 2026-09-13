@@ -142,3 +142,36 @@ ALTER TABLE app_user DROP COLUMN IF EXISTS is_email_verified;
 
 COMMENT ON TABLE auth_session IS
     'Session tokens issued on login/register. token_hash is looked up on every request.';
+
+
+-- 2026-09-13 — Investigation runs: one row per uploaded dataset (a .zip or a
+-- set of CSVs). The normalized tables live on disk under Settings.runs_storage_dir;
+-- this row holds ownership, lifecycle and the validation diagnostics.
+CREATE TABLE IF NOT EXISTS investigation_run (
+    id            text        PRIMARY KEY,
+    user_id       bigint      NOT NULL REFERENCES app_user (id) ON DELETE CASCADE,
+
+    status        text        NOT NULL,
+    filename      text        NOT NULL,
+    format        text        NOT NULL,
+    sha256        text        NOT NULL,
+    -- ValidationResult minus run_id/status: tables, column_warnings, ignored_files.
+    validation    jsonb       NOT NULL,
+    -- ApiErrorBody when status = 'failed'.
+    error         jsonb,
+
+    created_at    timestamptz NOT NULL DEFAULT now(),
+    started_at    timestamptz,
+    finished_at   timestamptz,
+
+    CONSTRAINT investigation_run_status_check
+        CHECK (status IN ('validating', 'ready', 'running', 'completed', 'failed')),
+    CONSTRAINT investigation_run_format_check CHECK (format IN ('zip', 'csv'))
+);
+
+COMMENT ON TABLE investigation_run IS
+    'Investigation runs. Dataset tables are stored on disk, keyed by id.';
+
+-- The history page lists a user's runs newest first.
+CREATE INDEX IF NOT EXISTS investigation_run_user_id_created_at_idx
+    ON investigation_run (user_id, created_at DESC);

@@ -65,6 +65,60 @@ class NotAuthenticatedError(AppError):
     message = "You must be signed in to do this."
 
 
+class UploadRejectedError(AppError):
+    """An uploaded dataset cannot be used at all (wrong format, unreadable, no tables).
+
+    The code varies with the reason, so the frontend can explain each case; the
+    message is user-facing Spanish.
+    """
+
+    status_code = status.HTTP_422_UNPROCESSABLE_CONTENT
+    code = "upload_rejected"
+
+    def __init__(
+        self, code: str, message: str, *, details: Any = None, status_code: int | None = None
+    ) -> None:
+        super().__init__(message, details)
+        self.code = code
+        if status_code is not None:
+            self.status_code = status_code
+
+
+class RunNotFoundError(AppError):
+    """The run does not exist or belongs to another account."""
+
+    status_code = status.HTTP_404_NOT_FOUND
+    code = "run_not_found"
+    message = "No encontramos esta corrida."
+
+
+class ValidationBlockedError(AppError):
+    """The dataset diagnostics have blocking errors, so the run cannot start."""
+
+    status_code = status.HTTP_409_CONFLICT
+    code = "validation_blocked"
+    message = "El diagnóstico tiene errores bloqueantes; corrige el dataset y vuelve a subirlo."
+
+
+class InvalidRunStateError(AppError):
+    """The run is not in a state that allows the requested transition."""
+
+    status_code = status.HTTP_409_CONFLICT
+    code = "invalid_state"
+    message = "La corrida no está en un estado que permita esta acción."
+
+
+class InvestigationUnavailableError(AppError):
+    """The investigation engine has not been built yet."""
+
+    status_code = status.HTTP_501_NOT_IMPLEMENTED
+    code = "investigation_unavailable"
+    message = (
+        "La investigación automática todavía no está disponible. "
+        "El dataset quedó validado y guardado."
+    )
+
+
 def error_response(
     *, status_code: int, code: str, message: str, details: Any = None
 ) -> JSONResponse:

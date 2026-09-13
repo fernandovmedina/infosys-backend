@@ -108,15 +108,34 @@ class InvalidRunStateError(AppError):
     message = "La corrida no está en un estado que permita esta acción."
 
 
-class InvestigationUnavailableError(AppError):
-    """The investigation engine has not been built yet."""
+class RunResultNotAvailableError(AppError):
+    """The run has no fraud analysis yet (not started, still running, or failed)."""
 
-    status_code = status.HTTP_501_NOT_IMPLEMENTED
-    code = "investigation_unavailable"
-    message = (
-        "La investigación automática todavía no está disponible. "
-        "El dataset quedó validado y guardado."
-    )
+    status_code = status.HTTP_409_CONFLICT
+    code = "result_not_available"
+    message = "La corrida todavía no tiene resultados de la investigación."
+
+
+class FraudDatasetInvalidError(AppError):
+    """The estate CSVs sent to the fraud engine do not match the estate schema.
+
+    `details` lists every problem as `{"file", "column", "message"}`.
+    """
+
+    status_code = status.HTTP_422_UNPROCESSABLE_CONTENT
+    code = "invalid_dataset"
+    message = "Los CSV no cumplen el esquema del estate."
+
+
+class FraudEngineOutputInvalidError(AppError):
+    """The engine's submission did not pass the official format validator, so it is withheld.
+
+    `details` carries the validator's error messages.
+    """
+
+    status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+    code = "engine_output_invalid"
+    message = "El resultado del motor no pasó el validador oficial; no se entrega."
 
 
 def error_response(

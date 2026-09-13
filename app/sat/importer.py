@@ -6,10 +6,9 @@ Design notes
   (a legal notice and a title) before the real header row. The header is located
   by looking for the ``RFC`` column rather than by hard-coding a line number, so
   a future snapshot with a different preamble still imports.
-* Rows are normalized in Python with :mod:`app.sat.normalization` -- the same
-  functions the search uses -- and streamed into ``sat_blacklist_staging`` with
-  ``COPY``, then merged by ``sat_blacklist_merge_staging()`` in one set-based
-  statement. There is never one INSERT per row.
+* Rows are normalized in Python with :mod:`app.sat.normalization` and streamed
+  into ``sat_blacklist_staging`` with ``COPY``, then merged by
+  ``sat_blacklist_merge_staging()`` in one set-based statement. There is never one INSERT per row.
 * ``source_hash`` (SHA-256 of the row minus its sequence number) makes the whole
   run idempotent and collapses the exact duplicates the source file contains.
 * A malformed row never aborts the run: it is counted, reported with its line

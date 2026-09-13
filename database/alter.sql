@@ -175,3 +175,67 @@ COMMENT ON TABLE investigation_run IS
 -- The history page lists a user's runs newest first.
 CREATE INDEX IF NOT EXISTS investigation_run_user_id_created_at_idx
     ON investigation_run (user_id, created_at DESC);
+
+
+-- 2026-09-13 — Fraud-detection engine results (TASK #3). The engine runs over a
+-- run's stored dataset in an in-memory DuckDB; PostgreSQL keeps what it
+-- concluded, one row per completed run. The rule catalog is not stored: it is
+-- static code (app/fraud/engine/catalogo.py) and served by GET /fraud/rules.
+CREATE TABLE IF NOT EXISTS fraud_analysis (
+    run_id            text             PRIMARY KEY
+                                       REFERENCES investigation_run (id) ON DELETE CASCADE,
+    engine_version    text             NOT NULL,
+    seed              integer          NOT NULL,
+
+    rules_evaluated   integer          NOT NULL,
+    rules_triggered   integer          NOT NULL,
+    findings_count    integer          NOT NULL,
+    total_exposure    double precision NOT NULL,
+
+    -- The official submission_schema.json document, as validated.
+    submission        jsonb            NOT NULL,
+    signals_per_rule  jsonb            NOT NULL,
+    data_quality      jsonb            NOT NULL,
+    -- [{rule, status, error}] for detectors skipped because they failed.
+    rule_failures     jsonb            NOT NULL,
+    warnings          jsonb            NOT NULL,
+    rows_per_table    jsonb            NOT NULL,
+    case_file_html    text             NOT NULL,
+
+    created_at        timestamptz      NOT NULL DEFAULT now()
+);
+
+COMMENT ON TABLE fraud_analysis IS
+    'Fraud-engine result of a completed investigation run (submission + case file).';
+
+-- Every row a detector returned, kept so each finding and lead can be audited
+-- back to the exact source record. `ordinal` preserves the engine's output order.
+CREATE TABLE IF NOT EXISTS fraud_signal (
+    run_id            text             NOT NULL
+                                       REFERENCES fraud_analysis (run_id) ON DELETE CASCADE,
+    ordinal           integer          NOT NULL,
+
+    rule_id           text             NOT NULL,
+    scheme_type       text,
+    evidence_family   text,
+    source_table      text             NOT NULL,
+    entity_id         text,
+    evidence_id       text,
+    detected_on       text,
+    severity          text             NOT NULL,
+    self_sufficiency  text             NOT NULL,
+    amount            double precision,
+    context           jsonb,
+
+    PRIMARY KEY (run_id, ordinal),
+    CONSTRAINT fraud_signal_severity_check CHECK (severity IN ('alta', 'media', 'baja')),
+    CONSTRAINT fraud_signal_self_sufficiency_check
+        CHECK (self_sufficiency IN ('autosuficiente', 'presuntiva'))
+);
+
+COMMENT ON TABLE fraud_signal IS
+    'Detector output (signals) behind a fraud_analysis, one row per cited source record.';
+
+-- Drill-down: signals of one rule, or about one entity, within a run.
+CREATE INDEX IF NOT EXISTS fraud_signal_run_id_rule_id_idx ON fraud_signal (run_id, rule_id);
+CREATE INDEX IF NOT EXISTS fraud_signal_run_id_entity_id_idx ON fraud_signal (run_id, entity_id);

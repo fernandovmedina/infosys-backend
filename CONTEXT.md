@@ -2,7 +2,9 @@
 
 > Single source of truth for this repository. Read this first.
 > Written for developers and AI coding agents. Last verified against the repo and
-> `/public/material/` on 2026-09-12 (HEAD `377d80b`).
+> `/public/material/` on 2026-09-12 (HEAD `377d80b`). Updated 2026-09-13 for TASK #3
+> (fraud-engine integration): see "Implemented: fraud-detection engine" below. Sections
+> not touched by TASK #3 (e.g. the estate generator and runs upload) may lag behind the code.
 >
 > Labels used throughout:
 > - **[OFFICIAL]** — stated in the challenge material. Cite the source file.
@@ -22,9 +24,11 @@
   (HTML/PDF/Markdown) with a **rendered money-trail diagram**.
 - **Scoring pillars:** Results, Judgment, Feasibility, Clarity. False accusations weigh
   **at least as much** as recall.
-- **Repo today:** a FastAPI + PostgreSQL backend with **one feature**: a bulk SAT
-  Art. 69-B blacklist check endpoint (TASK #1). The agent, estate generator, detectors,
-  case-file renderer and evaluation harness **do not exist yet**.
+- **Repo today:** a FastAPI + PostgreSQL backend with the SAT Art. 69-B blacklist check
+  (TASK #1), auth, dataset upload/investigation runs, an offline estate generator, and the
+  **deterministic fraud-detection engine** ported from `motor-agente-forense` (TASK #3):
+  24 SQL detectors → findings/leads → validated `submission` + HTML case file, exposed as
+  `POST /api/v1/fraud/analyze` and `POST /api/v1/runs/{id}/start`. No LLM stage yet.
 
 ---
 
@@ -463,21 +467,33 @@ Five seed rows plus a `TOTAL` row. Delete the template's comment block when fill
   **5433**, user/password/db `infosys`), accessed with **asyncpg** (no ORM). Extensions:
   `pg_trgm`, `unaccent`.
 - **Config:** `pydantic-settings`, env vars / `.env` (`DATABASE_URL`,
-  `DATABASE_POOL_MIN_SIZE`, `DATABASE_POOL_MAX_SIZE`,
-  `BLACKLIST_MAX_COMPANIES_PER_REQUEST`=500, `BLACKLIST_NAME_SIMILARITY_THRESHOLD`=0.45).
+  `DATABASE_POOL_MIN_SIZE`, `DATABASE_POOL_MAX_SIZE`).
 - **Tooling:** ruff (line length 100), mypy **strict**, pytest + pytest-asyncio + httpx.
-- **Layering:** `api/v1` routes → `sat/service` (batching, dedup, result assembly) →
-  `sat/repository` (single SQL query) ; `sat/normalization` shared by importer and search;
-  `core/` for config, pool, error envelope.
+- **Layering:** `api/v1` routes → feature `service` → feature `repository` (only SQL);
+  `core/` for config, pool, error envelope. (`sat/` now only holds the importer and
+  normalization; its search endpoint was removed.)
 - **Error envelope** (all errors): `{"error": {"code", "message", "details"}}`; codes
   `validation_error` (422), `database_unavailable` (503), `http_error`, `internal_error` (500).
+- **Fraud engine:** `app/fraud/` — in-memory **DuckDB** + **pandas** (added dep), no
+  PostgreSQL access from rules; results persisted to PostgreSQL. Layering: `api/v1/fraud.py`
+  and `api/v1/runs.py` → `fraud/service.py` → `fraud/engine/` (ported agent) + `fraud/rules/`;
+  `fraud/repository.py` for persistence. Full doc: `docs/fraud_engine.md`.
 - **Schema management:** `database/database.sql` (immutable initial schema) +
   `database/alter.sql` (append-only idempotent migrations) + `database/exec.sql`
   (apply both, run importer, `ANALYZE`, print summary).
 
 ## Current Implementation
 
-### Implemented: SAT blacklist check (TASK #1, commit `377d80b`)
+### SAT blacklist check (TASK #1, commit `377d80b`) — endpoint removed 2026-09-13
+
+> [DECISION] 2026-09-13: `POST /api/v1/sat/blacklist/check` was deleted because nothing
+> used it (removed `app/api/v1/sat.py`, `app/sat/{service,repository,schemas}.py`,
+> `tests/test_blacklist_endpoint.py`, `tests/test_search_performance.py`, settings
+> `BLACKLIST_MAX_COMPANIES_PER_REQUEST` / `BLACKLIST_NAME_SIMILARITY_THRESHOLD`, and the
+> per-connection `pg_trgm.similarity_threshold` pool hook). **Kept:** the
+> `sat_blacklist_record` table and its data, `database.sql` indexes, `exec.sql` seeding,
+> `app/sat/{importer,normalization}.py` and their tests. The description below is the
+> historical design of the removed endpoint; it is recoverable from git history.
 
 `POST /api/v1/sat/blacklist/check`. Also `GET /health`.
 
@@ -503,6 +519,88 @@ Five seed rows plus a `TOTAL` row. Delete the template's comment block when fill
 - Tests: 57 test functions (normalization, importer, endpoint, `EXPLAIN ANALYZE` index-usage
   checks). DB tests **skip** when no database is reachable.
 
+### Implemented: fraud-detection engine (TASK #3, 2026-09-13)
+
+[DECISION] Ported from `/Users/.../motor-agente-forense` (HEAD `06e60f3`), the source of
+truth for rule behavior. No runtime dependency on that repo. Details, rule table and
+request/response schemas: `docs/fraud_engine.md`.
+
+**What was integrated**
+- The deterministic agent (`src/agente/` → `app/fraud/engine/`, Spanish identifiers kept):
+  strict CSV ingestion, rule runner with per-rule failure isolation, estate queries, entity
+  resolution, assembler (union-find per scheme; accuse with ≥2 independent evidence
+  families or a rule sufficient alone, ≥3 exhibits and an amount; otherwise a declined lead
+  with a templated reason), exhibits/money trail/`peso_amount`, templated narrative, HTML
+  case file, and the official-validator gate (unmodified copy of `validate_format.py`).
+- All 24 registered detectors (`src/rules/<n>_<bloque>/` → `app/fraud/rules/<scheme>/`):
+  6 phantom_vendor, 4 kickback, 6 round_tripping, 2 threshold_splitting,
+  2 revenue_inflation, 4 data_integrity. Thresholds, SQL, scoring and classification unchanged.
+- Not ported (the reference never runs them): `2_kickback/efos_definitive_match.py`
+  (duplicate), `efos_presunto_match.py` (empty), `vendor_employee_name_similarity.py`
+  (out of SQL scope); reference CLIs, `scripts/`, `eval/` harness and ground-truth files.
+
+**Endpoints** (all `/api/v1`)
+- `POST /fraud/analyze` — multipart 8 CSVs + `seed`; synchronous; session required; returns
+  `FraudAnalysis` (submission, signals with evidence, data quality, rule failures, case file).
+- `GET /fraud/rules`, `GET /fraud/health` — public catalog / status.
+- `POST /runs/{id}/start` — now runs the engine in a background task (was `501
+  investigation_unavailable`); `202`, run `running` → `completed` | `failed` (retryable).
+- `GET /runs/{id}/result` — stored `FraudAnalysis` of a completed run.
+
+**Database** (`database/alter.sql`, 2026-09-13): `fraud_analysis` (1 row per completed run,
+FK → `investigation_run` cascade; counters, jsonb submission/details, case file) and
+`fraud_signal` (every detector row, PK `(run_id, ordinal)`, CHECKs on severity /
+self-sufficiency, indexes on `(run_id, rule_id)`, `(run_id, entity_id)`; bulk `COPY`).
+No seed data: the rule catalog stays in code.
+
+**Dependencies / config:** `pandas>=3.0.5`. Env `FRAUD_MAX_BYTES_PER_FILE` (50 MB),
+`FRAUD_MAX_ROWS_PER_TABLE` (1,000,000). The reference's `MOTOR_API_KEY` is replaced by the
+session cookie.
+
+**Files created:** `app/fraud/{__init__,schemas,service,loader,repository}.py`,
+`app/fraud/engine/*` (14 ported modules + `validate_format.py`), `app/fraud/rules/**`
+(24 rules, 6 registries, 5 READMEs), `app/api/v1/fraud.py`, `docs/fraud_engine.md`,
+`tests/test_fraud/{conftest,test_rules,test_pipeline,test_api}.py`,
+`tests/fixtures/fraud/{seed1301/*.csv,seed_1301.json}`.
+**Files modified:** `app/api/{dependencies,router}.py` (shared `CurrentUserDependency`,
+fraud router), `app/api/v1/runs.py`, `app/runs/{service,repository}.py`,
+`app/core/{config,errors}.py` (settings; `InvestigationUnavailableError` replaced by
+`RunResultNotAvailableError`, `FraudDatasetInvalidError`, `FraudEngineOutputInvalidError`),
+`database/alter.sql`, `pyproject.toml`/`uv.lock` (pandas; ruff/mypy relaxed only for the
+ported `app/fraud/engine` and `app/fraud/rules`), `.env.example`, `tests/test_runs.py`,
+`README.md`, `CLAUDE.md`.
+
+**Key decisions**
+1. Port verbatim, adapt only at the edges: 41/44 ported files are AST-identical to the
+   reference; the 3 that differ (`runner`, `pipeline`, `validacion`) only change rule
+   loading, drop CLI/`.duckdb` writing, expose raw signals, and locate the validator copy.
+2. Two load paths: strict reference ingestion for `/fraud/analyze`; tolerant loader for runs
+   (missing optional table → empty, missing column / uncastable value → NULL) so warnings
+   accepted at upload never become blocking. Identical output on clean data (tested).
+3. API follows this repo's conventions (English envelope, error envelope, session auth);
+   the official `submission` and case file are untouched. Differences are listed in
+   `docs/fraud_engine.md` → "Behavior differences from the reference".
+4. Runs execute in a FastAPI background task (no queue); estate stays in DuckDB, only
+   conclusions go to PostgreSQL.
+
+**Validation**
+- 83 tests in `tests/test_fraud` (1:1 ports of the reference rule/pipeline tests — incl.
+  seed 1301 submission identical to the reference's expected output — plus API, runs,
+  persistence, failure isolation, validator gate, loader equivalence). Full suite: 238 passed.
+- One-off comparison of reference vs port over **all 200 synthetic estates** in
+  `motor-agente-forense/datasets/`: **200/200 identical** (submission, validator result,
+  warnings, data quality, signals per rule, case file with its wall-clock metric
+  normalized), 0 errors on either side. Totals: 342 findings, 1,327 declined leads, 200/200
+  validator passes; ~0.12 s per estate (max 0.42 s).
+- Live end-to-end over uvicorn: register → analyze seed 1301 → upload run → start → poll →
+  result; both paths returned the reference submission.
+
+**Known limitations:** a run left `running` by a process crash is never recovered;
+catalog rules unimplemented in the reference (`PO_NEAR_THRESHOLD`, `BENFORD_*`, ...) remain
+unimplemented; the engine uses the estate's `efos_list`, not `sat_blacklist_record`; the case
+file's reproduction line names the reference CLI; calibration comes from the reference's
+tuning seeds only; lint/type checks are relaxed for the ported packages.
+
 ### How it relates to the challenge
 
 - It is a building block for suggested approach #2, detector "**blacklisted suppliers**",
@@ -517,13 +615,11 @@ Five seed rows plus a `TOTAL` row. Delete the template's comment block when fill
 - Estate generator (8 tables, seeded, with planted schemes + decoys + entanglement).
 - Ground-truth writer and isolated evaluation harness; Results table producer.
 - Estate loader accepting a runtime path.
-- Detectors beyond the blacklist (payment/invoice mismatch, circular money flows,
-  threshold splitting, etc.).
-- Investigation agent loop, LLM integration (Ollama or other), caching, cost accounting.
-- Adversarial reviewer ("challenger") and pre-print validator.
-- Submission JSON serializer; case-file renderer with money-trail diagram.
-- Integration of `validate_format.py` into the build.
-- Determinism / offline replay mechanism.
+- ~~Detectors, submission serializer, case-file renderer with money trail,
+  `validate_format.py` gate, determinism~~ — done by the fraud engine (TASK #3); 9 catalog
+  rules (e.g. `PO_NEAR_THRESHOLD`, `BENFORD_DEVIATION_*`) are still unimplemented.
+- LLM integration (Ollama or other), caching, cost accounting (engine runs `llm_calls: 0`).
+- Adversarial reviewer ("challenger") stage.
 
 ## Important Files and Directories
 
@@ -532,24 +628,25 @@ Five seed rows plus a `TOTAL` row. Delete the template's comment block when fill
 | `CONTEXT.md` | This file. |
 | `TODO.md` | Task briefs given to agents: TASK #1 (blacklist endpoint, done), TASK #2 (this document). |
 | `README.md` | Detailed docs for setup, endpoint, search strategy, import, DB. |
-| `CLAUDE.md`, `AGENTS.md` | Present but **empty**. |
+| `CLAUDE.md` | Guidance for Claude Code (commands, architecture, worker panes). `AGENTS.md` is empty. |
+| `docs/fraud_engine.md` | Fraud engine: architecture, rules, API schemas, how to add a rule, reference differences. |
+| `app/fraud/` | Fraud engine (`engine/`, `rules/`), service, tolerant run loader, persistence, schemas. |
+| `app/api/v1/fraud.py` | `/fraud/analyze`, `/fraud/rules`, `/fraud/health`. |
+| `tests/test_fraud/`, `tests/fixtures/fraud/` | Engine tests and the seed 1301 golden fixture. |
 | `Dockerfile` | Present but **empty**. |
 | `docker-compose.yml` | Local PostgreSQL 17 on port 5433. |
 | `pyproject.toml`, `uv.lock`, `.python-version` | Dependencies, tool config, Python 3.14. |
 | `.env.example` | Config template. `.env` exists locally (gitignored). |
 | `main.py` | Dev entry: `python main.py` → uvicorn on 127.0.0.1:8000. |
 | `app/main.py` | App factory, lifespan (pool open/close), `/health`. |
-| `app/api/router.py`, `app/api/v1/sat.py` | `/api/v1` router and the blacklist endpoint. |
+| `app/api/router.py` | `/api/v1` router (auth, runs, fraud). |
 | `app/core/{config,database,errors}.py` | Settings, asyncpg pool (sets `pg_trgm.similarity_threshold` per connection), error envelope. |
 | `app/sat/normalization.py` | RFC/name normalization, suffix stripping, cleared/redacted rules. Changing it requires a re-import. |
 | `app/sat/importer.py` | CSV → staging → merge; `sat-blacklist-import` CLI. |
-| `app/sat/repository.py` | The single bulk search SQL. |
-| `app/sat/service.py` | Dedup, ranking, result assembly. |
-| `app/sat/schemas.py` | Pydantic request/response models and validation. |
 | `database/database.sql` | Table `sat_blacklist_record`, partial indexes, trigger, staging table, merge function. |
 | `database/exec.sql` | Init + seed (shells out to `uv run sat-blacklist-import`). |
-| `database/alter.sql` | Append-only migrations; none yet. |
-| `tests/` | `conftest.py`, `test_normalization.py`, `test_importer.py`, `test_blacklist_endpoint.py`, `test_search_performance.py`. |
+| `database/alter.sql` | Append-only migrations: auth, `investigation_run`, `fraud_analysis`, `fraud_signal`. |
+| `tests/` | `conftest.py`, `test_normalization.py`, `test_importer.py`, `test_auth.py`, `test_runs.py`, `test_estate_generator/`, `test_fraud/`. |
 | `black_list.csv` | SAT 69-B snapshot (31 Jul 2026). |
 | `public/material/` | Official challenge material (untracked in git as of this writing). |
 | `scripts/` | Gitignored local dir; contains an empty `detect.sh`. |
@@ -580,8 +677,11 @@ uv run ruff format . && uv run ruff check . && uv run mypy app main.py tests && 
 8. **Immutable base schema + append-only `alter.sql`.**
 9. **DB tests skip** without a database.
 
-No decisions have yet been made about the agent, LLM provider, estate storage format,
-case-file format, or diagram technology.
+10. **Fraud engine** (TASK #3): deterministic SQL detectors over an in-memory DuckDB estate,
+    HTML case file with inline-SVG money trail, official validator as a gate; ported
+    verbatim from `motor-agente-forense` (see "Implemented: fraud-detection engine").
+
+No decision has yet been made about an LLM provider.
 
 ## Assumptions
 
@@ -650,6 +750,11 @@ Documented, not resolved.
 9. Which seeds are tuning vs reporting seeds.
 10. Should `CLAUDE.md` / `AGENTS.md` be populated (e.g. pointing to this file)?
 11. Is `Dockerfile` (empty) expected for the demo/deployment?
+12. (TASK #3) Should the engine's `efos_list` be enriched from the real SAT 69-B table
+    (`sat_blacklist_record`)? It would change detection results vs. the reference.
+13. (TASK #3) Do runs need a job queue / crash recovery instead of in-process background
+    tasks? Should `GET /runs` expose `findings_count` / `total_exposure` / `verdict`
+    (optional fields in the frontend's `RunSummary`)?
 
 ## Current Project Status
 
@@ -659,14 +764,14 @@ As of 2026-09-12:
 |---|---|
 | Challenge material collected | Done (`public/material/`, untracked in git) |
 | Project context (`CONTEXT.md`) | Done (this file) |
-| SAT 69-B blacklist import + bulk check endpoint | **Done**, tested, documented (commit `377d80b`) |
+| SAT 69-B blacklist import | **Done** (data kept in `sat_blacklist_record`); check endpoint **removed** 2026-09-13 as unused |
 | Estate generator + ground truth | Not started |
-| Detectors (beyond blacklist) | Not started |
+| Detectors / fraud engine | **Done** (TASK #3): 24 rules, API + runs, 200/200 equivalent to reference |
 | Investigation agent + LLM integration | Not started |
 | Challenger / validator stages | Not started |
-| Submission JSON + case file renderer | Not started |
+| Submission JSON + case file renderer | **Done** (fraud engine) |
 | Evaluation harness + Results table | Not started |
-| Determinism / offline replay | Not started |
+| Determinism / offline replay | Deterministic engine (no LLM); replay not needed yet |
 | Demo & pitch | Not started |
 
 Git: branch `main`; 3 commits (`6661852` initial, `5c87846` untrack scripts,

@@ -1,4 +1,4 @@
-"""asyncpg connection-pool lifecycle and the FastAPI dependency that exposes it."""
+"""Framework-independent asyncpg connection-pool lifecycle helpers."""
 
 from __future__ import annotations
 
@@ -7,10 +7,8 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
 import asyncpg
-from fastapi import Request
 
 from app.core.config import Settings, get_settings
-from app.core.errors import DatabaseUnavailableError
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +35,7 @@ async def create_pool(settings: Settings | None = None) -> asyncpg.Pool:
         min_size=settings.database_pool_min_size,
         max_size=settings.database_pool_max_size,
         command_timeout=30,
+        timeout=settings.database_connect_timeout_seconds,
         init=init_connection,
     )
 
@@ -49,11 +48,3 @@ async def pool_context(settings: Settings | None = None) -> AsyncIterator[asyncp
         yield pool
     finally:
         await pool.close()
-
-
-def get_pool(request: Request) -> asyncpg.Pool:
-    """FastAPI dependency returning the pool created during startup."""
-    pool: asyncpg.Pool | None = getattr(request.app.state, "pool", None)
-    if pool is None:
-        raise DatabaseUnavailableError()
-    return pool

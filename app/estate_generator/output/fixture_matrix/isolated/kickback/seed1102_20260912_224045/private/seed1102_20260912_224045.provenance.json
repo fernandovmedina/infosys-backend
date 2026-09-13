@@ -1,0 +1,22 @@
+{
+  "decoys": [],
+  "observation_note": "challenge_wide includes the configured counterparty transfers needed for complete evidence.",
+  "observation_profile": "challenge_wide",
+  "scenarios": [
+    {
+      "amount_basis": "illicit benefit visible in the vendor-to-employee return transfer",
+      "hidden_transaction_ids": [],
+      "illicit_benefit": 14179.84,
+      "maximum_public_confidence": "proven",
+      "public_peso_amount": 14179.84,
+      "scheme_id": "S1_kickback",
+      "visible_invoice_ids": [
+        "INV-00031"
+      ],
+      "visible_transaction_ids": [
+        "BNK-00178",
+        "BNK-00110"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "company_rfc": "HRF810614GSR",
+  "decoys": [
+    {
+      "entity": "RFC:HRF810614GSR",
+      "invoices": [
+        "INV-00208"
+      ],
+      "signal": "cancelled_revenue",
+      "why_innocent": "La cancelacion tiene reversion de ingresos, IVA y cuentas por cobrar."
+    },
+    {
+      "entity": "RFC:HTI760307HUE",
+      "invoices": [
+        "INV-00016"
+      ],
+      "signal": "new_vendor",
+      "why_innocent": "Contrato, PO, factura y pago consistentes."
+    },
+    {
+      "entity": "RFC:HTJ770614HUR",
+      "invoices": [
+        "INV-00177"
+      ],
+      "signal": "return_path",
+      "why_innocent": "Factura cancelada con reversion contable visible."
+    },
+    {
+      "entity": "EMP:00001301-0007",
+      "invoices": [
+        "INV-00052",
+        "INV-00294",
+        "INV-00037"
+      ],
+      "signal": "near_limit_purchases",
+      "why_innocent": "POs del mismo proveedor muestran obligaciones y contratos independientes."
+    },
+    {
+      "entity": "RFC:HTL791228HVR",
+      "invoices": [
+        "INV-00230"
+      ],
+      "signal": "return_payment",
+      "why_innocent": "El retorno va a la empresa y se identifica como reembolso."
+    }
+  ],
+  "schemes": [
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:HRF810614GSR"
+      ],
+      "peso_amount": 199014.24,
+      "scheme_id": "S1_revenue_inflation",
+      "supporting_invoices": [
+        "INV-00190",
+        "INV-00174",
+        "INV-00005"
+      ],
+      "supporting_txns": [],
+      "type": "revenue_inflation"
+    },
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:HTE720307HSE",
+        "EMP:00001301-0003"
+      ],
+      "peso_amount": 100257.64,
+      "scheme_id": "S2_phantom_vendor",
+      "supporting_invoices": [
+        "INV-00203"
+      ],
+      "supporting_txns": [
+        "BNK-00086"
+      ],
+      "type": "phantom_vendor"
+    },
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:HTF730614HSR"
+      ],
+      "peso_amount": 83810.0,
+      "scheme_id": "S3_round_tripping",
+      "supporting_invoices": [
+        "INV-00323"
+      ],
+      "supporting_txns": [
+        "BNK-00277",
+        "BNK-00160",
+        "BNK-00272"
+      ],
+      "type": "round_tripping"
+    },
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:HTG740921HTE",
+        "EMP:00001301-0005"
+      ],
+      "peso_amount": 158614.92,
+      "scheme_id": "S4_threshold_splitting",
+      "supporting_invoices": [
+        "INV-00227",
+        "INV-00095",
+        "INV-00192"
+      ],
+      "supporting_txns": [
+        "BNK-00339",
+        "BNK-00097",
+        "BNK-00346"
+      ],
+      "type": "threshold_splitting"
+    },
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:HTH751228HTR",
+        "EMP:00001301-0006"
+      ],
+      "peso_amount": 13778.94,
+      "scheme_id": "S5_kickback",
+      "supporting_invoices": [
+        "INV-00139"
+      ],
+      "supporting_txns": [
+        "BNK-00253",
+        "BNK-00124"
+      ],
+      "type": "kickback"
+    }
+  ],
+  "seed": 1301
+}

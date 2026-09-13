@@ -2,12 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Annotated
+from fastapi import APIRouter, status
 
-import asyncpg
-from fastapi import APIRouter, Depends, status
-
-from app.core.database import get_pool
+from app.api.dependencies import PoolDependency
 from app.sat.schemas import BlacklistCheckRequest, BlacklistCheckResponse
 from app.sat.service import check_companies
 
@@ -23,7 +20,7 @@ router = APIRouter(prefix="/sat/blacklist", tags=["SAT blacklist"])
 )
 async def check_blacklist(
     payload: BlacklistCheckRequest,
-    pool: Annotated[asyncpg.Pool, Depends(get_pool)],
+    pool: PoolDependency,
 ) -> BlacklistCheckResponse:
     """Check one or more companies against the SAT Art. 69-B listing.
 

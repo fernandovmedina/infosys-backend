@@ -3,14 +3,30 @@
 from __future__ import annotations
 
 import datetime as dt
-from typing import Any
 
 import asyncpg
+
+from app.auth.entities import User, UserWithPassword
+
+
+def _to_user(row: asyncpg.Record) -> User:
+    """Map a database record to the domain object exposed by this repository."""
+    return User(id=row["id"], name=row["name"], email=row["email"])
+
+
+def _to_user_with_password(row: asyncpg.Record) -> UserWithPassword:
+    """Map the credential-bearing projection used only during login."""
+    return UserWithPassword(
+        id=row["id"],
+        name=row["name"],
+        email=row["email"],
+        password_hash=row["password_hash"],
+    )
 
 
 async def create_user(
     conn: asyncpg.Connection, *, name: str, email: str, email_normalized: str, password_hash: str
-) -> dict[str, Any]:
+) -> User:
     """Insert a new account. Raises `asyncpg.UniqueViolationError` on a duplicate email."""
     row = await conn.fetchrow(
         """
@@ -23,13 +39,14 @@ async def create_user(
         email_normalized,
         password_hash,
     )
-    assert row is not None
-    return dict(row)
+    if row is None:  # pragma: no cover - INSERT ... RETURNING always yields one row
+        raise RuntimeError("User insert completed without returning the created user.")
+    return _to_user(row)
 
 
 async def get_user_by_email(
     conn: asyncpg.Connection, *, email_normalized: str
-) -> dict[str, Any] | None:
+) -> UserWithPassword | None:
     row = await conn.fetchrow(
         """
         SELECT id, name, email, password_hash
@@ -38,7 +55,7 @@ async def get_user_by_email(
         """,
         email_normalized,
     )
-    return dict(row) if row else None
+    return _to_user_with_password(row) if row else None
 
 
 async def create_session(
@@ -59,7 +76,7 @@ async def create_session(
     )
 
 
-async def get_session_user(conn: asyncpg.Connection, *, token_hash: str) -> dict[str, Any] | None:
+async def get_session_user(conn: asyncpg.Connection, *, token_hash: str) -> User | None:
     """The user a live, unexpired, unrevoked session token belongs to."""
     row = await conn.fetchrow(
         """
@@ -72,7 +89,7 @@ async def get_session_user(conn: asyncpg.Connection, *, token_hash: str) -> dict
         """,
         token_hash,
     )
-    return dict(row) if row else None
+    return _to_user(row) if row else None
 
 
 async def revoke_session(conn: asyncpg.Connection, *, token_hash: str) -> None:

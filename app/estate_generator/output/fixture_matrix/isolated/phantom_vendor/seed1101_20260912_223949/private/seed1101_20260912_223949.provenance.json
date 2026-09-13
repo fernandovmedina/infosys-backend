@@ -1,0 +1,21 @@
+{
+  "decoys": [],
+  "observation_note": "challenge_wide includes the configured counterparty transfers needed for complete evidence.",
+  "observation_profile": "challenge_wide",
+  "scenarios": [
+    {
+      "amount_basis": "gross unsupported paid invoice exposure",
+      "hidden_transaction_ids": [],
+      "illicit_benefit": null,
+      "maximum_public_confidence": "proven",
+      "public_peso_amount": 99539.6,
+      "scheme_id": "S1_phantom_vendor",
+      "visible_invoice_ids": [
+        "INV-00206"
+      ],
+      "visible_transaction_ids": [
+        "BNK-00226"
+      ]
+    }
+  ]
+}

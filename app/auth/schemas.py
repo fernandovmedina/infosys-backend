@@ -6,10 +6,7 @@ from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
-
-def normalize_email(email: str) -> str:
-    """Case-fold and trim an email so lookups don't depend on how it was typed."""
-    return email.strip().lower()
+from app.auth.entities import User
 
 
 class RegisterRequest(BaseModel):
@@ -45,6 +42,11 @@ class UserPublic(BaseModel):
     id: int
     name: str
     email: str
+
+    @classmethod
+    def from_domain(cls, user: User) -> UserPublic:
+        """Build the public transport model from an auth domain object."""
+        return cls(id=user.id, name=user.name, email=user.email)
 
 
 class SessionResponse(BaseModel):

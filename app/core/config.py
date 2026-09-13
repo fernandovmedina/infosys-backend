@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     )
     database_pool_min_size: int = Field(default=1, ge=1)
     database_pool_max_size: int = Field(default=10, ge=1)
+    database_connect_timeout_seconds: float = Field(
+        default=5.0,
+        gt=0,
+        description="Maximum time to wait while establishing a PostgreSQL connection.",
+    )
 
     blacklist_max_companies_per_request: int = Field(
         default=500,

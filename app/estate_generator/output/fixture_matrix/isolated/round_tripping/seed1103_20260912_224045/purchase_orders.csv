@@ -1,0 +1,360 @@
+po_id,vendor_rfc,date,amount,requester,approver,description
+PO-00291,YPP751212BZF,2026-04-12,20436.88,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de consultoria operativa
+PO-00064,YPX831212CDF,2026-01-13,34432.28,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00318,YQT750626COF,2026-03-24,40656.84,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de consultoria operativa
+PO-00290,YRB830626CSF,2026-06-26,38708.04,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00235,YRA820319CRS,2026-06-13,62469.48,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Suministro de insumos de produccion
+PO-00252,YPJ990626BWF,2026-02-07,64753.52,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Mantenimiento preventivo de instalaciones
+PO-00168,YPI980319BVS,2026-01-25,45118.20,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00247,YQD890626CGF,2026-03-20,22487.76,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Mantenimiento preventivo de instalaciones
+PO-00299,YPM720319BXS,2026-03-07,51916.96,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Suministro de insumos de produccion
+PO-00045,YPJ990626BWF,2026-02-01,18086.72,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Mantenimiento preventivo de instalaciones
+PO-00105,YPG960905BUS,2026-03-05,38915.68,Elena Mora 05 00001103,Fabian Rios 06 00001103,Cuota mensual: servicios de logistica y entrega
+PO-00320,YPU800319CBS,2026-06-06,92969.36,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de consultoria operativa
+PO-00297,YPT791212CBF,2026-05-22,44001.12,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Mantenimiento preventivo de instalaciones
+PO-00221,YQJ951212CJF,2026-05-26,27972.24,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de consultoria operativa
+PO-00021,YPZ850626CEF,2026-02-07,56833.04,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de consultoria operativa
+PO-00062,YQY800905CQS,2026-05-20,55953.76,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de consultoria operativa
+PO-00274,YPU800319CBS,2026-06-07,63968.20,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de consultoria operativa
+PO-00157,YQH930626CIF,2026-05-04,47730.52,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00300,YPU800319CBS,2026-06-04,65850.88,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de consultoria operativa
+PO-00346,YQH930626CIF,2026-05-06,50145.64,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Soporte y licencias de tecnologia
+PO-00209,YPS780905CAS,2026-05-15,53926.08,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00305,YPM720319BXS,2026-03-12,26475.84,Carla Soto 03 00001103,Diego Luna 04 00001103,Suministro de insumos de produccion
+PO-00044,YQQ720905CMS,2026-02-22,95316.04,Elena Mora 05 00001103,Fabian Rios 06 00001103,Suministro de insumos de produccion
+PO-00184,YQY800905CQS,2026-05-19,82788.04,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de consultoria operativa
+PO-00183,YQZ811212CRF,2026-05-31,99045.44,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de logistica y entrega
+PO-00144,YQU760905COS,2026-04-09,69028.12,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de logistica y entrega
+PO-00332,YPO740905BYS,2026-04-01,76363.96,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Mantenimiento preventivo de instalaciones
+PO-00255,YPM720319BXS,2026-03-05,35644.48,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00034,YQP710626CMF,2026-02-12,46372.16,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de logistica y entrega
+PO-00175,YPG960905BUS,2026-05-05,38915.68,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Cuota mensual: servicios de logistica y entrega
+PO-00156,YQG920319CHS,2026-04-25,32555.40,Elena Mora 05 00001103,Fabian Rios 06 00001103,Suministro de insumos de produccion
+PO-00123,YQH930626CIF,2026-05-07,35509.92,Carla Soto 03 00001103,Diego Luna 04 00001103,Soporte y licencias de tecnologia
+PO-00080,YQH930626CIF,2026-05-03,28082.44,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00112,YPJ990626BWF,2026-02-02,61219.00,Elena Mora 05 00001103,Fabian Rios 06 00001103,Mantenimiento preventivo de instalaciones
+PO-00131,YQV771212CPF,2026-04-16,43292.36,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00076,YQA860905CES,2026-02-19,48551.80,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de logistica y entrega
+PO-00273,YQK960319CJS,2026-06-06,28661.28,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de logistica y entrega
+PO-00298,YPW820905CCS,2026-06-28,65188.52,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00289,YPV810626CCF,2026-06-18,23807.84,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de logistica y entrega
+PO-00352,YRA820319CRS,2026-06-11,102472.08,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Suministro de insumos de produccion
+PO-00185,YQP710626CMF,2026-02-11,98072.20,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de logistica y entrega
+PO-00225,YQE900905CGS,2026-04-02,47715.44,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de consultoria operativa
+PO-00146,YPZ850626CEF,2026-02-08,56128.92,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de consultoria operativa
+PO-00006,YQB871212CFF,2026-03-01,48039.08,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Suministro de insumos de produccion
+PO-00216,YQV771212CPF,2026-04-17,68943.44,Carla Soto 03 00001103,Diego Luna 04 00001103,Suministro de insumos de produccion
+PO-00012,YPW820905CCS,2026-06-27,80556.20,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Suministro de insumos de produccion
+PO-00304,YPZ850626CEF,2026-02-06,19969.40,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de consultoria operativa
+PO-00143,YQI940905CIS,2026-05-19,79819.60,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Mantenimiento preventivo de instalaciones
+PO-00211,YRC840905CSS,2026-02-11,88641.40,Carla Soto 09 00001103,Diego Luna 10 00001103,Gestion extraordinaria de rutas y embarques
+PO-00162,YQC880319CFS,2026-03-14,95193.08,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00028,YQE900905CGS,2026-04-05,61517.12,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de consultoria operativa
+PO-00279,YQF911212CHF,2026-04-14,72539.44,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de logistica y entrega
+PO-00241,YPV810626CCF,2026-06-14,94072.52,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de logistica y entrega
+PO-00024,YPE940319BTS,2026-06-05,36131.68,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00293,YQA860905CES,2026-02-21,39190.60,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de logistica y entrega
+PO-00170,YPF950626BUF,2026-01-05,45884.96,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Cuota mensual: servicios de consultoria operativa
+PO-00354,YQQ720905CMS,2026-02-23,74550.88,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Suministro de insumos de produccion
+PO-00132,YPV810626CCF,2026-06-13,58157.76,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de logistica y entrega
+PO-00246,YQB871212CFF,2026-03-02,21818.44,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Suministro de insumos de produccion
+PO-00283,YQA860905CES,2026-02-16,21282.52,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de logistica y entrega
+PO-00010,YPU800319CBS,2026-06-02,45705.16,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de consultoria operativa
+PO-00086,YQE900905CGS,2026-03-31,67507.36,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de consultoria operativa
+PO-00310,YPH971212BVF,2026-01-13,33962.48,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Suministro de insumos de produccion
+PO-00316,YQV771212CPF,2026-04-21,45745.76,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00147,YRA820319CRS,2026-06-14,45296.84,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00177,YPE940319BTS,2026-03-05,36131.68,Carla Soto 03 00001103,Diego Luna 04 00001103,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00159,YPQ760319BZS,2026-04-22,107574.92,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de logistica y entrega
+PO-00060,YRB830626CSF,2026-06-24,99147.52,Carla Soto 03 00001103,Diego Luna 04 00001103,Soporte y licencias de tecnologia
+PO-00229,YPX831212CDF,2026-01-17,103884.96,Carla Soto 03 00001103,Diego Luna 04 00001103,Soporte y licencias de tecnologia
+PO-00072,YQX790626CQF,2026-05-07,62666.68,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Mantenimiento preventivo de instalaciones
+PO-00306,YPY840319CDS,2026-01-24,62650.44,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Mantenimiento preventivo de instalaciones
+PO-00165,YQY800905CQS,2026-05-22,37219.76,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de consultoria operativa
+PO-00350,YPY840319CDS,2026-01-25,48963.60,Carla Soto 03 00001103,Diego Luna 04 00001103,Mantenimiento preventivo de instalaciones
+PO-00050,YPL711212BXF,2026-02-26,97578.04,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de logistica y entrega
+PO-00095,YQF911212CHF,2026-04-15,25090.80,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de logistica y entrega
+PO-00001,YPS780905CAS,2026-05-13,108113.16,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Soporte y licencias de tecnologia
+PO-00271,YQW780319CPS,2026-04-26,59038.20,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00049,YQN991212CLF,2026-01-18,34761.72,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Mantenimiento preventivo de instalaciones
+PO-00038,YRB830626CSF,2026-06-22,64392.76,Carla Soto 09 00001103,Diego Luna 10 00001103,Soporte y licencias de tecnologia
+PO-00149,YQQ720905CMS,2026-02-21,86186.84,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Suministro de insumos de produccion
+PO-00070,YQS740319CNS,2026-03-18,44611.28,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Mantenimiento preventivo de instalaciones
+PO-00065,YQC880319CFS,2026-03-09,36827.68,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00088,YQJ951212CJF,2026-05-27,67977.16,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de consultoria operativa
+PO-00277,YPP751212BZF,2026-04-11,109052.76,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de consultoria operativa
+PO-00008,YPQ760319BZS,2026-04-18,109417.00,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de logistica y entrega
+PO-00321,YPT791212CBF,2026-05-23,102979.00,Elena Mora 05 00001103,Fabian Rios 06 00001103,Mantenimiento preventivo de instalaciones
+PO-00152,YQK960319CJS,2026-06-09,81296.28,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de logistica y entrega
+PO-00031,YQI940905CIS,2026-05-14,102708.72,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Mantenimiento preventivo de instalaciones
+PO-00264,YPF950626BUF,2026-04-05,45884.96,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Cuota mensual: servicios de consultoria operativa
+PO-00138,YQP710626CMF,2026-02-10,60784.00,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de logistica y entrega
+PO-00029,YQX790626CQF,2026-05-08,78922.92,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Mantenimiento preventivo de instalaciones
+PO-00081,YPH971212BVF,2026-01-12,97545.56,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Suministro de insumos de produccion
+PO-00281,YQT750626COF,2026-03-25,91800.08,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de consultoria operativa
+PO-00103,YPH971212BVF,2026-01-16,103324.68,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Suministro de insumos de produccion
+PO-00094,YPW820905CCS,2026-06-24,99439.84,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00347,YPE940319BTS,2026-01-05,36131.68,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00359,YPV810626CCF,2026-06-17,66135.08,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de logistica y entrega
+PO-00109,YQK960319CJS,2026-06-07,42538.36,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de logistica y entrega
+PO-00231,YQR731212CNF,2026-03-04,72635.72,Carla Soto 09 00001103,Diego Luna 10 00001103,Soporte y licencias de tecnologia
+PO-00335,YQY800905CQS,2026-05-21,81405.32,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de consultoria operativa
+PO-00142,YQI940905CIS,2026-05-20,87721.52,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Mantenimiento preventivo de instalaciones
+PO-00328,YQV771212CPF,2026-04-19,48697.96,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Suministro de insumos de produccion
+PO-00124,YPJ990626BWF,2026-02-05,61818.72,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Mantenimiento preventivo de instalaciones
+PO-00033,YPN730626BYF,2026-03-19,82884.32,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Soporte y licencias de tecnologia
+PO-00307,YQW780319CPS,2026-04-27,53901.72,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00191,YPJ990626BWF,2026-02-06,60913.92,Carla Soto 03 00001103,Diego Luna 04 00001103,Mantenimiento preventivo de instalaciones
+PO-00101,YPP751212BZF,2026-04-10,22194.28,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de consultoria operativa
+PO-00130,YQT750626COF,2026-03-29,32839.60,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de consultoria operativa
+PO-00173,YQQ720905CMS,2026-02-19,44272.56,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00083,YQK960319CJS,2026-06-11,90771.16,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de logistica y entrega
+PO-00161,YQZ811212CRF,2026-06-01,59140.28,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de logistica y entrega
+PO-00357,YQI940905CIS,2026-05-17,57793.52,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Mantenimiento preventivo de instalaciones
+PO-00250,YQH930626CIF,2026-05-08,109710.48,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00027,YQN991212CLF,2026-01-21,93743.08,Carla Soto 09 00001103,Diego Luna 10 00001103,Mantenimiento preventivo de instalaciones
+PO-00189,YPN730626BYF,2026-03-23,104794.40,Diego Luna 04 00001103,Elena Mora 05 00001103,Soporte y licencias de tecnologia
+PO-00128,YRB830626CSF,2026-06-23,75890.68,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Soporte y licencias de tecnologia
+PO-00356,YPK700905BWS,2026-02-13,49932.20,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de consultoria operativa
+PO-00078,YQG920319CHS,2026-04-28,68883.12,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00309,YQA860905CES,2026-02-15,84719.44,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de logistica y entrega
+PO-00113,YQS740319CNS,2026-03-14,101013.96,Carla Soto 03 00001103,Diego Luna 04 00001103,Mantenimiento preventivo de instalaciones
+PO-00047,YPN730626BYF,2026-03-18,73962.76,Carla Soto 09 00001103,Diego Luna 10 00001103,Soporte y licencias de tecnologia
+PO-00092,YRA820319CRS,2026-06-10,98702.08,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00107,YQS740319CNS,2026-03-13,105775.76,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Mantenimiento preventivo de instalaciones
+PO-00323,YQB871212CFF,2026-03-04,43981.40,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00242,YQC880319CFS,2026-03-15,107353.36,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00201,YPO740905BYS,2026-04-03,66213.96,Elena Mora 05 00001103,Fabian Rios 06 00001103,Mantenimiento preventivo de instalaciones
+PO-00009,YPV810626CCF,2026-06-15,37724.36,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de logistica y entrega
+PO-00118,YPW820905CCS,2026-06-23,80535.32,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00224,YPS780905CAS,2026-05-14,51860.12,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Soporte y licencias de tecnologia
+PO-00102,YQY800905CQS,2026-05-24,96964.40,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de consultoria operativa
+PO-00203,YQM980905CKS,2026-06-28,109698.88,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00228,YPI980319BVS,2026-01-22,65955.28,Diego Luna 04 00001103,Elena Mora 05 00001103,Soporte y licencias de tecnologia
+PO-00188,YQG920319CHS,2026-04-24,99656.76,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Suministro de insumos de produccion
+PO-00172,YQS740319CNS,2026-03-17,47058.88,Diego Luna 04 00001103,Elena Mora 05 00001103,Mantenimiento preventivo de instalaciones
+PO-00200,YQN991212CLF,2026-01-22,40728.76,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Mantenimiento preventivo de instalaciones
+PO-00358,YQO700319CLS,2026-02-01,42704.24,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de consultoria operativa
+PO-00041,YPP751212BZF,2026-04-08,57937.36,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de consultoria operativa
+PO-00327,YQO700319CLS,2026-02-02,66043.44,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de consultoria operativa
+PO-00217,YPO740905BYS,2026-03-30,27276.24,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Mantenimiento preventivo de instalaciones
+PO-00232,YQL970626CKF,2026-06-19,24748.60,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Suministro de insumos de produccion
+PO-00140,YQM980905CKS,2026-06-29,94007.56,Diego Luna 04 00001103,Elena Mora 05 00001103,Soporte y licencias de tecnologia
+PO-00215,YPS780905CAS,2026-05-11,86005.88,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00249,YPY840319CDS,2026-01-27,35183.96,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Mantenimiento preventivo de instalaciones
+PO-00169,YRA820319CRS,2026-06-09,56203.16,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00268,YRB830626CSF,2026-01-19,26100.00,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Soporte y licencias de tecnologia
+PO-00331,YQR731212CNF,2026-03-06,59995.20,Carla Soto 03 00001103,Diego Luna 04 00001103,Soporte y licencias de tecnologia
+PO-00248,YQI940905CIS,2026-05-16,105968.32,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Mantenimiento preventivo de instalaciones
+PO-00296,YQM980905CKS,2026-01-11,42587.08,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00202,YPM720319BXS,2026-03-09,69567.52,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Suministro de insumos de produccion
+PO-00058,YPG960905BUS,2026-04-05,38915.68,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Cuota mensual: servicios de logistica y entrega
+PO-00017,YQE900905CGS,2026-04-01,24022.44,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de consultoria operativa
+PO-00197,YPZ850626CEF,2026-02-04,83290.32,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de consultoria operativa
+PO-00243,YQM980905CKS,2026-01-12,61550.76,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00353,YPT791212CBF,2026-05-27,18359.32,Carla Soto 03 00001103,Diego Luna 04 00001103,Mantenimiento preventivo de instalaciones
+PO-00227,YQR731212CNF,2026-03-08,14059.20,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00108,YPL711212BXF,2026-03-01,40872.60,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de logistica y entrega
+PO-00190,YQF911212CHF,2026-04-12,85949.04,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de logistica y entrega
+PO-00181,YQT750626COF,2026-03-27,32833.80,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de consultoria operativa
+PO-00096,YQY800905CQS,2026-05-18,51633.92,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de consultoria operativa
+PO-00056,YQO700319CLS,2026-01-29,61184.20,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de consultoria operativa
+PO-00136,YQW780319CPS,2026-04-30,72823.64,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Soporte y licencias de tecnologia
+PO-00145,YQC880319CFS,2026-03-13,20636.40,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Soporte y licencias de tecnologia
+PO-00164,YQN991212CLF,2026-01-20,87614.80,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Mantenimiento preventivo de instalaciones
+PO-00338,YPQ760319BZS,2026-04-24,53260.24,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de logistica y entrega
+PO-00308,YPR770626CAF,2026-05-03,89970.76,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Suministro de insumos de produccion
+PO-00089,YQU760905COS,2026-04-10,62934.64,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de logistica y entrega
+PO-00011,YQY800905CQS,2026-05-23,92643.40,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de consultoria operativa
+PO-00220,YQA860905CES,2026-02-20,109475.00,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de logistica y entrega
+PO-00244,YPK700905BWS,2026-02-15,16625.12,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de consultoria operativa
+PO-00134,YRB830626CSF,2026-06-20,54249.72,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00158,YPR770626CAF,2026-05-02,83646.44,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Suministro de insumos de produccion
+PO-00114,YQA860905CES,2026-02-18,50425.20,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de logistica y entrega
+PO-00098,YPR770626CAF,2026-05-04,98139.48,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00085,YPQ760319BZS,2026-04-20,61567.00,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de logistica y entrega
+PO-00148,YQR731212CNF,2026-03-05,104797.88,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Soporte y licencias de tecnologia
+PO-00171,YPI980319BVS,2026-01-26,41314.56,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00007,YPX831212CDF,2026-01-18,83488.68,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00053,YQX790626CQF,2026-05-11,18034.52,Carla Soto 09 00001103,Diego Luna 10 00001103,Mantenimiento preventivo de instalaciones
+PO-00196,YQT750626COF,2026-03-26,27029.16,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de consultoria operativa
+PO-00218,YQL970626CKF,2026-06-18,44779.48,Carla Soto 03 00001103,Diego Luna 04 00001103,Suministro de insumos de produccion
+PO-00043,YQD890626CGF,2026-03-22,59394.32,Elena Mora 05 00001103,Fabian Rios 06 00001103,Mantenimiento preventivo de instalaciones
+PO-00160,YQB871212CFF,2026-02-28,101078.92,Carla Soto 03 00001103,Diego Luna 04 00001103,Suministro de insumos de produccion
+PO-00075,YPI980319BVS,2026-01-21,75627.36,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00207,YPM720319BXS,2026-03-06,82455.12,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00055,YQM980905CKS,2026-06-27,69081.48,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00074,YRA820319CRS,2026-06-12,61891.80,Elena Mora 05 00001103,Fabian Rios 06 00001103,Suministro de insumos de produccion
+PO-00179,YQP710626CMF,2026-02-09,41086.04,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de logistica y entrega
+PO-00343,YPO740905BYS,2026-03-31,35269.80,Diego Luna 04 00001103,Elena Mora 05 00001103,Mantenimiento preventivo de instalaciones
+PO-00093,YQU760905COS,2026-04-08,41502.48,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de logistica y entrega
+PO-00129,YPO740905BYS,2026-04-02,76448.64,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Mantenimiento preventivo de instalaciones
+PO-00280,YPR770626CAF,2026-04-30,57642.72,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00336,YPN730626BYF,2026-03-22,87886.24,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00286,YQF911212CHF,2026-04-13,29532.44,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de logistica y entrega
+PO-00339,YQR731212CNF,2026-03-07,100127.72,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00004,YPS780905CAS,2026-05-10,36775.48,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00057,YPG960905BUS,2026-02-05,38915.68,Diego Luna 04 00001103,Elena Mora 05 00001103,Cuota mensual: servicios de logistica y entrega
+PO-00275,YPK700905BWS,2026-02-16,88852.52,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de consultoria operativa
+PO-00016,YPG960905BUS,2026-06-05,38915.68,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Cuota mensual: servicios de logistica y entrega
+PO-00071,YPP751212BZF,2026-04-09,84224.12,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de consultoria operativa
+PO-00315,YQE900905CGS,2026-04-03,16369.92,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de consultoria operativa
+PO-00311,YQA860905CES,2026-02-17,22913.48,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de logistica y entrega
+PO-00236,YPH971212BVF,2026-01-15,82321.72,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00097,YRB830626CSF,2026-06-25,49889.28,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00240,YQM980905CKS,2026-01-09,35543.56,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Soporte y licencias de tecnologia
+PO-00163,YPF950626BUF,2026-06-05,45884.96,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Cuota mensual: servicios de consultoria operativa
+PO-00141,YPF950626BUF,2026-02-05,45884.96,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Cuota mensual: servicios de consultoria operativa
+PO-00337,YQE900905CGS,2026-04-06,101720.40,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de consultoria operativa
+PO-00110,YPX831212CDF,2026-01-15,35623.60,Carla Soto 09 00001103,Diego Luna 10 00001103,Soporte y licencias de tecnologia
+PO-00212,YQI940905CIS,2026-05-15,56381.80,Carla Soto 03 00001103,Diego Luna 04 00001103,Mantenimiento preventivo de instalaciones
+PO-00261,YQF911212CHF,2026-04-17,108375.32,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de logistica y entrega
+PO-00230,YQW780319CPS,2026-05-02,57994.20,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00139,YPT791212CBF,2026-05-25,32745.64,Carla Soto 09 00001103,Diego Luna 10 00001103,Mantenimiento preventivo de instalaciones
+PO-00054,YQT750626COF,2026-03-30,47598.28,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de consultoria operativa
+PO-00154,YQL970626CKF,2026-06-16,43198.40,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00287,YQP710626CMF,2026-02-08,18177.20,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de logistica y entrega
+PO-00178,YPU800319CBS,2026-06-01,101424.60,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de consultoria operativa
+PO-00295,YPE940319BTS,2026-05-05,36131.68,Elena Mora 05 00001103,Fabian Rios 06 00001103,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00259,YPP751212BZF,2026-04-07,76281.60,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de consultoria operativa
+PO-00345,YQJ951212CJF,2026-05-25,86301.68,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de consultoria operativa
+PO-00125,YQU760905COS,2026-04-04,30412.88,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de logistica y entrega
+PO-00314,YQL970626CKF,2026-06-20,25524.64,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Suministro de insumos de produccion
+PO-00115,YPO740905BYS,2026-03-27,91034.48,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Mantenimiento preventivo de instalaciones
+PO-00187,YQS740319CNS,2026-03-16,32025.28,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Mantenimiento preventivo de instalaciones
+PO-00063,YPL711212BXF,2026-02-24,47228.24,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de logistica y entrega
+PO-00150,YPT791212CBF,2026-05-26,47614.52,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Mantenimiento preventivo de instalaciones
+PO-00245,YPN730626BYF,2026-03-21,35637.52,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00100,YQL970626CKF,2026-06-17,97368.08,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00206,YQZ811212CRF,2026-05-29,51285.92,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de logistica y entrega
+PO-00272,YQQ720905CMS,2026-02-24,22985.40,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00106,YPO740905BYS,2026-03-28,52152.44,Carla Soto 03 00001103,Diego Luna 04 00001103,Mantenimiento preventivo de instalaciones
+PO-00266,YPH971212BVF,2026-01-09,85126.60,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00111,YQG920319CHS,2026-04-23,83095.44,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00292,YQC880319CFS,2026-03-10,109531.84,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00330,YPT791212CBF,2026-05-21,52861.20,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Mantenimiento preventivo de instalaciones
+PO-00135,YPQ760319BZS,2026-04-23,21366.04,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de logistica y entrega
+PO-00099,YQD890626CGF,2026-03-24,100974.52,Carla Soto 09 00001103,Diego Luna 10 00001103,Mantenimiento preventivo de instalaciones
+PO-00288,YQJ951212CJF,2026-05-28,39484.08,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de consultoria operativa
+PO-00018,YQU760905COS,2026-04-07,19030.96,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de logistica y entrega
+PO-00301,YPN730626BYF,2026-03-17,31317.68,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00019,YPL711212BXF,2026-02-25,79920.52,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de logistica y entrega
+PO-00222,YQN991212CLF,2026-01-19,78295.36,Elena Mora 05 00001103,Fabian Rios 06 00001103,Mantenimiento preventivo de instalaciones
+PO-00238,YPR770626CAF,2026-05-05,105386.00,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00030,YQZ811212CRF,2026-05-30,109653.64,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de logistica y entrega
+PO-00040,YQX790626CQF,2026-05-13,66875.16,Carla Soto 03 00001103,Diego Luna 04 00001103,Mantenimiento preventivo de instalaciones
+PO-00042,YPF950626BUF,2026-03-05,45884.96,Carla Soto 09 00001103,Diego Luna 10 00001103,Cuota mensual: servicios de consultoria operativa
+PO-00176,YQV771212CPF,2026-04-18,37371.72,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Suministro de insumos de produccion
+PO-00340,YQO700319CLS,2026-01-28,101529.00,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de consultoria operativa
+PO-00090,YQF911212CHF,2026-04-11,79449.56,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de logistica y entrega
+PO-00166,YQN991212CLF,2026-01-17,89485.88,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Mantenimiento preventivo de instalaciones
+PO-00122,YQB871212CFF,2026-02-26,92918.32,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00322,YPL711212BXF,2026-02-27,101907.16,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de logistica y entrega
+PO-00256,YPV810626CCF,2026-06-12,31360.60,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de logistica y entrega
+PO-00013,YQG920319CHS,2026-04-22,85199.68,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00294,YPV810626CCF,2026-06-16,42627.68,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de logistica y entrega
+PO-00349,YPH971212BVF,2026-01-11,98294.92,Carla Soto 03 00001103,Diego Luna 04 00001103,Suministro de insumos de produccion
+PO-00059,YQB871212CFF,2026-02-27,24687.12,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00312,YPI980319BVS,2026-01-23,54834.36,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Soporte y licencias de tecnologia
+PO-00180,YQJ951212CJF,2026-05-29,82755.56,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de consultoria operativa
+PO-00104,YQR731212CNF,2026-03-02,22869.40,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00269,YPK700905BWS,2026-02-17,73459.32,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de consultoria operativa
+PO-00067,YQX790626CQF,2026-05-12,52877.44,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Mantenimiento preventivo de instalaciones
+PO-00087,YPT791212CBF,2026-05-24,42450.20,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Mantenimiento preventivo de instalaciones
+PO-00348,YQU760905COS,2026-04-05,38844.92,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de logistica y entrega
+PO-00204,YQZ811212CRF,2026-06-02,101387.48,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de logistica y entrega
+PO-00260,YPK700905BWS,2026-02-14,57160.16,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de consultoria operativa
+PO-00324,YQF911212CHF,2026-04-16,15791.08,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de logistica y entrega
+PO-00133,YPH971212BVF,2026-01-10,42627.68,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00014,YPS780905CAS,2026-05-12,95165.24,Diego Luna 04 00001103,Elena Mora 05 00001103,Soporte y licencias de tecnologia
+PO-00329,YPI980319BVS,2026-01-27,72026.72,Carla Soto 09 00001103,Diego Luna 10 00001103,Soporte y licencias de tecnologia
+PO-00251,YQS740319CNS,2026-03-15,25748.52,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Mantenimiento preventivo de instalaciones
+PO-00126,YQX790626CQF,2026-05-09,104583.28,Elena Mora 05 00001103,Fabian Rios 06 00001103,Mantenimiento preventivo de instalaciones
+PO-00153,YPM720319BXS,2026-03-10,58700.64,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00091,YQG920319CHS,2026-04-27,101245.96,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00219,YPI980319BVS,2026-01-20,35608.52,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Soporte y licencias de tecnologia
+PO-00342,YPZ850626CEF,2026-02-09,58849.12,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de consultoria operativa
+PO-00167,YQD890626CGF,2026-03-21,67474.88,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Mantenimiento preventivo de instalaciones
+PO-00002,YQJ951212CJF,2026-05-30,52746.36,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de consultoria operativa
+PO-00052,YPU800319CBS,2026-06-05,98772.84,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de consultoria operativa
+PO-00155,YQJ951212CJF,2026-05-31,99496.68,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de consultoria operativa
+PO-00194,YPZ850626CEF,2026-02-05,43164.76,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de consultoria operativa
+PO-00195,YPJ990626BWF,2026-02-04,98871.44,Carla Soto 09 00001103,Diego Luna 10 00001103,Mantenimiento preventivo de instalaciones
+PO-00333,YPW820905CCS,2026-06-25,56721.68,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Suministro de insumos de produccion
+PO-00025,YQO700319CLS,2026-02-03,43619.48,Diego Luna 04 00001103,Elena Mora 05 00001103,Servicios de consultoria operativa
+PO-00073,YPX831212CDF,2026-01-16,56831.88,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Soporte y licencias de tecnologia
+PO-00284,YQE900905CGS,2026-04-04,38488.80,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de consultoria operativa
+PO-00214,YQM980905CKS,2026-01-10,26738.00,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Soporte y licencias de tecnologia
+PO-00282,YPM720319BXS,2026-03-08,59966.20,Elena Mora 05 00001103,Fabian Rios 06 00001103,Suministro de insumos de produccion
+PO-00234,YQO700319CLS,2026-01-31,30966.20,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de consultoria operativa
+PO-00344,YRA820319CRS,2026-06-15,47834.92,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00186,YPS780905CAS,2026-05-16,20994.84,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00037,YPN730626BYF,2026-03-16,73459.32,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00355,YPY840319CDS,2026-01-28,50304.56,Diego Luna 04 00001103,Elena Mora 05 00001103,Mantenimiento preventivo de instalaciones
+PO-00005,YPY840319CDS,2026-01-30,89338.56,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Mantenimiento preventivo de instalaciones
+PO-00263,YPW820905CCS,2026-06-26,88980.12,Elena Mora 05 00001103,Fabian Rios 06 00001103,Suministro de insumos de produccion
+PO-00253,YQU760905COS,2026-04-06,67805.48,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de logistica y entrega
+PO-00239,YQL970626CKF,2026-06-21,35876.48,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00193,YPE940319BTS,2026-02-05,36131.68,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00192,YQW780319CPS,2026-04-29,38167.48,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Soporte y licencias de tecnologia
+PO-00198,YPJ990626BWF,2026-01-31,43539.44,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Mantenimiento preventivo de instalaciones
+PO-00317,YPX831212CDF,2026-01-19,93709.44,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00003,YPF950626BUF,2026-05-05,45884.96,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Cuota mensual: servicios de consultoria operativa
+PO-00077,YQH930626CIF,2026-05-05,73859.52,Carla Soto 09 00001103,Diego Luna 10 00001103,Soporte y licencias de tecnologia
+PO-00117,YQD890626CGF,2026-03-26,14210.00,Carla Soto 03 00001103,Diego Luna 04 00001103,Mantenimiento preventivo de instalaciones
+PO-00326,YPE940319BTS,2026-04-05,36131.68,Diego Luna 04 00001103,Elena Mora 05 00001103,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00334,YQQ720905CMS,2026-02-20,42684.52,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00048,YQQ720905CMS,2026-02-25,63762.88,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00137,YPY840319CDS,2026-01-26,53688.28,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Mantenimiento preventivo de instalaciones
+PO-00325,YPW820905CCS,2026-06-29,80368.28,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00265,YPO740905BYS,2026-03-29,91307.08,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Mantenimiento preventivo de instalaciones
+PO-00036,YPR770626CAF,2026-04-29,66539.92,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00082,YQT750626COF,2026-03-28,72803.92,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de consultoria operativa
+PO-00120,YQR731212CNF,2026-03-03,39741.60,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00127,YQG920319CHS,2026-04-26,98622.04,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Suministro de insumos de produccion
+PO-00233,YQZ811212CRF,2026-06-04,83608.16,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de logistica y entrega
+PO-00035,YPH971212BVF,2026-01-14,89050.88,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00039,YPK700905BWS,2026-02-12,42401.48,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de consultoria operativa
+PO-00174,YQC880319CFS,2026-03-12,36919.32,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Soporte y licencias de tecnologia
+PO-00257,YPZ850626CEF,2026-02-10,107267.52,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de consultoria operativa
+PO-00023,YQP710626CMF,2026-02-13,91883.60,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de logistica y entrega
+PO-00199,YQK960319CJS,2026-06-08,96079.32,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de logistica y entrega
+PO-00084,YPY840319CDS,2026-01-29,94624.68,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Mantenimiento preventivo de instalaciones
+PO-00069,YQW780319CPS,2026-04-28,25209.12,Diego Luna 04 00001103,Elena Mora 05 00001103,Soporte y licencias de tecnologia
+PO-00020,YPX831212CDF,2026-01-14,107571.44,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00026,YQO700319CLS,2026-01-30,75684.20,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de consultoria operativa
+PO-00213,YPK700905BWS,2026-02-11,25980.52,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Servicios de consultoria operativa
+PO-00022,YRB830626CSF,2026-06-21,83651.08,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Soporte y licencias de tecnologia
+PO-00066,YQC880319CFS,2026-03-11,107464.72,Diego Luna 04 00001103,Elena Mora 05 00001103,Soporte y licencias de tecnologia
+PO-00210,YPN730626BYF,2026-03-20,49286.08,Carla Soto 03 00001103,Diego Luna 04 00001103,Soporte y licencias de tecnologia
+PO-00303,YPQ760319BZS,2026-04-25,33939.28,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Servicios de logistica y entrega
+PO-00079,YPQ760319BZS,2026-04-21,73219.20,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de logistica y entrega
+PO-00351,YQK960319CJS,2026-06-10,14788.84,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de logistica y entrega
+PO-00278,YPU800319CBS,2026-06-03,52067.76,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de consultoria operativa
+PO-00302,YQZ811212CRF,2026-06-03,87494.16,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de logistica y entrega
+PO-00205,YQX790626CQF,2026-05-10,103961.52,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Mantenimiento preventivo de instalaciones
+PO-00182,YQP710626CMF,2026-02-14,33926.52,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de logistica y entrega
+PO-00226,YPL711212BXF,2026-02-22,39301.96,Carla Soto 03 00001103,Diego Luna 04 00001103,Servicios de logistica y entrega
+PO-00270,YQS740319CNS,2026-03-19,49985.56,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Mantenimiento preventivo de instalaciones
+PO-00121,YQV771212CPF,2026-04-20,47996.16,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00208,YPI980319BVS,2026-01-24,16287.56,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Soporte y licencias de tecnologia
+PO-00068,YPG960905BUS,2026-01-05,38915.68,Carla Soto 03 00001103,Diego Luna 04 00001103,Cuota mensual: servicios de logistica y entrega
+PO-00267,YPP751212BZF,2026-04-14,44149.60,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Servicios de consultoria operativa
+PO-00116,YQV771212CPF,2026-04-15,76120.36,Carla Soto 09 00001103,Diego Luna 10 00001103,Suministro de insumos de produccion
+PO-00015,YPL711212BXF,2026-02-23,58279.56,Diego Luna 10 00001103,Ana Ruiz 01 00001103,Servicios de logistica y entrega
+PO-00276,YPQ760319BZS,2026-04-19,87720.36,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de logistica y entrega
+PO-00051,YQL970626CKF,2026-06-22,47160.96,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Suministro de insumos de produccion
+PO-00151,YQI940905CIS,2026-05-18,43647.32,Diego Luna 04 00001103,Elena Mora 05 00001103,Mantenimiento preventivo de instalaciones
+PO-00262,YQD890626CGF,2026-03-23,93618.96,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Mantenimiento preventivo de instalaciones
+PO-00237,YQH930626CIF,2026-05-09,56164.88,Ana Ruiz 07 00001103,Bruno Garcia 08 00001103,Soporte y licencias de tecnologia
+PO-00061,YPP751212BZF,2026-04-13,72802.76,Carla Soto 09 00001103,Diego Luna 10 00001103,Servicios de consultoria operativa
+PO-00254,YQK960319CJS,2026-06-05,15234.28,Bruno Garcia 08 00001103,Carla Soto 09 00001103,Servicios de logistica y entrega
+PO-00046,YPL711212BXF,2026-02-28,99512.92,Elena Mora 05 00001103,Fabian Rios 06 00001103,Servicios de logistica y entrega
+PO-00258,YPJ990626BWF,2026-02-03,101455.92,Bruno Garcia 02 00001103,Carla Soto 03 00001103,Mantenimiento preventivo de instalaciones
+PO-00341,YQB871212CFF,2026-03-03,77772.20,Diego Luna 04 00001103,Elena Mora 05 00001103,Suministro de insumos de produccion
+PO-00119,YPM720319BXS,2026-03-11,24969.00,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Suministro de insumos de produccion
+PO-00313,YQW780319CPS,2026-05-01,97501.48,Elena Mora 05 00001103,Fabian Rios 06 00001103,Soporte y licencias de tecnologia
+PO-00319,YPK700905BWS,2026-02-18,51024.92,Ana Ruiz 01 00001103,Bruno Garcia 02 00001103,Servicios de consultoria operativa
+PO-00223,YQN991212CLF,2026-01-23,72651.96,Carla Soto 03 00001103,Diego Luna 04 00001103,Mantenimiento preventivo de instalaciones
+PO-00032,YQD890626CGF,2026-03-25,45607.72,Fabian Rios 06 00001103,Ana Ruiz 07 00001103,Mantenimiento preventivo de instalaciones
+PO-00285,YPR770626CAF,2026-05-01,108557.44,Carla Soto 03 00001103,Diego Luna 04 00001103,Suministro de insumos de produccion

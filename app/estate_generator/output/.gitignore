@@ -1,3 +1,0 @@
-# Generated run directories are local artifacts, never source.
-*
-!.gitignore

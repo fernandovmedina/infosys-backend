@@ -1,0 +1,2 @@
+uuid,issuer_rfc,receiver_rfc,issue_date,subtotal,iva,total,concepto_text,uso_cfdi,forma_pago,metodo_pago,status
+INV-00001,AAAA010101AA1,EMP920101AB1,2026-02-15,80000.00,12800.00,92800.00,Servicios de ejemplo,G03,03,PUE,vigente

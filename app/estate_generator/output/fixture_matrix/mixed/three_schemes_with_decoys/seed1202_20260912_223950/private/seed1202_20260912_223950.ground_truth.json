@@ -1,0 +1,101 @@
+{
+  "company_rfc": "DDE720327EFY",
+  "decoys": [
+    {
+      "entity": "RFC:DDE720327EFY",
+      "invoices": [
+        "INV-00046"
+      ],
+      "signal": "cancelled_revenue",
+      "why_innocent": "La cancelacion tiene reversion de ingresos, IVA y cuentas por cobrar."
+    },
+    {
+      "entity": "RFC:DFF950606FGL",
+      "invoices": [
+        "INV-00236"
+      ],
+      "signal": "new_vendor",
+      "why_innocent": "Contrato, PO, factura y pago consistentes."
+    },
+    {
+      "entity": "EMP:00001202-0006",
+      "invoices": [
+        "INV-00312",
+        "INV-00364",
+        "INV-00161"
+      ],
+      "signal": "near_limit_purchases",
+      "why_innocent": "POs del mismo proveedor muestran obligaciones y contratos independientes."
+    },
+    {
+      "entity": "RFC:DFH971220FHL",
+      "invoices": [
+        "INV-00118"
+      ],
+      "signal": "return_payment",
+      "why_innocent": "El retorno va a la empresa y se identifica como reembolso."
+    },
+    {
+      "entity": "RFC:DFI980327FHY",
+      "invoices": [
+        "INV-00096"
+      ],
+      "signal": "return_path",
+      "why_innocent": "Factura cancelada con reversion contable visible."
+    }
+  ],
+  "schemes": [
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:DDE720327EFY"
+      ],
+      "peso_amount": 191831.52,
+      "scheme_id": "S1_revenue_inflation",
+      "supporting_invoices": [
+        "INV-00233",
+        "INV-00372",
+        "INV-00289"
+      ],
+      "supporting_txns": [],
+      "type": "revenue_inflation"
+    },
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:DFD931220FFL",
+        "EMP:00001202-0003"
+      ],
+      "peso_amount": 98887.68,
+      "scheme_id": "S2_phantom_vendor",
+      "supporting_invoices": [
+        "INV-00157"
+      ],
+      "supporting_txns": [
+        "BNK-00286"
+      ],
+      "type": "phantom_vendor"
+    },
+    {
+      "difficulty": "medium",
+      "entities": [
+        "RFC:DFE940327FFY",
+        "EMP:00001202-0004"
+      ],
+      "peso_amount": 139092.12,
+      "scheme_id": "S3_threshold_splitting",
+      "supporting_invoices": [
+        "INV-00335",
+        "INV-00031",
+        "INV-00234"
+      ],
+      "supporting_txns": [
+        "BNK-00192",
+        "BNK-00040",
+        "BNK-00018"
+      ],
+      "type": "threshold_splitting"
+    }
+  ],
+  "seed": 1202
+}

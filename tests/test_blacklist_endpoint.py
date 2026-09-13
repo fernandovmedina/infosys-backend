@@ -12,7 +12,7 @@ import pytest
 from fastapi import FastAPI
 from httpx import ASGITransport, AsyncClient
 
-from app.core.database import get_pool
+from app.api.dependencies import get_pool
 from app.core.errors import DatabaseUnavailableError
 from app.main import create_app
 from tests.conftest import requires_database

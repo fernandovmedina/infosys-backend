@@ -14,6 +14,28 @@ uv run python -m evaluation.estate_generator.cli \
   --observation-profile challenge_wide
 ```
 
+For a ready-made matrix covering a clean baseline, clean data with decoys, each
+scheme in isolation, mixed scheme counts, and all five schemes together, run:
+
+```bash
+./evaluation/estate_generator/generate.sh
+```
+
+The script uses distinct seed ranges for each case and prints the label and
+output path for every fixture. Set `SKIP_UV_SYNC=1` when the environment is
+already synchronized. It writes CSV estates and private sidecars under a
+discoverable category tree:
+
+```text
+app/estate_generator/output/fixture_matrix/
+├── clean/no_schemes/
+├── clean/with_decoys/
+├── isolated/{phantom_vendor,kickback,round_tripping,
+│             threshold_splitting,revenue_inflation}/
+├── mixed/{seed_driven,three_schemes_with_decoys}/
+└── all_five/with_decoys/
+```
+
 Without `--all-five`, the default deterministic mix contains 0–5 schemes and
 0–10 decoys. `--scheme-count` and `--decoy-count` override that mix. To choose
 specific families, use `--scheme-type kickback --scheme-type round_tripping`

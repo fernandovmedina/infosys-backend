@@ -60,4 +60,6 @@ estate. Use multiple seeds and both observation profiles for tuning, then keep
 separate seeds held out for evaluation.
 
 See [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) for the implementation and
-review contract.
+review contract, and the repository's
+[complete usage guide](../../docs/synthetic_estate_generator_guide.md) for
+end-to-end commands and troubleshooting.

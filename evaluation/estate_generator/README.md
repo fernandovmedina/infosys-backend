@@ -46,3 +46,7 @@ before tuning and do not inspect its private sidecars during development.
 [`heldout_manifest.json`](heldout_manifest.json) reserves six seeds—three per
 observation profile—for the final evaluation. Do not generate or inspect their
 private sidecars during prompt or detector tuning.
+
+See the repository's [complete usage guide](../../docs/synthetic_estate_generator_guide.md)
+for public CSV/SQLite output, explicit scheme selection, validation, and
+deployment instructions.

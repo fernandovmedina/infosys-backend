@@ -16,6 +16,9 @@ See [app/estate_generator/README.md](app/estate_generator/README.md) for its
 module boundaries and [evaluation/estate_generator/README.md](evaluation/estate_generator/README.md)
 for the separation between public estates and private evaluation material.
 
+For the complete generator workflow, see the
+[Synthetic estate generator guide](docs/synthetic_estate_generator_guide.md).
+
 Generate a public normal-business estate with:
 
 ```bash

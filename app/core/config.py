@@ -73,7 +73,7 @@ class Settings(BaseSettings):
         default=None,
         description="Installed local Ollama model. Leave empty to disable conversational Q&A.",
     )
-    explainability_timeout_seconds: float = Field(default=8.0, gt=0, le=10.0)
+    explainability_timeout_seconds: float = Field(default=8.0, gt=0, le=120.0)
 
 
 @lru_cache

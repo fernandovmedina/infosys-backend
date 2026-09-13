@@ -16,6 +16,7 @@ dependencies = [
 
 [project.scripts]
 sat-blacklist-import = "app.sat.importer:main"
+estate-generate = "app.estate_generator.cli:main"
 
 [dependency-groups]
 dev = [

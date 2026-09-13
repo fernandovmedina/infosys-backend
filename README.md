@@ -15,6 +15,23 @@ See [app/estate_generator/README.md](app/estate_generator/README.md) for its
 module boundaries and [evaluation/estate_generator/README.md](evaluation/estate_generator/README.md)
 for the separation between public estates and private evaluation material.
 
+Generate a public normal-business estate with:
+
+```bash
+uv run estate-generate --seed 7 --output generated/estate_7.db
+```
+
+Generate a private training/evaluation fixture, including the five synthetic
+scheme families and paired decoys, with:
+
+```bash
+uv run python -m evaluation.estate_generator.cli \
+  --seed 7 --output generated/fixture_7.db --all-five --decoy-count 5
+```
+
+Only the SQLite file is public. Keep `evaluation/` and the generated
+`private/*.json` truth/provenance sidecars out of the investigator deployment.
+
 ---
 
 ## Getting started

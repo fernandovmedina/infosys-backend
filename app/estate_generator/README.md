@@ -1,42 +1,62 @@
 # Synthetic estate generator
 
-This package will generate deterministic, offline SQLite estates matching
+This package generates deterministic, offline SQLite estates that match
 `public/material/estate_schema.sql`. It is a library and CLI concern, not an
-API route: the deployed investigator must be able to consume an estate without
-being able to reach generator internals or evaluation data.
+API route, and has no dependency on FastAPI, PostgreSQL, live SAT data, or the
+private evaluator.
 
-## Boundaries
+## Public generation
 
-| Area | Responsibility | Must not depend on |
-|---|---|---|
-| `config.py` | Public, seed-based generation controls | evaluator truth or hidden actor roles |
-| `challenge_contract.py` | One read-only path to supplied format material | FastAPI, PostgreSQL, or network access |
-| `normal_business.py` | Ordinary events, obligations, documents, and payments | fraud-only rendering paths |
-| `scenarios.py` | Event-level scenario interventions and innocent counterparts | direct SQLite row patching |
-| `accounting.py` | Exact-cent postings and settlement state | floating-point source-of-truth arithmetic |
-| `exporter.py` | Projection into the eight public SQLite tables | evaluator-only provenance |
-| `checks.py` | Public-estate invariants and leakage smoke checks | private causal facts as evidence |
-| `cli.py` | Reproducible offline generation command | FastAPI application startup |
+After `uv sync --all-groups`, generate a normal-business estate with:
 
-Only `config.py` and `challenge_contract.py` exist in this structural change.
-The remaining modules will be added with their tests as generator behavior is
-implemented. Listing the boundaries now establishes ownership without shipping
-placeholder logic or a command that appears functional but generates no estate.
+```bash
+uv run estate-generate \
+  --seed 7 \
+  --output generated/estate_7.db
+```
 
-## Artifact separation
+Useful controls include `--start-date`, `--end-date`, `--vendor-count`,
+`--employee-count`, `--normal-event-count`, `--observation-profile`, and
+`--force`. Existing files are never replaced without `--force`.
 
-The generator will write public SQLite estates below `generated/`, which is
-ignored by Git. Private evaluation sidecars are owned by
-`evaluation/estate_generator/`; the application package must never import them.
-The investigator receives the public database only.
+The generator creates vendors, employees, contracts, purchase orders,
+purchase and sales invoices, exact-cent double-entry postings, complete and
+partial settlements, and cancellation/reversal paths. Before export it checks
+identifier/link integrity, invoice arithmetic, journal balance, CLABE shape
+and checksum, causal dates, and chronological account funding.
 
-The challenge materials under `public/material/` are format specifications.
-They are not generated output and must remain unchanged.
+`challenge_wide` retains simulated third-party bank legs so complete kickback
+and cycle evidence can be tested. `company_only` exports only transfers with a
+company-account endpoint. In that restricted profile, the kickback fixture
+uses a visible vendor/approver account conflict and is capped at `probable`;
+round-tripping is likewise capped because its intermediary leg is hidden.
 
-## Agentic implementation
+## Package boundaries
 
-The package-local [collaboration contract](AGENTS.md) assigns one builder to
-implementation, keeps quality/domain reviewers read-only, and protects the
-public/private evaluation boundary. Agents should start with the stated
-vertical slice and its invariants rather than attempting all scenario families
-in parallel.
+| Module | Responsibility |
+|---|---|
+| `config.py` | Public seed, date, volume, and observation controls |
+| `challenge_contract.py` | Read-only access to the supplied schema |
+| `models.py` | Typed exact-cent internal records |
+| `normal_business.py` | Ordinary event, accounting, settlement, and refund APIs |
+| `accounting.py` | IVA and journal-balance helpers |
+| `checks.py` | Public-estate invariants |
+| `exporter.py` | Projection into the eight supplied SQLite tables |
+| `generator.py` | Public generation facade |
+| `cli.py` | Reproducible offline command |
+
+Scenario attribution, decoy rationale, and answer keys live under
+`evaluation/estate_generator/`; no module in `app/estate_generator/` imports
+that boundary. Deploy the investigator with only the public database and
+application code—not `evaluation/` or generated `private/` sidecars.
+
+## Scope and caveat
+
+This is a strong hackathon fixture generator, not an empirically calibrated
+digital twin. Its entities and EFOS rows are fictional. EFOS status is context,
+never standalone proof, and no real SAT taxpayer allegation is copied into an
+estate. Use multiple seeds and both observation profiles for tuning, then keep
+separate seeds held out for evaluation.
+
+See [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) for the implementation and
+review contract.

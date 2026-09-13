@@ -25,7 +25,7 @@ def render_fixture(
     if output_path.exists() and not overwrite:
         raise FileExistsError(f"refusing to overwrite existing estate: {output_path}")
     private_directory = output_path.parent / "private"
-    truth_path = private_directory / f"{output_path.stem}.truth.json"
+    truth_path = private_directory / f"{output_path.stem}.ground_truth.json"
     provenance_path = private_directory / f"{output_path.stem}.provenance.json"
     if not overwrite and (truth_path.exists() or provenance_path.exists()):
         raise FileExistsError("refusing to overwrite existing private fixture sidecar")

@@ -25,7 +25,7 @@ explainable counterpart.
 The command writes:
 
 - `<output>.db`: the only artifact supplied to the investigator.
-- `private/<stem>.truth.json`: scheme labels, entities, evidence IDs, amounts,
+- `private/<stem>.ground_truth.json`: scheme labels, entities, evidence IDs, amounts,
   and decoys.
 - `private/<stem>.provenance.json`: observation limits, confidence ceilings,
   amount bases, and visible/hidden evidence attribution.

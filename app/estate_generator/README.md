@@ -48,7 +48,8 @@ round-tripping is likewise capped because its intermediary leg is hidden.
 Scenario attribution, decoy rationale, and answer keys live under
 `evaluation/estate_generator/`; no module in `app/estate_generator/` imports
 that boundary. Deploy the investigator with only the public database and
-application code—not `evaluation/` or generated `private/` sidecars.
+application code—not `evaluation/` or generated `private/` sidecars
+(`*.ground_truth.json` and `*.provenance.json`).
 
 ## Scope and caveat
 

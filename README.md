@@ -30,7 +30,8 @@ uv run python -m evaluation.estate_generator.cli \
 ```
 
 Only the SQLite file is public. Keep `evaluation/` and the generated
-`private/*.json` truth/provenance sidecars out of the investigator deployment.
+`private/*.ground_truth.json` and `private/*.provenance.json` sidecars out of
+the investigator deployment.
 
 ---
 

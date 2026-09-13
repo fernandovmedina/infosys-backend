@@ -11,6 +11,7 @@ from random import Random
 from app.estate_generator.config import EstateGeneratorConfig, ObservationProfile
 from app.estate_generator.exporter import export_sqlite
 from app.estate_generator.models import BankTransaction, GeneratedEstate
+from app.estate_generator.output import export_csv
 from evaluation.estate_generator.scenarios import PrivateDecoy, PrivateScenario, ScenarioRun
 
 
@@ -20,15 +21,65 @@ def render_fixture(
     output_path: Path,
     *,
     overwrite: bool = False,
+    sidecar_stem: str | None = None,
 ) -> tuple[Path, Path, Path]:
     """Write the public estate and private sibling truth/provenance sidecars."""
     if output_path.exists() and not overwrite:
         raise FileExistsError(f"refusing to overwrite existing estate: {output_path}")
-    private_directory = output_path.parent / "private"
-    truth_path = private_directory / f"{output_path.stem}.ground_truth.json"
-    provenance_path = private_directory / f"{output_path.stem}.provenance.json"
-    if not overwrite and (truth_path.exists() or provenance_path.exists()):
-        raise FileExistsError("refusing to overwrite existing private fixture sidecar")
+    scenario_evidence = _prepare_fixture(run, config)
+    export_sqlite(
+        run.estate, output_path, observation_profile=config.observation_profile, overwrite=overwrite
+    )
+    truth_path, provenance_path = _write_sidecars(
+        run,
+        config,
+        output_path.parent,
+        scenario_evidence,
+        stem=sidecar_stem or output_path.stem,
+        overwrite=overwrite,
+    )
+    return output_path, truth_path, provenance_path
+
+
+def render_fixture_run(
+    run: ScenarioRun,
+    config: EstateGeneratorConfig,
+    run_directory: Path,
+    *,
+    sqlite_only: bool = False,
+    overwrite: bool = False,
+) -> tuple[Path, Path, Path]:
+    """Write a timestamped run directory as CSVs or one SQLite database."""
+    if sqlite_only:
+        return render_fixture(
+            run,
+            config,
+            run_directory / "estate.db",
+            overwrite=overwrite,
+            sidecar_stem=run_directory.name,
+        )
+    run_directory.mkdir(parents=True, exist_ok=True)
+    scenario_evidence = _prepare_fixture(run, config)
+    export_csv(
+        run.estate,
+        run_directory,
+        observation_profile=config.observation_profile,
+        overwrite=overwrite,
+    )
+    truth_path, provenance_path = _write_sidecars(
+        run,
+        config,
+        run_directory,
+        scenario_evidence,
+        stem=run_directory.name,
+        overwrite=overwrite,
+    )
+    return run_directory, truth_path, provenance_path
+
+
+def _prepare_fixture(
+    run: ScenarioRun, config: EstateGeneratorConfig
+) -> dict[str, dict[str, list[str]]]:
     visible_transactions = {item.txn_id for item in _observed_transactions(run.estate, config)}
     invoice_map, transaction_map = canonicalize_public_records(run.estate, config.seed)
     scenario_evidence = {
@@ -52,9 +103,23 @@ def render_fixture(
         for item in run.scenarios
     ]
     run.decoys[:] = [_remap_decoy(item, invoice_map) for item in run.decoys]
-    export_sqlite(
-        run.estate, output_path, observation_profile=config.observation_profile, overwrite=overwrite
-    )
+    return scenario_evidence
+
+
+def _write_sidecars(
+    run: ScenarioRun,
+    config: EstateGeneratorConfig,
+    public_directory: Path,
+    scenario_evidence: dict[str, dict[str, list[str]]],
+    *,
+    stem: str,
+    overwrite: bool,
+) -> tuple[Path, Path]:
+    private_directory = public_directory / "private"
+    truth_path = private_directory / f"{stem}.ground_truth.json"
+    provenance_path = private_directory / f"{stem}.provenance.json"
+    if not overwrite and (truth_path.exists() or provenance_path.exists()):
+        raise FileExistsError("refusing to overwrite existing private fixture sidecar")
     private_directory.mkdir(parents=True, exist_ok=True)
     truth_path.write_text(
         json.dumps(truth_document(run, config), indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -64,7 +129,7 @@ def render_fixture(
         + "\n",
         encoding="utf-8",
     )
-    return output_path, truth_path, provenance_path
+    return truth_path, provenance_path
 
 
 def canonicalize_public_records(

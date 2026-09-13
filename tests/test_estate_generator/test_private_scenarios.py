@@ -12,7 +12,8 @@ import pytest
 
 from app.estate_generator.checks import validate_public_estate
 from app.estate_generator.config import EstateGeneratorConfig, ObservationProfile
-from evaluation.estate_generator.harness import render_fixture, truth_document
+from app.estate_generator.output import create_run_directory
+from evaluation.estate_generator.harness import render_fixture, render_fixture_run, truth_document
 from evaluation.estate_generator.scenarios import SCHEME_TYPES, build_scenario_run
 
 
@@ -273,29 +274,18 @@ def test_explicit_scheme_selection_supports_named_subset_and_rejects_conflicts()
         build_scenario_run(config, all_five=True, scheme_types=("kickback",), decoy_count=0)
 
 
-def test_explicit_scheme_selection_cli_writes_only_requested_families(tmp_path: Path) -> None:
-    output_path = tmp_path / "subset.db"
-    result = subprocess.run(
-        [
-            sys.executable,
-            "-m",
-            "evaluation.estate_generator.cli",
-            "--seed",
-            "12",
-            "--output",
-            str(output_path),
-            "--schemes",
-            "kickback,round_tripping",
-            "--decoy-count",
-            "0",
-        ],
-        capture_output=True,
-        text=True,
-        check=False,
+def test_explicit_scheme_selection_run_writes_only_requested_families(tmp_path: Path) -> None:
+    config = EstateGeneratorConfig(seed=12, normal_event_count=30)
+    run_directory = create_run_directory(12, root=tmp_path)
+    _, truth_path, _ = render_fixture_run(
+        build_scenario_run(
+            config,
+            scheme_types=("kickback", "round_tripping"),
+            decoy_count=0,
+        ),
+        config,
+        run_directory,
     )
-
-    assert result.returncode == 0, result.stdout + result.stderr
-    truth_path = output_path.parent / "private" / "subset.ground_truth.json"
     truth = json.loads(truth_path.read_text(encoding="utf-8"))
     assert [item["type"] for item in truth["schemes"]] == [
         "kickback",

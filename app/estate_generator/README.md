@@ -1,6 +1,6 @@
 # Synthetic estate generator
 
-This package generates deterministic, offline SQLite estates that match
+This package generates deterministic, offline estates that match
 `public/material/estate_schema.sql`. It is a library and CLI concern, not an
 API route, and has no dependency on FastAPI, PostgreSQL, live SAT data, or the
 private evaluator.
@@ -10,14 +10,14 @@ private evaluator.
 After `uv sync --all-groups`, generate a normal-business estate with:
 
 ```bash
-uv run estate-generate \
-  --seed 7 \
-  --output generated/estate_7.db
+uv run estate-generate --seed 7
 ```
 
-Useful controls include `--start-date`, `--end-date`, `--vendor-count`,
-`--employee-count`, `--normal-event-count`, `--observation-profile`, and
-`--force`. Existing files are never replaced without `--force`.
+The command writes to `app/estate_generator/output/seed7_<YYYYMMDD>_<HHMMSS>/`.
+CSV files are the default, one per schema table. Pass `--sqlite` to write only
+`estate.db` in that run folder. Useful controls include `--start-date`,
+`--end-date`, `--vendor-count`, `--employee-count`, `--normal-event-count`,
+and `--observation-profile`.
 
 The generator creates vendors, employees, contracts, purchase orders,
 purchase and sales invoices, exact-cent double-entry postings, complete and

@@ -9,11 +9,9 @@ Generate a challenge fixture from the repository root with:
 ```bash
 uv run python -m evaluation.estate_generator.cli \
   --seed 7 \
-  --output generated/fixture_7.db \
   --all-five \
   --decoy-count 5 \
-  --observation-profile challenge_wide \
-  --force
+  --observation-profile challenge_wide
 ```
 
 Without `--all-five`, the default deterministic mix contains 0–5 schemes and
@@ -25,12 +23,15 @@ supported scheme families are phantom vendor, kickback, round-tripping,
 threshold splitting, and revenue inflation. Each has an innocent, publicly
 explainable counterpart.
 
-The command writes:
+The command creates `app/estate_generator/output/seed7_<YYYYMMDD>_<HHMMSS>/`
+and writes:
 
-- `<output>.db`: the only artifact supplied to the investigator.
-- `private/<stem>.ground_truth.json`: scheme labels, entities, evidence IDs, amounts,
+- CSV mode (default): one CSV per public schema table; this is the only public
+  artifact supplied to the investigator.
+- `--sqlite`: only `estate.db` is written as the public artifact.
+- `private/<run-name>.ground_truth.json`: scheme labels, entities, evidence IDs, amounts,
   and decoys.
-- `private/<stem>.provenance.json`: observation limits, confidence ceilings,
+- `private/<run-name>.provenance.json`: observation limits, confidence ceilings,
   amount bases, and visible/hidden evidence attribution.
 
 The private command is intentionally not installed as a project script.

@@ -37,7 +37,8 @@ the next task starts.
    paths.
 4. Project records through the supplied `estate_schema.sql` into standalone
    SQLite, with deterministic IDs and insertion order.
-5. Provide an offline `estate-generate --seed … --output …` CLI.
+5. Provide an offline `estate-generate --seed …` CLI that writes timestamped
+   CSV run folders, with an optional SQLite-only mode.
 
 **Milestone A gates**
 

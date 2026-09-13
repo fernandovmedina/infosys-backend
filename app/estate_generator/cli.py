@@ -4,19 +4,22 @@ from __future__ import annotations
 
 import argparse
 from datetime import date
-from pathlib import Path
 
 from app.estate_generator.config import EstateGeneratorConfig, ObservationProfile
-from app.estate_generator.generator import generate_sqlite_estate
+from app.estate_generator.generator import generate_estate
+from app.estate_generator.output import export_run
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Generate a deterministic forensic-auditor SQLite estate."
+        description="Generate a deterministic forensic-auditor estate run."
     )
     parser.add_argument("--seed", type=int, required=True, help="Deterministic random seed")
-    parser.add_argument("--output", type=Path, required=True, help="SQLite destination path")
-    parser.add_argument("--force", action="store_true", help="Replace an existing output file")
+    parser.add_argument(
+        "--sqlite",
+        action="store_true",
+        help="Write only estate.db; otherwise write one CSV per schema table",
+    )
     parser.add_argument(
         "--start-date",
         type=date.fromisoformat,
@@ -52,11 +55,20 @@ def main() -> None:
         normal_event_count=args.normal_event_count,
         observation_profile=args.observation_profile,
     )
-    estate = generate_sqlite_estate(config, args.output, overwrite=args.force)
-    print(
-        f"Generated {args.output} with {len(estate.invoices)} invoices, "
-        f"{len(estate.bank_transactions)} bank transactions, and seed {args.seed}."
+    estate = generate_estate(config)
+    run_directory, artifacts = export_run(
+        estate,
+        seed=args.seed,
+        observation_profile=config.observation_profile,
+        sqlite_only=args.sqlite,
     )
+    format_name = "SQLite" if args.sqlite else "CSV"
+    print(
+        f"Generated {format_name} estate run at {run_directory} with "
+        f"{len(estate.invoices)} invoices and {len(estate.bank_transactions)} bank transactions."
+    )
+    for artifact in artifacts.values():
+        print(f"  {artifact}")
 
 
 if __name__ == "__main__":

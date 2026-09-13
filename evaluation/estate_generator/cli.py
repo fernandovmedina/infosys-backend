@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import argparse
 from datetime import date
-from pathlib import Path
 
 from app.estate_generator.config import EstateGeneratorConfig, ObservationProfile
-from evaluation.estate_generator.harness import render_fixture
+from app.estate_generator.output import create_run_directory
+from evaluation.estate_generator.harness import render_fixture_run
 from evaluation.estate_generator.scenarios import SCHEME_TYPES, build_scenario_run
 
 
@@ -25,7 +25,11 @@ def _parse_scheme_list(value: str) -> tuple[str, ...]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate a private-evaluation estate fixture.")
     parser.add_argument("--seed", type=int, required=True)
-    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--sqlite",
+        action="store_true",
+        help="Write only estate.db; otherwise write one CSV per schema table",
+    )
     selection = parser.add_mutually_exclusive_group()
     selection.add_argument("--all-five", action="store_true")
     selection.add_argument("--scheme-count", type=int)
@@ -43,7 +47,6 @@ def main() -> None:
         help="Select comma-separated scheme types explicitly",
     )
     parser.add_argument("--decoy-count", type=int)
-    parser.add_argument("--force", action="store_true")
     parser.add_argument(
         "--observation-profile",
         type=ObservationProfile,
@@ -66,9 +69,17 @@ def main() -> None:
         scheme_types=args.scheme_type or args.schemes,
         decoy_count=args.decoy_count,
     )
-    _, truth_path, provenance_path = render_fixture(run, config, args.output, overwrite=args.force)
+    run_directory = create_run_directory(config.seed)
+    _, truth_path, provenance_path = render_fixture_run(
+        run,
+        config,
+        run_directory,
+        sqlite_only=args.sqlite,
+    )
+    format_name = "SQLite" if args.sqlite else "CSV"
     print(
-        f"Generated public estate {args.output}; private sidecars: {truth_path}, {provenance_path}"
+        f"Generated {format_name} estate run at {run_directory}; "
+        f"private sidecars: {truth_path}, {provenance_path}"
     )
 
 

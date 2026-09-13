@@ -29,6 +29,7 @@ from .catalogo import (
     REGLAS_SUFICIENTES_SOLAS,
     RULE_TO_SCHEME,
 )
+from .cobertura import validate_entity_coverage
 from .entidades import TIPOS_ACUSABLES, Entidad, Resolutor, format_entity_id
 from .estate import Estate
 from .evidencia import Citas, build_exhibits, citar_senal, compute_peso_amount, pesos
@@ -225,6 +226,9 @@ class Ensamblador:
         exhibits = build_exhibits(self.estate, citas)
         if len(exhibits) < MIN_EXHIBITS:
             return ("exhibits_insuficientes", exhibits)
+        cobertura = validate_entity_coverage(self.estate, cl.acusables, exhibits)
+        if cobertura:
+            return ("entidad_sin_respaldo", cobertura)
         monto = compute_peso_amount(cl.esquema, exhibits)
         if monto is None:
             return ("sin_monto", exhibits)
@@ -418,6 +422,15 @@ class Ensamblador:
             razon = (
                 f"{nombre}{con_otros}: {detalle}. Ninguno de los registros citables ({ids}) es una factura, "
                 f"pago, orden o contrato con monto, así que no hay daño en pesos que reclamar."
+            )
+        elif clave == "entidad_sin_respaldo":
+            faltantes_texto = "; ".join(
+                f"{self.etiqueta(item.entity)}: falta {item.requirement}" for item in datos
+            )
+            razon = (
+                f"{nombre}{con_otros}: {detalle}. Se revisaron los exhibits del candidato, "
+                f"pero no todos prueban la participación de cada entidad acusada ({faltantes_texto}). "
+                "La señal queda cerrada como pista para no atribuir una operación a alguien sin respaldo documental."
             )
         elif clave == "no_resuelta":
             cuentas = ", ".join(format_entity_id(e.canonico, e.tipo) for e in datos)

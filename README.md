@@ -22,6 +22,8 @@ and an HTML case file. See [Fraud detection](#fraud-detection).
 See [app/estate_generator/README.md](app/estate_generator/README.md) for its
 module boundaries and [evaluation/estate_generator/README.md](evaluation/estate_generator/README.md)
 for the separation between public estates and private evaluation material.
+Current challenge readiness, evaluation commands, and explicitly deferred work
+are documented in [docs/challenge_readiness.md](docs/challenge_readiness.md).
 
 For the complete generator workflow, see the
 [Synthetic estate generator guide](docs/synthetic_estate_generator_guide.md).

@@ -57,6 +57,16 @@ class Settings(BaseSettings):
         description="Origins allowed to call the API with credentials (the frontend's dev URL).",
     )
 
+    runs_storage_dir: str = Field(
+        default="storage/runs",
+        description="Directory where each run's normalized dataset tables are written.",
+    )
+    runs_max_upload_bytes: int = Field(
+        default=200 * 1024 * 1024,
+        ge=1,
+        description="Upper bound on the total size of one dataset upload.",
+    )
+
 
 @lru_cache
 def get_settings() -> Settings:

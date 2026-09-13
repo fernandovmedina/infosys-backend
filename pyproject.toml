@@ -13,6 +13,7 @@ dependencies = [
     "pydantic-settings>=2.7.0",
     "duckdb>=1.5.5",
     "email-validator>=2.3.0",
+    "python-multipart>=0.0.32",
 ]
 
 [build-system]

@@ -4,15 +4,13 @@ from __future__ import annotations
 
 from typing import Annotated
 
-import asyncpg
 from fastapi import APIRouter, Depends, File, Response, UploadFile, status
 
+from app.api.dependencies import PoolDependency, SessionTokenDependency
 from app.auth import service as auth_service
-from app.auth.schemas import UserPublic
+from app.auth.entities import User
 from app.core.config import Settings, get_settings
-from app.core.database import get_pool
 from app.core.errors import UploadRejectedError
-from app.core.session import get_session_token
 from app.runs import service
 from app.runs.ingest import UploadedFile
 from app.runs.schemas import (
@@ -27,16 +25,14 @@ router = APIRouter(prefix="/runs", tags=["runs"])
 
 _READ_CHUNK_BYTES = 1024 * 1024
 
-Pool = Annotated[asyncpg.Pool, Depends(get_pool)]
+Pool = PoolDependency
 
 
-async def current_user(
-    pool: Pool, session_token: Annotated[str | None, Depends(get_session_token)]
-) -> UserPublic:
+async def current_user(pool: Pool, session_token: SessionTokenDependency) -> User:
     return await auth_service.get_current_user(pool, session_token=session_token)
 
 
-CurrentUser = Annotated[UserPublic, Depends(current_user)]
+CurrentUser = Annotated[User, Depends(current_user)]
 
 
 async def _read_uploads(files: list[UploadFile], max_bytes: int) -> list[UploadedFile]:

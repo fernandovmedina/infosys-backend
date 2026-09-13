@@ -1132,3 +1132,349 @@ If you encounter a genuine product or architectural decision that cannot be answ
 Then ask me through the Claude Code terminal.
 
 Otherwise, make the most reasonable engineering decision and continue without interrupting the implementation.
+
+# TASK #4
+
+## IMPORTANT
+REMEMBER TO ORCHESTATE
+
+# MAIN TASK
+
+Integrate and connect the existing backend with the frontend application.
+
+The frontend repository is already loaded in this Claude Code session. Inspect it thoroughly to understand:
+
+* Which backend endpoints it expects.
+* The HTTP methods used.
+* The expected request payloads.
+* The expected response structures.
+* Authentication requirements.
+* Error handling expectations.
+* Loading and empty states.
+* Any mocked, hardcoded, temporary, or placeholder data currently used.
+* Any frontend features that are currently disconnected from the backend.
+* Any mismatches between the frontend expectations and the backend implementation.
+
+Your goal is to make the frontend communicate correctly with the backend while preserving the current frontend behavior and UI as much as possible.
+
+The backend should remain the source of truth for business logic, fraud detection, analysis, database operations, and validation.
+
+Do not duplicate backend logic inside the frontend.
+
+# WHAT TO DO
+
+* Inspect the frontend repository before making backend changes.
+
+* Identify every place where the frontend:
+
+  * Calls an API.
+  * Uses mock data.
+  * Uses hardcoded results.
+  * Has TODO integrations.
+  * Expects data that currently does not come from the backend.
+  * Performs logic that should instead belong to the backend.
+
+* Build a clear internal mapping between:
+
+  ```text
+  Frontend feature
+      ↓
+  Frontend request
+      ↓
+  Backend endpoint
+      ↓
+  Request schema
+      ↓
+  Backend processing
+      ↓
+  Response schema
+      ↓
+  Frontend rendering
+  ```
+
+* Compare the frontend expectations against the endpoints that already exist in the backend.
+
+* Reuse existing backend endpoints whenever possible.
+
+* If an endpoint exists but its request or response does not match what the frontend requires:
+
+  * Determine whether the safest solution is to adapt the frontend or backend.
+  * Prefer maintaining clean and reusable API contracts.
+  * Avoid breaking endpoints already implemented in previous tasks.
+
+* If a required endpoint does not exist, implement it in the backend following the existing architecture and conventions.
+
+* Replace frontend mock/hardcoded data with real backend requests where appropriate.
+
+* Configure the frontend API base URL correctly.
+
+* Use environment variables for backend URLs or configuration that can differ between development and production.
+
+* Do not hardcode localhost URLs throughout the frontend.
+
+* Make sure CORS is configured correctly so the frontend can communicate with the backend during development.
+
+* Validate the complete request/response flow.
+
+* Handle backend errors correctly in the frontend.
+
+* Make sure HTTP status codes are meaningful and consistent.
+
+* Make sure API responses remain JSON serializable and follow the project's existing naming conventions.
+
+* Preserve backward compatibility with functionality implemented in previous tasks whenever possible.
+
+* Do not remove existing working functionality merely to simplify the integration.
+
+# CODEX WORKERS
+
+You have **2 Codex workers available**.
+
+Use them actively to reduce Claude session usage and reserve Claude for coordination, architectural decisions, reviewing results, and difficult problems.
+
+Delegate independent tasks whenever possible.
+
+Good tasks to delegate include:
+
+* Worker 1:
+
+  * Inspect the frontend.
+  * Find all API calls, mocks, hardcoded data, TODO integrations, and expected request/response structures.
+  * Produce a frontend → backend integration map.
+
+* Worker 2:
+
+  * Inspect the backend.
+  * List existing endpoints, schemas, services, and functionality.
+  * Compare them against what the frontend requires.
+  * Identify missing or incompatible endpoints.
+
+You are responsible for supervising the workers.
+
+Do not blindly trust their output.
+
+For every Codex worker result:
+
+1. Review the changes or findings.
+2. Inspect the actual files they modified.
+3. Compare their implementation against the real frontend/backend requirements.
+4. Run the relevant tests or validation.
+5. If something is incorrect, incomplete, inconsistent, or poorly implemented, send the worker feedback and have them fix it.
+6. Re-check the result after the worker finishes.
+
+Claude remains responsible for the final integrated result.
+
+Do not consider a delegated task complete merely because a worker reports that it is complete.
+
+# INTEGRATION RULES
+
+Keep responsibilities separated:
+
+```text
+Frontend
+- UI
+- Forms
+- User interactions
+- Request creation
+- Response rendering
+- Loading states
+- Error states
+
+Backend
+- Business logic
+- Fraud rules
+- Fraud engine
+- SAT blacklist validation
+- Data normalization
+- Database access
+- Validation
+- Scoring
+- Analysis
+- Evidence generation
+```
+
+Do not move fraud-detection rules into the frontend.
+
+Do not expose internal implementation details that the frontend does not need.
+
+Prefer stable DTO/API schemas between both applications.
+
+If the frontend expects a structure that is clearly coupled to old mock data, it is acceptable to refactor the frontend to use a cleaner backend response rather than creating a bad backend API solely to reproduce the mock structure.
+
+# API CONTRACT
+
+For every frontend/backend integration, verify:
+
+* Endpoint path.
+* HTTP method.
+* Query parameters.
+* Path parameters.
+* Request body.
+* Content-Type.
+* Response body.
+* HTTP status codes.
+* Authentication.
+* Error response.
+* Empty response behavior.
+
+Keep response structures predictable.
+
+Prefer responses such as:
+
+```json
+{
+  "data": {},
+  "message": "..."
+}
+```
+
+or follow the convention already established by the backend if one exists.
+
+Do not introduce a second API response convention unnecessarily.
+
+# ERROR HANDLING
+
+The frontend must correctly handle scenarios such as:
+
+* Backend unavailable.
+* Network request failure.
+* Invalid request.
+* Invalid uploaded data.
+* Database errors.
+* Fraud engine errors.
+* No results.
+* Partial analysis results.
+* Authentication errors.
+* 4xx responses.
+* 5xx responses.
+
+Do not expose Python stack traces, SQL errors, secrets, internal paths, or infrastructure details to the frontend.
+
+# ENVIRONMENT CONFIGURATION
+
+Use environment variables for configuration.
+
+Do not scatter URLs such as:
+
+```text
+http://localhost:8000
+```
+
+throughout frontend components.
+
+Create or reuse a centralized API configuration/client if appropriate for the frontend architecture.
+
+Development should support something conceptually similar to:
+
+```text
+Frontend
+http://localhost:3000
+
+Backend
+http://localhost:8000
+```
+
+but use the actual ports configured in both repositories.
+
+# VALIDATION
+
+After integrating everything:
+
+1. Start the backend.
+2. Start the frontend.
+3. Verify the frontend can reach the backend.
+4. Verify CORS.
+5. Test the main frontend flows.
+6. Test successful requests.
+7. Test invalid requests.
+8. Test empty results.
+9. Test backend failures where reasonable.
+10. Confirm the frontend renders real backend data.
+11. Confirm no important mock data remains where a real endpoint should be used.
+12. Confirm existing backend functionality still works.
+
+If the project already has automated tests, run them.
+
+Also run the appropriate:
+
+* Linter.
+* Type checking.
+* Build.
+* Backend tests.
+* Frontend tests.
+
+Fix failures caused by the integration.
+
+# WHAT NOT TO DO
+
+* Do not rewrite the frontend from scratch.
+* Do not rewrite the backend architecture unnecessarily.
+* Do not duplicate backend logic in the frontend.
+* Do not move fraud detection rules to the frontend.
+* Do not create duplicate endpoints if an existing endpoint can be reused or extended cleanly.
+* Do not break endpoints implemented in previous tasks without a justified reason.
+* Do not hardcode backend URLs in multiple files.
+* Do not leave mock data connected to production flows when real backend data exists.
+* Do not silently change the frontend UX unless required for the integration.
+* Do not add unnecessary dependencies.
+* Do not expose secrets or `.env` values.
+* Do not commit credentials.
+* Do not trust Codex worker output without reviewing it.
+* Do not mark the task complete while major frontend flows are still disconnected.
+
+# REFERENCES
+
+Frontend repository:
+
+```text
+/Users/froot/Documents/workspace/fernandovmedina/web/infosys
+```
+
+The current repository is the backend that must be connected to that frontend.
+
+Previous tasks in this repository already contain important functionality such as:
+
+* Database integration.
+* SAT blacklist validation.
+* Fraud detection rules.
+* Fraud engine logic.
+* Fraud-related endpoints.
+
+Reuse those implementations rather than recreating them.
+
+# FINAL REVIEW
+
+Before finishing, inspect both repositories one final time.
+
+Confirm that:
+
+* Frontend requests match backend contracts.
+* Backend responses match what the frontend consumes.
+* Main frontend workflows are connected.
+* Mock data has been removed where appropriate.
+* Environment configuration is correct.
+* CORS works.
+* Error handling works.
+* Fraud logic remains in the backend.
+* Previous functionality remains operational.
+* Codex worker changes have been reviewed.
+* The frontend builds successfully.
+* The backend starts successfully.
+
+At the end, provide a concise summary containing:
+
+* Frontend files changed.
+* Backend files changed.
+* Endpoints integrated.
+* New endpoints created, if any.
+* API contracts modified, if any.
+* Mock data removed.
+* Environment variables required.
+* Tests/checks executed.
+* Any remaining limitations or follow-up work.
+
+# FEEDBACK
+
+If you encounter a genuine ambiguity that cannot be resolved by inspecting the frontend, backend, existing documentation, database, or previous implementation, ask me through the Claude Code terminal.
+
+Otherwise, make reasonable engineering decisions and continue without interrupting the task.

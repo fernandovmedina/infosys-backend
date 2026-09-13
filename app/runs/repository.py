@@ -100,3 +100,36 @@ async def delete_runs(conn: asyncpg.Connection, *, user_id: int) -> list[str]:
         user_id,
     )
     return [row["id"] for row in rows]
+
+
+async def mark_running(
+    conn: asyncpg.Connection, *, run_id: str, user_id: int
+) -> dict[str, Any] | None:
+    """Move a ready or failed run to `running`. None if it was not in one of those states."""
+    row = await conn.fetchrow(
+        f"""
+        UPDATE investigation_run
+        SET status = 'running', started_at = now(), finished_at = NULL, error = NULL
+        WHERE id = $1 AND user_id = $2 AND status IN ('ready', 'failed')
+        RETURNING {_RUN_COLUMNS}
+        """,
+        run_id,
+        user_id,
+    )
+    return _to_dict(row) if row else None
+
+
+async def mark_finished(
+    conn: asyncpg.Connection, *, run_id: str, status: str, error: dict[str, Any] | None = None
+) -> None:
+    """Close a running run as `completed` or `failed` (with its ApiErrorBody)."""
+    await conn.execute(
+        """
+        UPDATE investigation_run
+        SET status = $2, finished_at = now(), error = $3::jsonb
+        WHERE id = $1 AND status = 'running'
+        """,
+        run_id,
+        status,
+        None if error is None else json.dumps(error, ensure_ascii=False),
+    )

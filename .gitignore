@@ -4,7 +4,6 @@ venv/
 env/
 
 # local files and directories
-scripts/
 p.md
 PROMPT.md
 

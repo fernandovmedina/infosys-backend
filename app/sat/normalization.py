@@ -1,11 +1,10 @@
-"""Normalization shared by the importer and the search.
+"""Normalization applied by the importer to the stored SAT listing columns.
 
-Both sides of a lookup must agree exactly. The importer writes
-``rfc_normalized`` / ``name_normalized`` / ``name_core`` into the table using
-these functions, and the API normalizes incoming queries with the very same
-ones. Because normalization happens in Python rather than in SQL, the query is a
-plain equality test against an indexed column -- no function call wraps the
-column, so the B-tree and GIN indexes stay usable.
+The importer writes ``rfc_normalized`` / ``name_normalized`` / ``name_core``
+into the table using these functions. Any future lookup must normalize its input
+with the very same ones; because normalization happens in Python rather than in
+SQL, such a lookup is a plain equality test against an indexed column, so the
+B-tree and GIN indexes stay usable.
 
 Changing any function here changes the meaning of the stored columns, so a
 change must be followed by a re-import (``uv run sat-blacklist-import``).

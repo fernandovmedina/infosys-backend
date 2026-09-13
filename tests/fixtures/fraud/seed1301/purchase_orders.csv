@@ -1,0 +1,370 @@
+po_id,vendor_rfc,date,amount,requester,approver,description
+PO-00101,HRG820921GTE,2026-05-05,37007.48,Elena Mora 05 00001301,Fabian Rios 06 00001301,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00363,HSK820307HIE,2026-05-20,70826.12,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Mantenimiento preventivo de instalaciones
+PO-00319,HRV970614HAR,2026-05-27,86822.52,Carla Soto 03 00001301,Diego Luna 04 00001301,Mantenimiento preventivo de instalaciones
+PO-00067,HRN890614GWR,2026-02-26,36088.76,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de logistica y entrega
+PO-00292,HRJ850614GUR,2026-01-11,37531.80,Carla Soto 03 00001301,Diego Luna 04 00001301,Suministro de insumos de produccion
+PO-00201,HSR891228HLR,2026-02-10,39654.60,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de logistica y entrega
+PO-00368,HRL871228GVR,2026-02-01,26321.56,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Mantenimiento preventivo de instalaciones
+PO-00293,HSF771228HFR,2026-03-20,103415.16,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Mantenimiento preventivo de instalaciones
+PO-00055,HRP911228GXR,2026-03-22,70439.84,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00063,HRP911228GXR,2026-03-18,107834.76,Carla Soto 09 00001301,Diego Luna 10 00001301,Soporte y licencias de tecnologia
+PO-00120,HRG820921GTE,2026-03-05,37007.48,Carla Soto 03 00001301,Diego Luna 04 00001301,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00357,HRV970614HAR,2026-05-21,53937.68,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Mantenimiento preventivo de instalaciones
+PO-00084,HTC700921HRE,2026-06-13,98892.32,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Suministro de insumos de produccion
+PO-00284,HRY700307HCE,2026-06-24,26560.52,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00008,HTD711228HRR,2026-01-19,26100.00,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Soporte y licencias de tecnologia
+PO-00270,HSX950614HOR,2026-04-17,69639.44,Carla Soto 03 00001301,Diego Luna 04 00001301,Suministro de insumos de produccion
+PO-00140,HRZ710614HCR,2026-01-14,15795.72,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00180,HSO860307HKE,2026-06-29,80196.60,Diego Luna 04 00001301,Elena Mora 05 00001301,Soporte y licencias de tecnologia
+PO-00248,HSL830614HIR,2026-05-27,84479.32,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de consultoria operativa
+PO-00080,HRO900921GXE,2026-03-06,82161.64,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00085,HRQ920307GYE,2026-04-03,106969.40,Elena Mora 05 00001301,Fabian Rios 06 00001301,Mantenimiento preventivo de instalaciones
+PO-00291,HTB990614HQR,2026-05-31,23989.96,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de logistica y entrega
+PO-00236,HSY960921HPE,2026-04-26,77112.16,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00191,HRK860921GVE,2026-01-26,56450.24,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00349,HSQ880921HLE,2026-01-29,29591.60,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de consultoria operativa
+PO-00309,HSN851228HJR,2026-06-19,68366.92,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Suministro de insumos de produccion
+PO-00150,HSM840921HJE,2026-06-11,35351.00,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de logistica y entrega
+PO-00240,HSK820307HIE,2026-05-14,53022.44,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Mantenimiento preventivo de instalaciones
+PO-00203,HRZ710614HCR,2026-01-15,99640.52,Carla Soto 09 00001301,Diego Luna 10 00001301,Soporte y licencias de tecnologia
+PO-00136,HRJ850614GUR,2026-01-16,21506.40,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Suministro de insumos de produccion
+PO-00224,HRU960307HAE,2026-05-12,106337.20,Diego Luna 04 00001301,Elena Mora 05 00001301,Soporte y licencias de tecnologia
+PO-00052,HSP870614HKR,2026-01-18,84757.72,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Mantenimiento preventivo de instalaciones
+PO-00344,HSH790614HGR,2026-04-12,74626.28,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de logistica y entrega
+PO-00002,HTA980307HQE,2026-05-24,104511.36,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00185,HSC740307HEE,2026-02-19,29605.52,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de logistica y entrega
+PO-00324,HSB731228HDR,2026-02-06,72226.24,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de consultoria operativa
+PO-00249,HRZ710614HCR,2026-01-18,102438.44,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00064,HSK820307HIE,2026-05-19,84780.92,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Mantenimiento preventivo de instalaciones
+PO-00010,HSC740307HEE,2026-02-16,108298.76,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00001,HRS940921GZE,2026-04-22,26830.80,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de logistica y entrega
+PO-00186,HSR891228HLR,2026-02-08,66488.88,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de logistica y entrega
+PO-00269,HSZ971228HPR,2026-05-13,30666.92,Carla Soto 03 00001301,Diego Luna 04 00001301,Mantenimiento preventivo de instalaciones
+PO-00034,HRK860921GVE,2026-01-24,109906.52,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Soporte y licencias de tecnologia
+PO-00328,HRK860921GVE,2026-01-25,19938.08,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00148,HRN890614GWR,2026-02-23,54982.84,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de logistica y entrega
+PO-00043,HSG780307HGE,2026-04-05,97109.40,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de consultoria operativa
+PO-00279,HTD711228HRR,2026-06-26,40236.92,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00311,HSG780307HGE,2026-03-31,42583.60,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de consultoria operativa
+PO-00342,HRO900921GXE,2026-03-11,79011.08,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00333,HSQ880921HLE,2026-02-03,34222.32,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00336,HRO900921GXE,2026-03-12,21114.32,Carla Soto 03 00001301,Diego Luna 04 00001301,Suministro de insumos de produccion
+PO-00121,HRN890614GWR,2026-03-01,21627.04,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de logistica y entrega
+PO-00149,HRX991228HBR,2026-06-16,45716.76,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de logistica y entrega
+PO-00024,HTC700921HRE,2026-06-12,30308.48,Elena Mora 05 00001301,Fabian Rios 06 00001301,Suministro de insumos de produccion
+PO-00301,HRO900921GXE,2026-03-10,99277.44,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00097,HRL871228GVR,2026-02-02,60046.24,Elena Mora 05 00001301,Fabian Rios 06 00001301,Mantenimiento preventivo de instalaciones
+PO-00025,HSL830614HIR,2026-05-30,46475.40,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de consultoria operativa
+PO-00227,HSF771228HFR,2026-03-21,26938.68,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Mantenimiento preventivo de instalaciones
+PO-00151,HRV970614HAR,2026-05-26,32039.20,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Mantenimiento preventivo de instalaciones
+PO-00028,HSZ971228HPR,2026-05-10,19484.52,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Mantenimiento preventivo de instalaciones
+PO-00078,HTD711228HRR,2026-06-25,67466.76,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00317,HRP911228GXR,2026-03-21,59608.92,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00165,HSO860307HKE,2026-01-11,67734.72,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00065,HRW980921HBE,2026-06-07,68761.32,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00332,HSE760921HFE,2026-03-10,49472.84,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00170,HSU920921HNE,2026-03-15,23259.16,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Mantenimiento preventivo de instalaciones
+PO-00190,HSP870614HKR,2026-01-23,75009.08,Carla Soto 03 00001301,Diego Luna 04 00001301,Mantenimiento preventivo de instalaciones
+PO-00012,HRQ920307GYE,2026-04-02,67219.68,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Mantenimiento preventivo de instalaciones
+PO-00297,HSD750614HER,2026-03-02,68075.76,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Suministro de insumos de produccion
+PO-00177,HTG740921HTE,2026-02-22,52296.28,Elena Mora 05 00001301,Elena Mora 05 00001301,Paquete integrado de adecuacion de planta zona norte
+PO-00127,HRS940921GZE,2026-04-24,101510.44,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de logistica y entrega
+PO-00298,HSS900307HME,2026-02-23,80564.32,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Suministro de insumos de produccion
+PO-00320,HTJ770614HUR,2026-03-29,46400.00,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00264,HTA980307HQE,2026-05-20,57523.24,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de consultoria operativa
+PO-00207,HST910614HMR,2026-03-05,64746.56,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Soporte y licencias de tecnologia
+PO-00031,HRS940921GZE,2026-04-19,107692.08,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00074,HRG820921GTE,2026-04-05,37007.48,Diego Luna 04 00001301,Elena Mora 05 00001301,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00315,HSN851228HJR,2026-06-20,49608.56,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Suministro de insumos de produccion
+PO-00111,HSX950614HOR,2026-04-16,24517.76,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00098,HRZ710614HCR,2026-01-19,69745.00,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00215,HRM880307GWE,2026-02-14,106185.24,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de consultoria operativa
+PO-00189,HSO860307HKE,2026-01-12,43042.96,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00209,HRZ710614HCR,2026-01-16,47782.72,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Soporte y licencias de tecnologia
+PO-00069,HTD711228HRR,2026-06-23,96239.40,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Soporte y licencias de tecnologia
+PO-00258,HSX950614HOR,2026-04-21,86271.52,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00331,HSP870614HKR,2026-01-17,20334.80,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Mantenimiento preventivo de instalaciones
+PO-00277,HSX950614HOR,2026-04-18,77012.40,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Suministro de insumos de produccion
+PO-00216,HRP911228GXR,2026-03-23,107802.28,Diego Luna 04 00001301,Elena Mora 05 00001301,Soporte y licencias de tecnologia
+PO-00087,HRT951228GZR,2026-05-02,76735.16,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Suministro de insumos de produccion
+PO-00369,HRR930614GYR,2026-04-11,53922.60,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de consultoria operativa
+PO-00294,HSA720921HDE,2026-01-25,93683.92,Carla Soto 03 00001301,Diego Luna 04 00001301,Mantenimiento preventivo de instalaciones
+PO-00106,HSI800921HHE,2026-04-23,81753.32,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00042,HSY960921HPE,2026-04-29,104506.72,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Soporte y licencias de tecnologia
+PO-00300,HTK780921HVE,2026-04-05,49300.00,Ana Ruiz 07 00001301,Ana Ruiz 07 00001301,Mantenimiento mensual
+PO-00021,HRJ850614GUR,2026-01-13,92121.40,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Suministro de insumos de produccion
+PO-00176,HSI800921HHE,2026-04-25,98000.28,Elena Mora 05 00001301,Fabian Rios 06 00001301,Suministro de insumos de produccion
+PO-00004,HSB731228HDR,2026-02-09,103447.64,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de consultoria operativa
+PO-00039,HRO900921GXE,2026-03-07,25948.04,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Suministro de insumos de produccion
+PO-00053,HRH831228GTR,2026-03-05,39815.84,Carla Soto 09 00001301,Diego Luna 10 00001301,Cuota mensual: servicios de consultoria operativa
+PO-00139,HSJ811228HHR,2026-05-06,57600.96,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Soporte y licencias de tecnologia
+PO-00188,HRQ920307GYE,2026-03-31,30879.20,Diego Luna 04 00001301,Elena Mora 05 00001301,Mantenimiento preventivo de instalaciones
+PO-00126,HSP870614HKR,2026-01-22,91005.48,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Mantenimiento preventivo de instalaciones
+PO-00310,HSZ971228HPR,2026-05-12,51477.32,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Mantenimiento preventivo de instalaciones
+PO-00117,HSW940307HOE,2026-04-04,109430.92,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de logistica y entrega
+PO-00057,HRH831228GTR,2026-06-05,39815.84,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Cuota mensual: servicios de consultoria operativa
+PO-00041,HRL871228GVR,2026-02-03,80941.32,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Mantenimiento preventivo de instalaciones
+PO-00099,HTA980307HQE,2026-05-22,17770.04,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de consultoria operativa
+PO-00221,HRZ710614HCR,2026-01-13,92443.88,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00360,HSZ971228HPR,2026-05-08,79280.20,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Mantenimiento preventivo de instalaciones
+PO-00077,HRZ710614HCR,2026-01-17,60295.64,Carla Soto 03 00001301,Diego Luna 04 00001301,Soporte y licencias de tecnologia
+PO-00230,HRM880307GWE,2026-02-11,88023.12,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de consultoria operativa
+PO-00184,HRQ920307GYE,2026-03-27,23193.04,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Mantenimiento preventivo de instalaciones
+PO-00334,HRU960307HAE,2026-05-13,82168.60,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Soporte y licencias de tecnologia
+PO-00124,HSW940307HOE,2026-04-06,24115.24,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de logistica y entrega
+PO-00197,HRR930614GYR,2026-04-09,94604.96,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de consultoria operativa
+PO-00112,HSZ971228HPR,2026-05-07,46431.32,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Mantenimiento preventivo de instalaciones
+PO-00029,HRW980921HBE,2026-06-02,74103.12,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de consultoria operativa
+PO-00131,HSV931228HNR,2026-03-28,70080.24,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de consultoria operativa
+PO-00090,HSK820307HIE,2026-05-17,35476.28,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Mantenimiento preventivo de instalaciones
+PO-00094,HSJ811228HHR,2026-05-04,25015.40,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00241,HRM880307GWE,2026-02-13,54808.84,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de consultoria operativa
+PO-00013,HRS940921GZE,2026-04-25,101297.00,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de logistica y entrega
+PO-00226,HSM840921HJE,2026-06-06,79999.40,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00158,HSY960921HPE,2026-05-02,89968.44,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00086,HTB990614HQR,2026-05-30,49171.24,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de logistica y entrega
+PO-00123,HSK820307HIE,2026-05-18,97357.64,Diego Luna 04 00001301,Elena Mora 05 00001301,Mantenimiento preventivo de instalaciones
+PO-00229,HRU960307HAE,2026-05-11,52742.88,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00167,HRM880307GWE,2026-02-12,21702.44,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de consultoria operativa
+PO-00295,HRI840307GUE,2026-06-05,33080.88,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Cuota mensual: servicios de logistica y entrega
+PO-00195,HSE760921HFE,2026-03-09,63127.20,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00327,HSY960921HPE,2026-04-30,42514.00,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Soporte y licencias de tecnologia
+PO-00138,HSU920921HNE,2026-03-16,87146.16,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Mantenimiento preventivo de instalaciones
+PO-00362,HSW940307HOE,2026-04-05,41785.52,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00093,HSM840921HJE,2026-06-05,81713.88,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de logistica y entrega
+PO-00335,HRH831228GTR,2026-04-05,39815.84,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Cuota mensual: servicios de consultoria operativa
+PO-00239,HSA720921HDE,2026-01-26,59324.72,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Mantenimiento preventivo de instalaciones
+PO-00217,HTG740921HTE,2026-02-23,52853.08,Elena Mora 05 00001301,Elena Mora 05 00001301,Paquete integrado de adecuacion de planta zona norte
+PO-00163,HRY700307HCE,2026-06-29,37630.40,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00089,HSO860307HKE,2026-06-27,75081.00,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00145,HSW940307HOE,2026-04-07,49827.80,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de logistica y entrega
+PO-00171,HSE760921HFE,2026-03-15,21995.92,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00237,HTI760307HUE,2026-03-26,87000.00,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00262,HRL871228GVR,2026-02-06,94941.36,Carla Soto 03 00001301,Diego Luna 04 00001301,Mantenimiento preventivo de instalaciones
+PO-00161,HSJ811228HHR,2026-05-09,43994.16,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00175,HSD750614HER,2026-02-26,98924.80,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00007,HRN890614GWR,2026-02-24,20073.80,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de logistica y entrega
+PO-00345,HSV931228HNR,2026-03-25,97662.72,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00303,HRK860921GVE,2026-01-23,22298.68,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Soporte y licencias de tecnologia
+PO-00353,HTK780921HVE,2026-04-07,49300.00,Ana Ruiz 07 00001301,Ana Ruiz 07 00001301,Insumo de seguridad
+PO-00096,HSG780307HGE,2026-04-04,68646.48,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de consultoria operativa
+PO-00082,HRR930614GYR,2026-04-10,64842.84,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de consultoria operativa
+PO-00304,HSL830614HIR,2026-05-31,52339.20,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de consultoria operativa
+PO-00365,HRW980921HBE,2026-06-01,81783.48,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de consultoria operativa
+PO-00153,HRP911228GXR,2026-03-19,27023.36,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Soporte y licencias de tecnologia
+PO-00073,HRM880307GWE,2026-02-18,80948.28,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de consultoria operativa
+PO-00049,HRO900921GXE,2026-03-09,29415.28,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Suministro de insumos de produccion
+PO-00235,HSG780307HGE,2026-04-02,98214.88,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de consultoria operativa
+PO-00110,HSQ880921HLE,2026-01-30,106708.40,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de consultoria operativa
+PO-00247,HSI800921HHE,2026-04-26,16685.44,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Suministro de insumos de produccion
+PO-00351,HSS900307HME,2026-02-21,47333.80,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Suministro de insumos de produccion
+PO-00119,HRX991228HBR,2026-06-14,15146.12,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de logistica y entrega
+PO-00079,HRR930614GYR,2026-04-07,97326.32,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de consultoria operativa
+PO-00134,HSF771228HFR,2026-03-26,45873.36,Carla Soto 03 00001301,Diego Luna 04 00001301,Mantenimiento preventivo de instalaciones
+PO-00068,HRT951228GZR,2026-05-05,18028.72,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00037,HRG820921GTE,2026-02-05,37007.48,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00205,HTG740921HTE,2026-02-24,53465.56,Elena Mora 05 00001301,Elena Mora 05 00001301,Paquete integrado de adecuacion de planta zona norte
+PO-00341,HSD750614HER,2026-02-27,15662.32,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00252,HRG820921GTE,2026-06-05,37007.48,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00305,HTA980307HQE,2026-05-18,69429.48,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de consultoria operativa
+PO-00339,HRY700307HCE,2026-06-25,39529.32,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Suministro de insumos de produccion
+PO-00048,HRS940921GZE,2026-04-20,81449.40,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de logistica y entrega
+PO-00212,HTC700921HRE,2026-06-10,92216.52,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00016,HRN890614GWR,2026-02-28,68079.24,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00160,HSE760921HFE,2026-03-13,70741.44,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Soporte y licencias de tecnologia
+PO-00346,HRP911228GXR,2026-03-16,64428.72,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00128,HSA720921HDE,2026-01-28,74373.40,Diego Luna 04 00001301,Elena Mora 05 00001301,Mantenimiento preventivo de instalaciones
+PO-00246,HTA980307HQE,2026-05-21,74498.68,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de consultoria operativa
+PO-00102,HSA720921HDE,2026-01-27,56313.36,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Mantenimiento preventivo de instalaciones
+PO-00261,HRX991228HBR,2026-06-15,83325.12,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de logistica y entrega
+PO-00250,HSM840921HJE,2026-06-09,85442.12,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de logistica y entrega
+PO-00350,HSA720921HDE,2026-01-29,47457.92,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Mantenimiento preventivo de instalaciones
+PO-00326,HSG780307HGE,2026-04-03,103519.56,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de consultoria operativa
+PO-00358,HSL830614HIR,2026-05-28,71733.24,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de consultoria operativa
+PO-00289,HSV931228HNR,2026-03-29,14880.48,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de consultoria operativa
+PO-00168,HSI800921HHE,2026-04-28,84512.96,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00081,HSS900307HME,2026-02-20,61207.40,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00116,HSD750614HER,2026-03-01,32898.76,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Suministro de insumos de produccion
+PO-00260,HSC740307HEE,2026-02-18,83787.96,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de logistica y entrega
+PO-00129,HSQ880921HLE,2026-02-02,60331.60,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de consultoria operativa
+PO-00251,HSU920921HNE,2026-03-17,59796.84,Diego Luna 04 00001301,Elena Mora 05 00001301,Mantenimiento preventivo de instalaciones
+PO-00146,HSO860307HKE,2026-01-09,41938.64,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Soporte y licencias de tecnologia
+PO-00142,HRU960307HAE,2026-05-14,52709.24,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Soporte y licencias de tecnologia
+PO-00005,HSC740307HEE,2026-02-15,99530.32,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de logistica y entrega
+PO-00083,HSY960921HPE,2026-04-28,40292.60,Diego Luna 04 00001301,Elena Mora 05 00001301,Soporte y licencias de tecnologia
+PO-00306,HRX991228HBR,2026-06-17,37853.12,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de logistica y entrega
+PO-00125,HSQ880921HLE,2026-01-28,70097.64,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de consultoria operativa
+PO-00075,HSO860307HKE,2026-01-10,24610.56,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Soporte y licencias de tecnologia
+PO-00135,HSN851228HJR,2026-06-18,24442.36,Carla Soto 03 00001301,Diego Luna 04 00001301,Suministro de insumos de produccion
+PO-00194,HSM840921HJE,2026-06-07,101525.52,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de logistica y entrega
+PO-00266,HRX991228HBR,2026-06-13,24166.28,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de logistica y entrega
+PO-00219,HRU960307HAE,2026-05-15,17381.44,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00287,HTH751228HTR,2026-02-25,137789.44,Fabian Rios 06 00001301,Fabian Rios 06 00001301,Mantenimiento correctivo de linea de produccion
+PO-00220,HSF771228HFR,2026-03-25,19476.40,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Mantenimiento preventivo de instalaciones
+PO-00267,HRT951228GZR,2026-04-29,44008.08,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00036,HST910614HMR,2026-03-04,54565.24,Carla Soto 09 00001301,Diego Luna 10 00001301,Soporte y licencias de tecnologia
+PO-00192,HRM880307GWE,2026-02-15,27708.92,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de consultoria operativa
+PO-00115,HRN890614GWR,2026-02-25,50390.40,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de logistica y entrega
+PO-00254,HTA980307HQE,2026-05-19,50158.40,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de consultoria operativa
+PO-00109,HSR891228HLR,2026-02-11,75007.92,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de logistica y entrega
+PO-00322,HRT951228GZR,2026-04-30,60909.28,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00091,HSK820307HIE,2026-05-15,70261.20,Carla Soto 03 00001301,Diego Luna 04 00001301,Mantenimiento preventivo de instalaciones
+PO-00147,HRK860921GVE,2026-01-21,80661.76,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00156,HSJ811228HHR,2026-05-03,42545.32,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00038,HRM880307GWE,2026-02-17,100250.68,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00223,HSU920921HNE,2026-03-14,101522.04,Carla Soto 03 00001301,Diego Luna 04 00001301,Mantenimiento preventivo de instalaciones
+PO-00072,HTC700921HRE,2026-06-11,49683.96,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Suministro de insumos de produccion
+PO-00280,HRP911228GXR,2026-03-17,88048.64,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00343,HSP870614HKR,2026-01-20,65138.64,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Mantenimiento preventivo de instalaciones
+PO-00181,HRO900921GXE,2026-03-08,67586.24,Elena Mora 05 00001301,Fabian Rios 06 00001301,Suministro de insumos de produccion
+PO-00162,HRI840307GUE,2026-04-05,33080.88,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Cuota mensual: servicios de logistica y entrega
+PO-00257,HSU920921HNE,2026-03-18,27935.12,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Mantenimiento preventivo de instalaciones
+PO-00108,HRR930614GYR,2026-04-13,32982.28,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de consultoria operativa
+PO-00253,HSF771228HFR,2026-03-24,75389.56,Carla Soto 09 00001301,Diego Luna 10 00001301,Mantenimiento preventivo de instalaciones
+PO-00242,HSK820307HIE,2026-05-16,18218.96,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Mantenimiento preventivo de instalaciones
+PO-00017,HSM840921HJE,2026-06-10,90125.04,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de logistica y entrega
+PO-00092,HTB990614HQR,2026-06-04,95393.76,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00058,HRY700307HCE,2026-06-28,61190.00,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00088,HSA720921HDE,2026-01-24,21320.80,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Mantenimiento preventivo de instalaciones
+PO-00268,HSL830614HIR,2026-05-29,36629.32,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de consultoria operativa
+PO-00157,HRQ920307GYE,2026-03-28,77399.84,Carla Soto 03 00001301,Diego Luna 04 00001301,Mantenimiento preventivo de instalaciones
+PO-00054,HSI800921HHE,2026-04-27,86377.08,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00308,HSW940307HOE,2026-04-09,88104.32,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de logistica y entrega
+PO-00290,HSV931228HNR,2026-03-24,87325.96,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de consultoria operativa
+PO-00348,HRU960307HAE,2026-05-16,101781.88,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00202,HSB731228HDR,2026-02-07,45140.24,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de consultoria operativa
+PO-00107,HSJ811228HHR,2026-05-05,49397.44,Carla Soto 09 00001301,Diego Luna 10 00001301,Soporte y licencias de tecnologia
+PO-00285,HRP911228GXR,2026-03-20,55751.92,Carla Soto 03 00001301,Diego Luna 04 00001301,Soporte y licencias de tecnologia
+PO-00071,HSS900307HME,2026-02-22,71929.28,Elena Mora 05 00001301,Fabian Rios 06 00001301,Suministro de insumos de produccion
+PO-00244,HSX950614HOR,2026-04-19,90743.32,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Suministro de insumos de produccion
+PO-00366,HSC740307HEE,2026-02-17,65109.64,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de logistica y entrega
+PO-00271,HRR930614GYR,2026-04-12,105121.52,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Servicios de consultoria operativa
+PO-00018,HSL830614HIR,2026-05-25,44057.96,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de consultoria operativa
+PO-00045,HSI800921HHE,2026-04-22,77238.60,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00035,HSH790614HGR,2026-04-11,59469.72,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de logistica y entrega
+PO-00245,HRK860921GVE,2026-01-20,16581.04,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00027,HTC700921HRE,2026-06-09,54713.72,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00313,HSW940307HOE,2026-04-08,45610.04,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de logistica y entrega
+PO-00282,HSM840921HJE,2026-06-08,90528.72,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de logistica y entrega
+PO-00206,HSE760921HFE,2026-03-14,50233.80,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00259,HSR891228HLR,2026-02-13,63587.72,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de logistica y entrega
+PO-00155,HRN890614GWR,2026-02-27,93947.24,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de logistica y entrega
+PO-00137,HRW980921HBE,2026-06-06,73154.24,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de consultoria operativa
+PO-00132,HSP870614HKR,2026-01-19,84236.88,Elena Mora 05 00001301,Fabian Rios 06 00001301,Mantenimiento preventivo de instalaciones
+PO-00256,HSF771228HFR,2026-03-23,44615.92,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Mantenimiento preventivo de instalaciones
+PO-00076,HSH790614HGR,2026-04-15,31205.16,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de logistica y entrega
+PO-00172,HSB731228HDR,2026-02-10,37383.32,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de consultoria operativa
+PO-00255,HRW980921HBE,2026-06-03,42807.48,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de consultoria operativa
+PO-00183,HRJ850614GUR,2026-01-14,71641.60,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00169,HSA720921HDE,2026-01-30,26488.60,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Mantenimiento preventivo de instalaciones
+PO-00044,HRV970614HAR,2026-05-25,101297.00,Carla Soto 09 00001301,Diego Luna 10 00001301,Mantenimiento preventivo de instalaciones
+PO-00359,HTF730614HSR,2026-02-19,83810.00,Carla Soto 09 00001301,Diego Luna 10 00001301,Gestion extraordinaria de rutas y embarques
+PO-00275,HTC700921HRE,2026-06-15,76358.16,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00066,HTL791228HVR,2026-04-08,69600.00,Carla Soto 09 00001301,Diego Luna 10 00001301,Mantenimiento preventivo de instalaciones
+PO-00338,HRY700307HCE,2026-06-26,45752.72,Elena Mora 05 00001301,Fabian Rios 06 00001301,Suministro de insumos de produccion
+PO-00009,HSN851228HJR,2026-06-22,88709.84,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00179,HSZ971228HPR,2026-05-11,27443.28,Carla Soto 09 00001301,Diego Luna 10 00001301,Mantenimiento preventivo de instalaciones
+PO-00210,HSS900307HME,2026-02-19,28353.88,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00340,HSY960921HPE,2026-05-01,67641.92,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00288,HSX950614HOR,2026-04-20,98680.04,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00040,HSB731228HDR,2026-02-04,87147.32,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de consultoria operativa
+PO-00274,HRT951228GZR,2026-05-04,80307.96,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00056,HSD750614HER,2026-02-28,80949.44,Carla Soto 03 00001301,Diego Luna 04 00001301,Suministro de insumos de produccion
+PO-00286,HRH831228GTR,2026-01-05,39815.84,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Cuota mensual: servicios de consultoria operativa
+PO-00231,HRJ850614GUR,2026-01-15,76447.48,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00234,HSP870614HKR,2026-01-21,23537.56,Carla Soto 09 00001301,Diego Luna 10 00001301,Mantenimiento preventivo de instalaciones
+PO-00278,HST910614HMR,2026-03-06,36831.16,Carla Soto 03 00001301,Diego Luna 04 00001301,Soporte y licencias de tecnologia
+PO-00198,HST910614HMR,2026-03-08,47152.84,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00103,HRK860921GVE,2026-01-22,16894.24,Diego Luna 04 00001301,Elena Mora 05 00001301,Soporte y licencias de tecnologia
+PO-00050,HSR891228HLR,2026-02-12,78012.32,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de logistica y entrega
+PO-00032,HST910614HMR,2026-03-03,33063.48,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00312,HSH790614HGR,2026-04-16,35751.20,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de logistica y entrega
+PO-00272,HSJ811228HHR,2026-05-08,98123.24,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00095,HRJ850614GUR,2026-01-09,32569.32,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00211,HRH831228GTR,2026-05-05,39815.84,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Cuota mensual: servicios de consultoria operativa
+PO-00019,HRX991228HBR,2026-06-12,80182.68,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de logistica y entrega
+PO-00051,HSB731228HDR,2026-02-05,19694.48,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00033,HSL830614HIR,2026-05-26,103279.44,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00356,HRU960307HAE,2026-05-10,78180.52,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00337,HSV931228HNR,2026-03-26,39073.44,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de consultoria operativa
+PO-00059,HRM880307GWE,2026-02-16,84430.60,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de consultoria operativa
+PO-00193,HSV931228HNR,2026-03-27,52032.96,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de consultoria operativa
+PO-00273,HTB990614HQR,2026-06-03,79102.72,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de logistica y entrega
+PO-00354,HRV970614HAR,2026-05-23,67565.36,Elena Mora 05 00001301,Fabian Rios 06 00001301,Mantenimiento preventivo de instalaciones
+PO-00130,HTD711228HRR,2026-06-20,17777.00,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00173,HRQ920307GYE,2026-03-30,21582.96,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Mantenimiento preventivo de instalaciones
+PO-00060,HSN851228HJR,2026-06-21,29469.80,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00159,HSD750614HER,2026-03-04,77178.28,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Suministro de insumos de produccion
+PO-00299,HRR930614GYR,2026-04-14,16994.00,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Servicios de consultoria operativa
+PO-00046,HTD711228HRR,2026-06-21,41105.76,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Soporte y licencias de tecnologia
+PO-00347,HSR891228HLR,2026-02-14,104112.32,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00187,HRS940921GZE,2026-04-21,22000.56,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de logistica y entrega
+PO-00006,HSZ971228HPR,2026-05-09,101715.76,Elena Mora 05 00001301,Fabian Rios 06 00001301,Mantenimiento preventivo de instalaciones
+PO-00026,HRV970614HAR,2026-05-24,47696.88,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Mantenimiento preventivo de instalaciones
+PO-00238,HSQ880921HLE,2026-01-31,22529.52,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de consultoria operativa
+PO-00178,HSW940307HOE,2026-04-10,19294.28,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de logistica y entrega
+PO-00329,HSH790614HGR,2026-04-14,72997.64,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de logistica y entrega
+PO-00014,HTK780921HVE,2026-04-06,49300.00,Ana Ruiz 07 00001301,Ana Ruiz 07 00001301,Licencia anual
+PO-00114,HTB990614HQR,2026-05-29,39727.68,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de logistica y entrega
+PO-00133,HSF771228HFR,2026-03-22,80419.32,Elena Mora 05 00001301,Fabian Rios 06 00001301,Mantenimiento preventivo de instalaciones
+PO-00022,HSB731228HDR,2026-02-08,43503.48,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de consultoria operativa
+PO-00364,HSV931228HNR,2026-03-30,56856.24,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de consultoria operativa
+PO-00164,HSU920921HNE,2026-03-19,78832.44,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Mantenimiento preventivo de instalaciones
+PO-00243,HRH831228GTR,2026-02-05,39815.84,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Cuota mensual: servicios de consultoria operativa
+PO-00199,HSQ880921HLE,2026-02-01,89707.44,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de consultoria operativa
+PO-00233,HRL871228GVR,2026-02-07,25863.36,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Mantenimiento preventivo de instalaciones
+PO-00302,HSS900307HME,2026-02-25,55620.84,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00070,HRT951228GZR,2026-05-03,82347.24,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Suministro de insumos de produccion
+PO-00330,HRW980921HBE,2026-06-04,35208.32,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de consultoria operativa
+PO-00367,HRJ850614GUR,2026-01-12,17239.92,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Suministro de insumos de produccion
+PO-00281,HRI840307GUE,2026-01-05,33080.88,Carla Soto 03 00001301,Diego Luna 04 00001301,Cuota mensual: servicios de logistica y entrega
+PO-00113,HTB990614HQR,2026-06-01,86641.56,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de logistica y entrega
+PO-00061,HRQ920307GYE,2026-03-29,51592.16,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Mantenimiento preventivo de instalaciones
+PO-00214,HTA980307HQE,2026-05-23,38900.60,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de consultoria operativa
+PO-00213,HSE760921HFE,2026-03-11,89093.80,Diego Luna 04 00001301,Elena Mora 05 00001301,Soporte y licencias de tecnologia
+PO-00218,HSG780307HGE,2026-04-06,69090.76,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00208,HRX991228HBR,2026-06-18,70463.04,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00023,HRN890614GWR,2026-02-22,32060.08,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de logistica y entrega
+PO-00318,HRL871228GVR,2026-01-31,53252.12,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Mantenimiento preventivo de instalaciones
+PO-00047,HRY700307HCE,2026-06-23,17951.00,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00204,HTB990614HQR,2026-06-02,97190.60,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Servicios de logistica y entrega
+PO-00325,HSU920921HNE,2026-03-13,89169.20,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Mantenimiento preventivo de instalaciones
+PO-00352,HTC700921HRE,2026-06-14,30850.20,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00263,HSN851228HJR,2026-06-17,95990.00,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00228,HRR930614GYR,2026-04-08,55275.16,Diego Luna 04 00001301,Elena Mora 05 00001301,Servicios de consultoria operativa
+PO-00265,HRI840307GUE,2026-02-05,33080.88,Diego Luna 04 00001301,Elena Mora 05 00001301,Cuota mensual: servicios de logistica y entrega
+PO-00062,HRK860921GVE,2026-01-27,37072.44,Carla Soto 09 00001301,Diego Luna 10 00001301,Soporte y licencias de tecnologia
+PO-00307,HSC740307HEE,2026-02-21,57933.88,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de logistica y entrega
+PO-00232,HSG780307HGE,2026-04-01,65913.52,Carla Soto 09 00001301,Diego Luna 10 00001301,Servicios de consultoria operativa
+PO-00361,HRQ920307GYE,2026-04-01,95614.16,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Mantenimiento preventivo de instalaciones
+PO-00323,HTD711228HRR,2026-06-24,67244.04,Carla Soto 03 00001301,Diego Luna 04 00001301,Soporte y licencias de tecnologia
+PO-00144,HRT951228GZR,2026-05-01,60974.24,Carla Soto 03 00001301,Diego Luna 04 00001301,Suministro de insumos de produccion
+PO-00314,HRG820921GTE,2026-01-05,37007.48,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Cuota mensual: mantenimiento preventivo de instalaciones
+PO-00015,HSH790614HGR,2026-04-13,87926.84,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Servicios de logistica y entrega
+PO-00154,HRI840307GUE,2026-03-05,33080.88,Elena Mora 05 00001301,Fabian Rios 06 00001301,Cuota mensual: servicios de logistica y entrega
+PO-00200,HRS940921GZE,2026-04-18,99879.48,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Servicios de logistica y entrega
+PO-00296,HSR891228HLR,2026-02-09,65896.12,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de logistica y entrega
+PO-00196,HRL871228GVR,2026-02-05,87683.24,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Mantenimiento preventivo de instalaciones
+PO-00122,HSN851228HJR,2026-06-16,49382.36,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00011,HRS940921GZE,2026-04-23,33424.24,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de logistica y entrega
+PO-00105,HST910614HMR,2026-03-02,86698.40,Elena Mora 05 00001301,Fabian Rios 06 00001301,Soporte y licencias de tecnologia
+PO-00182,HSY960921HPE,2026-04-27,95723.20,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00020,HRV970614HAR,2026-05-22,64518.04,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Mantenimiento preventivo de instalaciones
+PO-00316,HSC740307HEE,2026-02-20,91522.84,Carla Soto 03 00001301,Diego Luna 04 00001301,Servicios de logistica y entrega
+PO-00003,HSD750614HER,2026-03-03,31017.24,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00355,HSE760921HFE,2026-03-12,46474.24,Ana Ruiz 01 00001301,Bruno Garcia 02 00001301,Soporte y licencias de tecnologia
+PO-00104,HSO860307HKE,2026-06-28,32142.44,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Soporte y licencias de tecnologia
+PO-00141,HRW980921HBE,2026-06-05,52017.88,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Servicios de consultoria operativa
+PO-00276,HRI840307GUE,2026-05-05,33080.88,Ana Ruiz 07 00001301,Bruno Garcia 08 00001301,Cuota mensual: servicios de logistica y entrega
+PO-00100,HSS900307HME,2026-02-24,79324.28,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00321,HST910614HMR,2026-03-07,74809.56,Diego Luna 10 00001301,Ana Ruiz 01 00001301,Soporte y licencias de tecnologia
+PO-00118,HSI800921HHE,2026-04-24,92736.20,Bruno Garcia 08 00001301,Carla Soto 09 00001301,Suministro de insumos de produccion
+PO-00143,HRO900921GXE,2026-03-05,85570.88,Diego Luna 04 00001301,Elena Mora 05 00001301,Suministro de insumos de produccion
+PO-00030,HTD711228HRR,2026-06-22,27532.60,Carla Soto 09 00001301,Diego Luna 10 00001301,Soporte y licencias de tecnologia
+PO-00283,HSJ811228HHR,2026-05-07,23031.80,Carla Soto 03 00001301,Diego Luna 04 00001301,Soporte y licencias de tecnologia
+PO-00222,HSH790614HGR,2026-04-17,16572.92,Elena Mora 05 00001301,Fabian Rios 06 00001301,Servicios de logistica y entrega
+PO-00174,HRY700307HCE,2026-06-27,93008.80,Bruno Garcia 02 00001301,Carla Soto 03 00001301,Suministro de insumos de produccion
+PO-00225,HSX950614HOR,2026-04-15,30590.36,Carla Soto 09 00001301,Diego Luna 10 00001301,Suministro de insumos de produccion
+PO-00166,HRJ850614GUR,2026-01-10,58182.12,Fabian Rios 06 00001301,Ana Ruiz 07 00001301,Suministro de insumos de produccion
+PO-00152,HRL871228GVR,2026-02-04,61000.92,Carla Soto 09 00001301,Diego Luna 10 00001301,Mantenimiento preventivo de instalaciones

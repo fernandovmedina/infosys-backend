@@ -4,13 +4,12 @@ from __future__ import annotations
 
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, File, Response, UploadFile, status
+from fastapi import APIRouter, BackgroundTasks, Body, Depends, File, Response, UploadFile, status
 
-from app.api.dependencies import PoolDependency, SessionTokenDependency
-from app.auth import service as auth_service
-from app.auth.entities import User
+from app.api.dependencies import CurrentUserDependency, PoolDependency
 from app.core.config import Settings, get_settings
 from app.core.errors import UploadRejectedError
+from app.fraud.schemas import FraudAnalysis, StartRunRequest
 from app.runs import service
 from app.runs.ingest import UploadedFile
 from app.runs.schemas import (
@@ -26,13 +25,7 @@ router = APIRouter(prefix="/runs", tags=["runs"])
 _READ_CHUNK_BYTES = 1024 * 1024
 
 Pool = PoolDependency
-
-
-async def current_user(pool: Pool, session_token: SessionTokenDependency) -> User:
-    return await auth_service.get_current_user(pool, session_token=session_token)
-
-
-CurrentUser = Annotated[User, Depends(current_user)]
+CurrentUser = CurrentUserDependency
 
 
 async def _read_uploads(files: list[UploadFile], max_bytes: int) -> list[UploadedFile]:
@@ -106,9 +99,38 @@ async def get_validation(run_id: str, pool: Pool, user: CurrentUser) -> Validati
     return await service.get_validation(pool, run_id=run_id, user_id=user.id)
 
 
-@router.post("/{run_id}/start", response_model=RunState, summary="Start the investigation")
-async def start_run(run_id: str, pool: Pool, user: CurrentUser) -> RunState:
-    return await service.start_run(pool, run_id=run_id, user_id=user.id)
+@router.post(
+    "/{run_id}/start",
+    response_model=RunState,
+    status_code=status.HTTP_202_ACCEPTED,
+    summary="Start the fraud investigation of a validated dataset",
+)
+async def start_run(
+    run_id: str,
+    pool: Pool,
+    user: CurrentUser,
+    background_tasks: BackgroundTasks,
+    payload: Annotated[StartRunRequest | None, Body()] = None,
+) -> RunState:
+    """Move the run to `running` and audit its dataset with the fraud engine.
+
+    Returns immediately; poll `GET /runs/{run_id}` until the status is
+    `completed` (read `GET /runs/{run_id}/result`) or `failed` (see `error`).
+    A failed run can be started again.
+    """
+    state = await service.start_run(pool, run_id=run_id, user_id=user.id)
+    seed = payload.seed if payload else 0
+    background_tasks.add_task(service.execute_run, pool, run_id=run_id, seed=seed)
+    return state
+
+
+@router.get(
+    "/{run_id}/result",
+    response_model=FraudAnalysis,
+    summary="The fraud analysis of a completed run",
+)
+async def get_result(run_id: str, pool: Pool, user: CurrentUser) -> FraudAnalysis:
+    return await service.get_result(pool, run_id=run_id, user_id=user.id)
 
 
 @router.delete(

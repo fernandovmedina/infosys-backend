@@ -29,19 +29,6 @@ class Settings(BaseSettings):
         description="Maximum time to wait while establishing a PostgreSQL connection.",
     )
 
-    blacklist_max_companies_per_request: int = Field(
-        default=500,
-        ge=1,
-        le=10_000,
-        description="Upper bound on companies per check request, to cap request cost.",
-    )
-    blacklist_name_similarity_threshold: float = Field(
-        default=0.45,
-        ge=0.0,
-        le=1.0,
-        description="Minimum pg_trgm similarity for a fuzzy company-name match.",
-    )
-
     auth_session_ttl_days: int = Field(
         default=7,
         ge=1,
@@ -65,6 +52,17 @@ class Settings(BaseSettings):
         default=200 * 1024 * 1024,
         ge=1,
         description="Upper bound on the total size of one dataset upload.",
+    )
+
+    fraud_max_bytes_per_file: int = Field(
+        default=50 * 1024 * 1024,
+        ge=1,
+        description="Upper bound on each CSV sent to POST /fraud/analyze.",
+    )
+    fraud_max_rows_per_table: int = Field(
+        default=1_000_000,
+        ge=1,
+        description="Upper bound on rows per estate table the fraud engine loads.",
     )
 
 

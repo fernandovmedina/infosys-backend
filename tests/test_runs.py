@@ -225,8 +225,13 @@ async def test_upload_zip_then_read_validation_and_history(
     assert history[0]["run_id"] == run_id
 
     started = await signed_in.post(f"/api/v1/runs/{run_id}/start")
-    assert started.status_code == 501
-    assert started.json()["error"]["code"] == "investigation_unavailable"
+    assert started.status_code == 202, started.text
+    assert started.json()["status"] == "running"
+    # The background audit finishes before the in-process transport returns.
+    state = (await signed_in.get(f"/api/v1/runs/{run_id}")).json()
+    assert state["status"] == "completed", state
+    result = (await signed_in.get(f"/api/v1/runs/{run_id}/result")).json()
+    assert result["rows_per_table"]["invoices"] == 1
 
 
 @requires_database

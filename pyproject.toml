@@ -12,6 +12,7 @@ dependencies = [
     "asyncpg>=0.30.0",
     "pydantic-settings>=2.7.0",
     "duckdb>=1.5.5",
+    "email-validator>=2.3.0",
 ]
 
 [project.scripts]

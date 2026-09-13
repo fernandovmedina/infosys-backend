@@ -34,7 +34,9 @@ Requires Python 3.14, `uv`, and Docker.
 ```bash
 uv sync --all-groups
 cp .env.example .env
-docker compose up -d                                        # Postgres 17 on localhost:5433
+docker compose up -d postgres                               # Postgres 17 on localhost:5433
+docker compose up -d --build                                # full stack: + API container on :8000
+scripts/snapshot.sh export|import <file>                    # share app data (DB rows + run files)
 psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/exec.sql # schema + migrations + blacklist import (idempotent)
 uv run uvicorn app.main:app --reload                        # http://127.0.0.1:8000/docs
 

@@ -1,0 +1,31 @@
+# Keep the build context to what the image needs.
+.git
+.venv
+.env
+.env.*
+**/__pycache__
+*.py[cod]
+*.egg-info
+.mypy_cache
+.pytest_cache
+.ruff_cache
+.claude
+.codex
+.DS_Store
+
+# Local state, never baked into the image
+storage
+generated
+snapshot
+app/estate_generator/output
+
+# Not needed at runtime
+tests
+evaluation
+docs
+rules
+CONTEXT.md
+PROMPT.md
+TODO.md
+p.md
+requirements.txt

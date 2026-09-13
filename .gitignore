@@ -55,3 +55,6 @@ generated/*
 
 # Uploaded datasets of investigation runs
 storage/
+
+# Data snapshots (password hashes, uploaded datasets): share privately
+snapshot/

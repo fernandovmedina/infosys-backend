@@ -16,5 +16,21 @@ services:
       timeout: 3s
       retries: 30
 
+  api:
+    build: .
+    container_name: infosys-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://infosys:infosys@postgres:5432/infosys
+      CORS_ALLOWED_ORIGINS: '["http://localhost:3000"]'
+    ports:
+      - "8000:8000"
+    volumes:
+      # Uploaded run datasets; investigation_run rows point at these files.
+      - infosys-runs:/app/storage/runs
+
 volumes:
   infosys-pgdata:
+  infosys-runs:

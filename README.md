@@ -62,12 +62,40 @@ The output directory is created once and contains `submission.json`,
 
 ## Getting started
 
+### With Docker only
+
+```bash
+docker compose up -d --build   # API on http://localhost:8000/docs, Postgres on localhost:5433
+```
+
+On start the `api` container applies `database/database.sql` and `alter.sql`
+and, on first start only, seeds the SAT blacklist from `black_list.csv`.
+Postgres data and uploaded run datasets live in the `infosys-pgdata` and
+`infosys-runs` volumes; `docker compose down -v` wipes both.
+
+### Sharing data
+
+Postgres volumes stay on the machine that created them. To hand users, runs
+and fraud results to someone else:
+
+```bash
+scripts/snapshot.sh export                                   # -> snapshot/infosys-snapshot.tar.gz
+scripts/snapshot.sh import snapshot/infosys-snapshot.tar.gz  # on the other machine, stack running
+```
+
+The archive holds a data-only dump of the app tables plus the run dataset
+files. Import replaces those tables. The SAT listing is not included (it is
+re-seeded from the CSV) and neither are sessions. It contains password hashes:
+share it privately, never commit it.
+
+### Local development
+
 Requires Python 3.14, [uv](https://docs.astral.sh/uv/), and Docker.
 
 ```bash
 uv sync --all-groups          # install dependencies
 cp .env.example .env          # configuration
-docker compose up -d          # PostgreSQL 17 on localhost:5433
+docker compose up -d postgres # PostgreSQL 17 on localhost:5433
 ```
 
 Create the schema and seed the blacklist:

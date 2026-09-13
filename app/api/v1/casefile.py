@@ -9,10 +9,11 @@ from __future__ import annotations
 
 from typing import Annotated
 
-from fastapi import APIRouter, Query, Response
+from fastapi import APIRouter, Depends, Query, Response
 
 from app.api.dependencies import CurrentUserDependency, PoolDependency
 from app.casefile import service
+from app.casefile.explainability import ExplainAnswer, ExplainQuestion
 from app.casefile.schemas import (
     EntityPage,
     EntityStatus,
@@ -25,6 +26,7 @@ from app.casefile.schemas import (
     Report,
     SearchResponse,
 )
+from app.core.config import Settings, get_settings
 from app.fraud.schemas import Submission
 from app.runs.estate import SourceTable
 
@@ -188,3 +190,24 @@ async def search(
     q: Annotated[str, Query(max_length=200)] = "",
 ) -> SearchResponse:
     return await service.search(pool, run_id=run_id, user_id=user.id, query=q)
+
+
+@router.post(
+    "/explain",
+    response_model=ExplainAnswer,
+    summary="Ask the local model to explain the completed, evidence-backed case file",
+)
+async def explain_case_file(
+    run_id: str,
+    request: ExplainQuestion,
+    pool: Pool,
+    user: CurrentUser,
+    settings: Annotated[Settings, Depends(get_settings)],
+) -> ExplainAnswer:
+    return await service.explain(
+        pool,
+        run_id=run_id,
+        user_id=user.id,
+        question=request.question,
+        settings=settings,
+    )

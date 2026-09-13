@@ -154,6 +154,17 @@ class FraudEngineOutputInvalidError(AppError):
     message = "The engine output did not pass the official validator and was not delivered."
 
 
+class ExplainabilityUnavailableError(AppError):
+    """The optional local explanation model is disabled or could not answer."""
+
+    status_code = status.HTTP_503_SERVICE_UNAVAILABLE
+    code = "explainability_unavailable"
+    message = (
+        "The local explanation service is unavailable. "
+        "The evidence remains available in the case file."
+    )
+
+
 def error_response(
     *, status_code: int, code: str, message: str, details: Any = None
 ) -> JSONResponse:

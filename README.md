@@ -67,8 +67,11 @@ Requires Python 3.14, [uv](https://docs.astral.sh/uv/), and Docker.
 ```bash
 uv sync --all-groups          # install dependencies
 cp .env.example .env          # configuration
-docker compose up -d          # PostgreSQL 17 on localhost:5433
+docker compose -f ../docker-compose.yml up -d postgres  # PostgreSQL on localhost:5433
 ```
+
+For the complete application, including local Ollama/Qwen explainability, use
+`docker compose up --build` from the repository root; see [`../README.md`](../README.md).
 
 Create the schema and seed the blacklist:
 
@@ -159,6 +162,7 @@ table, request/response schemas, how to add a rule, behavior vs. the reference).
 | `GET /api/v1/runs/{run_id}/result` | The stored analysis of a `completed` run. |
 | `GET /api/v1/fraud/rules` | Rule catalog: scheme, evidence family, implemented, description. |
 | `GET /api/v1/fraud/health` | Engine status and rules loaded. |
+| `POST /api/v1/runs/{run_id}/explain` | Answers `{ "question": "..." }` with the configured **local** Ollama model. It uses an allow-listed brief from the completed case file; it cannot change the finding or inspect uncited upload rows. |
 
 The engine loads the tables into an in-memory DuckDB, runs every rule (a failing
 rule is reported and skipped, the rest continue), clusters signals per scheme and
@@ -166,6 +170,24 @@ accuses only with two independent evidence families or a rule sufficient on its
 own; everything else is a declined lead with a reason. Results are persisted in
 `fraud_analysis` and `fraud_signal` (`database/alter.sql`). Limits:
 `FRAUD_MAX_BYTES_PER_FILE`, `FRAUD_MAX_ROWS_PER_TABLE`.
+
+### Local explainability Q&A
+
+The investigator remains deterministic. The optional Q&A layer translates its already
+completed evidence trail for the signed-in owner; it is not an agent that makes or revises
+fraud decisions. Configure an installed Ollama model in `.env`:
+
+```bash
+ollama pull qwen2.5:7b
+EXPLAINABILITY_OLLAMA_MODEL=qwen2.5:7b
+```
+
+It calls only `EXPLAINABILITY_OLLAMA_URL` (default `127.0.0.1:11434`) with an allow-listed
+brief: summary, findings, declined leads, rules, reconciliations, money trail, and cited
+records. Raw/uncited rows, CLABEs, addresses, private folders, ground truth, credentials and
+internal reasoning are excluded. If Ollama is not configured or unavailable, `/explain`
+returns `503 explainability_unavailable`; the ordinary case file stays available. Calls time
+out after 8 seconds by default and identical grounded questions are cached in-process.
 
 ---
 

@@ -18,6 +18,7 @@ import pytest
 from httpx import AsyncClient
 
 from app.casefile import views
+from app.casefile.explainability import redacted_case_brief
 from app.casefile.index import CaseIndex, RunInfo, build_index, split_trail_label
 from app.core.config import get_settings
 from app.fraud import service as fraud_service
@@ -163,6 +164,28 @@ def test_markdown_export_lists_findings_and_leads(index: CaseIndex) -> None:
     submission = index.analysis.submission
     assert markdown.count("### Finding #") == len(submission.findings)
     assert all(lead.entity in markdown for lead in submission.leads_not_pursued)
+
+
+def test_explanation_brief_contains_only_cited_records_and_masks_sensitive_fields(
+    index: CaseIndex,
+) -> None:
+    brief = redacted_case_brief(index)
+    assert brief["case_summary"]["findings_count"] == len(index.analysis.submission.findings)
+    assert "private" not in str(brief).lower()
+    cited = {
+        f"{exhibit.source_table}:{exhibit.record_id}"
+        for finding in index.analysis.submission.findings
+        for exhibit in finding.exhibits
+    }
+    returned = {
+        f"{record['source_table']}:{record['record_id']}"
+        for finding in brief["findings"]
+        for record in finding["cited_records"]
+    }
+    assert returned <= cited
+    for finding in brief["findings"]:
+        for record in finding["cited_records"]:
+            assert record["fields"].get("bank_clabe") in (None, "[redacted]")
 
 
 # ---------------------------------------------------------------------------

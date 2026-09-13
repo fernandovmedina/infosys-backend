@@ -16,6 +16,7 @@ from starlette.concurrency import run_in_threadpool
 
 from app.casefile import index as case_index
 from app.casefile import views
+from app.casefile.explainability import ExplainAnswer, ask_ollama, redacted_case_brief
 from app.casefile.index import CaseIndex, RunInfo
 from app.casefile.schemas import (
     EntityPage,
@@ -29,6 +30,7 @@ from app.casefile.schemas import (
     Report,
     SearchResponse,
 )
+from app.core.config import Settings
 from app.core.errors import (
     EntityNotFoundError,
     RecordNotFoundError,
@@ -155,3 +157,24 @@ async def export_case_file(
     if format == "html":
         return index.analysis.case_file_html
     return await run_in_threadpool(views.render_markdown, index)
+
+
+async def explain(
+    pool: asyncpg.Pool,
+    *,
+    run_id: str,
+    user_id: int,
+    question: str,
+    settings: Settings,
+) -> ExplainAnswer:
+    """Answer a question from a redacted, completed case-file brief only."""
+    index = await _completed_index(pool, run_id=run_id, user_id=user_id)
+    brief = await run_in_threadpool(redacted_case_brief, index)
+    answer = await run_in_threadpool(
+        ask_ollama, settings=settings, question=question.strip(), brief=brief
+    )
+    return ExplainAnswer(
+        answer=answer,
+        grounded_in=brief["grounding_ids"],
+        model=settings.explainability_ollama_model or "",
+    )

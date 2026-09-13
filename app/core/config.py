@@ -65,6 +65,16 @@ class Settings(BaseSettings):
         description="Upper bound on rows per estate table the fraud engine loads.",
     )
 
+    explainability_ollama_url: str = Field(
+        default="http://127.0.0.1:11434",
+        description="Base URL of the local Ollama server used for case-file Q&A.",
+    )
+    explainability_ollama_model: str | None = Field(
+        default=None,
+        description="Installed local Ollama model. Leave empty to disable conversational Q&A.",
+    )
+    explainability_timeout_seconds: float = Field(default=8.0, gt=0, le=10.0)
+
 
 @lru_cache
 def get_settings() -> Settings:

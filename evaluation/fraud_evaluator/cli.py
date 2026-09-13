@@ -19,7 +19,15 @@ from app.fraud.engine.ingesta import archivos_en_carpeta
 from app.fraud.service import ENGINE_VERSION, analyze_files
 from evaluation.estate_generator.harness import render_fixture_run
 from evaluation.estate_generator.scenarios import build_scenario_run
-from evaluation.fraud_evaluator.scoring import RESULT_COLUMNS, ScoreRow, score_submission, total_row
+from evaluation.fraud_evaluator.scoring import (
+    FALSE_POSITIVE_COLUMNS,
+    RESULT_COLUMNS,
+    FalsePositive,
+    ScoreRow,
+    false_positive_details,
+    score_submission,
+    total_row,
+)
 
 EVALUATION_ROOT = Path(__file__).resolve().parents[1]
 HELDOUT_MANIFEST = EVALUATION_ROOT / "estate_generator" / "heldout_manifest.json"
@@ -83,7 +91,11 @@ def _load_tuning(manifest_path: Path) -> list[EvaluationCase]:
 
 
 def _write_results(
-    output_root: Path, mode: Mode, rows: list[ScoreRow], cases: list[EvaluationCase]
+    output_root: Path,
+    mode: Mode,
+    rows: list[ScoreRow],
+    cases: list[EvaluationCase],
+    false_positives: list[FalsePositive],
 ) -> Path:
     results = output_root / "results"
     results.mkdir(parents=True, exist_ok=True)
@@ -93,6 +105,30 @@ def _write_results(
         writer.writeheader()
         writer.writerows(row.csv_row() for row in rows)
         writer.writerow(total_row(rows))
+    diagnostics_path = results / "false_positive_diagnostics.csv"
+    with diagnostics_path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=FALSE_POSITIVE_COLUMNS)
+        writer.writeheader()
+        writer.writerows(item.csv_row() for item in false_positives)
+    summary: dict[tuple[str, str, str], int] = {}
+    for item in false_positives:
+        key = (item.decoy_signal, item.finding_scheme_type, item.triggered_rules)
+        summary[key] = summary.get(key, 0) + 1
+    with (results / "false_positive_summary.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=("decoy_signal", "finding_scheme_type", "triggered_rules", "occurrences"),
+        )
+        writer.writeheader()
+        writer.writerows(
+            {
+                "decoy_signal": key[0],
+                "finding_scheme_type": key[1],
+                "triggered_rules": key[2],
+                "occurrences": count,
+            }
+            for key, count in sorted(summary.items())
+        )
     (results / "evaluation_manifest.json").write_text(
         json.dumps(
             {
@@ -112,10 +148,23 @@ def _write_results(
     return table_path
 
 
-def evaluate(*, mode: Mode, output_root: Path, manifest_path: Path | None = None) -> Path:
+def evaluate(
+    *,
+    mode: Mode,
+    output_root: Path,
+    manifest_path: Path | None = None,
+    start_at: int = 0,
+    max_cases: int | None = None,
+) -> Path:
     """Produce a Results table or fail without publishing a partial final table."""
     if output_root.exists():
         raise FileExistsError(f"refusing to reuse evaluator output directory: {output_root}")
+    if mode == "heldout" and max_cases is not None:
+        raise ValueError("--max-cases is allowed only in tuning mode")
+    if mode == "heldout" and start_at:
+        raise ValueError("--start-at is allowed only in tuning mode")
+    if start_at < 0:
+        raise ValueError("--start-at cannot be negative")
     if mode == "heldout":
         cases = _prepare_heldout(output_root)
     else:
@@ -123,8 +172,15 @@ def evaluate(*, mode: Mode, output_root: Path, manifest_path: Path | None = None
             raise ValueError("--manifest is required for tuning mode")
         output_root.mkdir(parents=True)
         cases = _load_tuning(manifest_path)
+        if max_cases is not None:
+            if max_cases < 1:
+                raise ValueError("--max-cases must be positive")
+            cases = cases[start_at : start_at + max_cases]
+        elif start_at:
+            cases = cases[start_at:]
 
     rows: list[ScoreRow] = []
+    false_positives: list[FalsePositive] = []
     try:
         for case in cases:
             analysis = analyze_files(
@@ -138,10 +194,15 @@ def evaluate(*, mode: Mode, output_root: Path, manifest_path: Path | None = None
                     output_valid=True,
                 )
             )
+            false_positives += false_positive_details(
+                truth=truth,
+                submission=analysis.submission.model_dump(mode="json"),
+                signals=[signal.model_dump(mode="json") for signal in analysis.signals],
+            )
     except Exception:
         shutil.rmtree(output_root)
         raise
-    return _write_results(output_root, mode, rows, cases)
+    return _write_results(output_root, mode, rows, cases, false_positives)
 
 
 def main() -> None:
@@ -149,9 +210,21 @@ def main() -> None:
     parser.add_argument("--mode", choices=("heldout", "tuning"), required=True)
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--manifest", type=Path, help="Required only for tuning mode.")
+    parser.add_argument(
+        "--max-cases", type=int, help="Evaluate the first N seed-sorted tuning cases only."
+    )
+    parser.add_argument(
+        "--start-at", type=int, default=0, help="Zero-based offset into seed-sorted tuning cases."
+    )
     args = parser.parse_args()
     try:
-        table = evaluate(mode=args.mode, output_root=args.output_root, manifest_path=args.manifest)
+        table = evaluate(
+            mode=args.mode,
+            output_root=args.output_root,
+            manifest_path=args.manifest,
+            start_at=args.start_at,
+            max_cases=args.max_cases,
+        )
     except (FileExistsError, FileNotFoundError, ValueError) as exc:
         raise SystemExit(str(exc)) from exc
     print(f"Wrote {table}")

@@ -86,10 +86,23 @@ def build_scenario_run(
     if scheme_types is None:
         selected = tuple(types) if all_five else tuple(types[:requested_schemes])
     scenarios = [_add_scheme(builder, kind, index + 1) for index, kind in enumerate(selected)]
-    decoys = [
-        _add_decoy(builder, types[index % len(types)], index + 1)
-        for index in range(requested_decoys)
-    ]
+    protected_entities = {entity for scenario in scenarios for entity in scenario.entities}
+    # A revenue-cancellation decoy necessarily names the audited company.  When
+    # that company is also planted with revenue inflation, calling it an honest
+    # decoy would contaminate entity-level false-accusation scoring.
+    decoy_types = [kind for kind in types if not (kind == "revenue_inflation" and any(
+        scenario.scheme_type == "revenue_inflation" for scenario in scenarios
+    ))]
+    decoys = []
+    for index in range(requested_decoys):
+        decoy = _add_decoy(
+            builder,
+            decoy_types[index % len(decoy_types)],
+            index + 1,
+            excluded_entities=protected_entities,
+        )
+        decoys.append(decoy)
+        protected_entities.add(decoy.entity)
     return ScenarioRun(estate=builder.estate, scenarios=scenarios, decoys=decoys)
 
 
@@ -281,9 +294,18 @@ def _add_scheme(builder: EstateEventBuilder, kind: str, index: int) -> PrivateSc
     raise ValueError(f"unsupported scenario type: {kind}")
 
 
-def _add_decoy(builder: EstateEventBuilder, kind: str, index: int) -> PrivateDecoy:
+def _add_decoy(
+    builder: EstateEventBuilder, kind: str, index: int, *, excluded_entities: set[str]
+) -> PrivateDecoy:
     event_date = _event_date(builder, index + 10)
-    employee = builder.estate.employees[(index + 2) % len(builder.estate.employees)]
+    eligible_employees = [
+        employee
+        for employee in builder.estate.employees
+        if employee.emp_id not in excluded_entities
+    ]
+    if not eligible_employees:
+        raise ValueError("no employee remains available for an isolated decoy")
+    employee = eligible_employees[(index + 2) % len(eligible_employees)]
     if kind == "phantom_vendor":
         vendor = builder.add_vendor(category="Consultoria")
         builder.add_efos_context(vendor=vendor, status="presunto", publication_date=event_date)

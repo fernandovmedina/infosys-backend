@@ -42,11 +42,22 @@ uv run python -m evaluation.fraud_evaluator.cli --mode tuning \
   --output-root generated/evaluation/tuning-run
 ```
 
+For iterative diagnostics, tuning mode also supports `--start-at` and
+`--max-cases`; held-out mode intentionally rejects both switches.
+
 The evaluator invokes the production fraud engine with public CSV paths only.
 It matches findings to planted schemes one-to-one when the scheme type and at
 least one exact entity ID match. A decoy counts as accused only if its exact
 entity ID appears in a published finding. It writes the official Results-table
-columns and recomputes totals from aggregate counts.
+columns and recomputes totals from aggregate counts. It also writes
+`false_positive_diagnostics.csv` and `false_positive_summary.csv`; use these
+only on tuning fixtures to select targeted exculpatory checks before freezing
+the engine for held-out reporting.
+
+Private fixtures keep every decoy entity disjoint from every planted-scheme
+entity in the same estate. In particular, a normal cancelled-sale decoy is not
+generated when the audited company is also planted with revenue inflation; it
+would otherwise make entity-level false-accusation scoring ambiguous.
 
 ## Deferred backlog
 

@@ -39,6 +39,20 @@ def test_all_five_fixture_has_all_types_paired_decoys_and_resolvable_truth(tmp_p
     )
 
 
+@pytest.mark.parametrize("seed", (42, 43, 99))
+def test_decoy_entities_are_never_planted_fraud_entities(seed: int) -> None:
+    run = build_scenario_run(
+        EstateGeneratorConfig(seed=seed, normal_event_count=30), all_five=True, decoy_count=10
+    )
+
+    scheme_entities = {entity for scenario in run.scenarios for entity in scenario.entities}
+    decoy_entities = [decoy.entity for decoy in run.decoys]
+
+    assert not scheme_entities.intersection(decoy_entities)
+    assert len(decoy_entities) == len(set(decoy_entities))
+    assert "cancelled_revenue" not in {decoy.signal for decoy in run.decoys}
+
+
 def test_company_only_caps_counterparty_schemes_at_probable() -> None:
     config = EstateGeneratorConfig(
         seed=42,

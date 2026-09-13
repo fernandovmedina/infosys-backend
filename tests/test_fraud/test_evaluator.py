@@ -7,7 +7,7 @@ from typing import Any
 import pytest
 
 from evaluation.fraud_evaluator import cli
-from evaluation.fraud_evaluator.scoring import score_submission, total_row
+from evaluation.fraud_evaluator.scoring import false_positive_details, score_submission, total_row
 
 
 def _submission(*findings: dict[str, Any]) -> dict[str, Any]:
@@ -71,6 +71,39 @@ def test_total_recomputes_rates_from_counts() -> None:
     assert total["peso_reconciles"] == "false"
 
 
+def test_false_positive_diagnostics_include_the_decoy_explanation_and_rules() -> None:
+    truth = {
+        "seed": 7,
+        "schemes": [],
+        "decoys": [
+            {
+                "entity": "RFC:DECOY010101AAA",
+                "signal": "legitimate_short_lifecycle",
+                "why_innocent": "The contract and purchase order document the work.",
+            }
+        ],
+    }
+    submission = _submission(
+        {
+            "scheme_type": "phantom_vendor",
+            "entities": ["RFC:DECOY010101AAA"],
+            "peso_amount": 1,
+            "confidence": "probable",
+            "rule_broken": "CFF Artículo 69-B",
+        }
+    )
+
+    details = false_positive_details(
+        truth=truth,
+        submission=submission,
+        signals=[{"entity_id": "DECOY010101AAA", "rule_id": "VENDOR_SHORT_LIFECYCLE"}],
+    )
+
+    assert len(details) == 1
+    assert details[0].why_innocent.startswith("The contract")
+    assert details[0].triggered_rules == "VENDOR_SHORT_LIFECYCLE"
+
+
 def test_tuning_mode_rejects_reserved_heldout_seed(tmp_path: Path) -> None:
     heldout = tmp_path / "heldout.json"
     heldout.write_text(json.dumps({"cases": [{"seed": 9}]}), encoding="utf-8")
@@ -81,6 +114,16 @@ def test_tuning_mode_rejects_reserved_heldout_seed(tmp_path: Path) -> None:
         patch.setattr(cli, "HELDOUT_MANIFEST", heldout)
         with pytest.raises(ValueError, match="reserved"):
             cli._load_tuning(manifest)
+
+
+def test_heldout_evaluation_rejects_a_partial_case_limit(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="only in tuning"):
+        cli.evaluate(mode="heldout", output_root=tmp_path / "result", max_cases=1)
+
+
+def test_heldout_evaluation_rejects_a_tuning_offset(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="only in tuning"):
+        cli.evaluate(mode="heldout", output_root=tmp_path / "result", start_at=1)
 
 
 def test_production_application_does_not_reference_private_evaluator() -> None:

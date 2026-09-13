@@ -21,6 +21,18 @@ RESULT_COLUMNS = (
     "wall_clock_s",
 )
 
+FALSE_POSITIVE_COLUMNS = (
+    "seed",
+    "decoy_entity",
+    "decoy_signal",
+    "why_innocent",
+    "finding_index",
+    "finding_scheme_type",
+    "confidence",
+    "rule_broken",
+    "triggered_rules",
+)
+
 
 @dataclass(frozen=True)
 class ScoreRow:
@@ -44,8 +56,29 @@ class ScoreRow:
         return row
 
 
+@dataclass(frozen=True)
+class FalsePositive:
+    seed: int
+    decoy_entity: str
+    decoy_signal: str
+    why_innocent: str
+    finding_index: int
+    finding_scheme_type: str
+    confidence: str
+    rule_broken: str
+    triggered_rules: str
+
+    def csv_row(self) -> dict[str, str | int]:
+        return asdict(self)
+
+
 def _entities(item: dict[str, Any]) -> set[str]:
     return {str(entity) for entity in item.get("entities", [])}
+
+
+def _entity_aliases(entity: str) -> set[str]:
+    prefix, separator, value = entity.partition(":")
+    return {entity, value, f"{prefix}:{value}"} if separator else {entity}
 
 
 def _matches(scheme: dict[str, Any], finding: dict[str, Any]) -> bool:
@@ -104,6 +137,41 @@ def score_submission(
         mxn_cost=round(float(metadata["mxn_cost"]), 2),
         wall_clock_s=round(float(metadata["wall_clock_seconds"]), 2),
     )
+
+
+def false_positive_details(
+    *, truth: dict[str, Any], submission: dict[str, Any], signals: list[dict[str, Any]]
+) -> list[FalsePositive]:
+    """Return one row for every published finding that names an honest decoy."""
+    by_entity: dict[str, set[str]] = {}
+    for signal in signals:
+        entity_id = signal.get("entity_id")
+        if entity_id is None:
+            continue
+        by_entity.setdefault(str(entity_id), set()).add(str(signal["rule_id"]))
+
+    details: list[FalsePositive] = []
+    for decoy in truth.get("decoys", []):
+        entity = str(decoy["entity"])
+        aliases = _entity_aliases(entity)
+        rules = sorted({rule for alias in aliases for rule in by_entity.get(alias, set())})
+        for index, finding in enumerate(submission.get("findings", []), start=1):
+            if entity not in _entities(finding):
+                continue
+            details.append(
+                FalsePositive(
+                    seed=int(truth["seed"]),
+                    decoy_entity=entity,
+                    decoy_signal=str(decoy["signal"]),
+                    why_innocent=str(decoy["why_innocent"]),
+                    finding_index=index,
+                    finding_scheme_type=str(finding["scheme_type"]),
+                    confidence=str(finding["confidence"]),
+                    rule_broken=str(finding["rule_broken"]),
+                    triggered_rules=", ".join(rules),
+                )
+            )
+    return details
 
 
 def total_row(rows: list[ScoreRow]) -> dict[str, str | int | float]:

@@ -41,6 +41,30 @@ class DatabaseUnavailableError(AppError):
     message = "The database is currently unavailable. Please retry shortly."
 
 
+class EmailAlreadyRegisteredError(AppError):
+    """Registration was attempted with an email already on file."""
+
+    status_code = status.HTTP_409_CONFLICT
+    code = "email_already_registered"
+    message = "An account with this email already exists."
+
+
+class InvalidCredentialsError(AppError):
+    """Login failed: unknown email or wrong password."""
+
+    status_code = status.HTTP_401_UNAUTHORIZED
+    code = "invalid_credentials"
+    message = "Invalid email or password."
+
+
+class NotAuthenticatedError(AppError):
+    """No valid session cookie was present on a request that requires one."""
+
+    status_code = status.HTTP_401_UNAUTHORIZED
+    code = "not_authenticated"
+    message = "You must be signed in to do this."
+
+
 def error_response(
     *, status_code: int, code: str, message: str, details: Any = None
 ) -> JSONResponse:

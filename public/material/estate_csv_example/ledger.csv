@@ -1,0 +1,2 @@
+entry_id,date,account_code,account_name,debit,credit,description,invoice_uuid,cost_center,approver
+1,2026-02-15,5000,Gastos operativos,92800.00,0.00,Registro factura,INV-00001,CC-100 Produccion,A. Ejemplo

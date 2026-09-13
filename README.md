@@ -76,6 +76,28 @@ uv run uvicorn app.main:app --reload    # docs at http://127.0.0.1:8000/docs
 
 ---
 
+## Project structure
+
+The online API and offline estate generator share the repository but keep
+their dependencies separate:
+
+| Path | Responsibility |
+| --- | --- |
+| `app/api/` | FastAPI routes, request dependencies, and HTTP response handling. |
+| `app/auth/` | Authentication entities, business rules, security, and persistence. |
+| `app/sat/` | SAT input normalization, blacklist search, and CSV importing. |
+| `app/core/` | Runtime configuration and database lifecycle. |
+| `app/estate_generator/` | Public, deterministic, offline estate generation. |
+| `evaluation/` | Private scenario generation and evaluation harnesses. |
+| `database/` | PostgreSQL schema and migrations. |
+| `tests/` | Unit, contract, and optional PostgreSQL integration tests. |
+
+Route modules translate HTTP input and output; services own business behavior;
+repositories are the only feature modules that issue database queries. This
+keeps transport models and raw database records out of the service layer.
+
+---
+
 ## The endpoint
 
 ### `POST /api/v1/sat/blacklist/check`

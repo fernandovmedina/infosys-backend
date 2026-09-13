@@ -11,14 +11,13 @@ import datetime as dt
 import asyncpg
 
 from app.auth import repository
-from app.auth.schemas import UserPublic, normalize_email
+from app.auth.entities import IssuedSession, User
 from app.auth.security import (
     generate_session_token,
     hash_password,
     hash_session_token,
     verify_password,
 )
-from app.core.config import get_settings
 from app.core.errors import (
     EmailAlreadyRegisteredError,
     InvalidCredentialsError,
@@ -26,17 +25,14 @@ from app.core.errors import (
 )
 
 
-def _to_user_public(row: dict[str, object]) -> UserPublic:
-    return UserPublic(
-        id=row["id"],  # type: ignore[arg-type]
-        name=row["name"],  # type: ignore[arg-type]
-        email=row["email"],  # type: ignore[arg-type]
-    )
+def _normalize_email(email: str) -> str:
+    """Case-fold and trim an email so lookups do not depend on its presentation."""
+    return email.strip().lower()
 
 
-async def register(pool: asyncpg.Pool, *, name: str, email: str, password: str) -> UserPublic:
+async def register(pool: asyncpg.Pool, *, name: str, email: str, password: str) -> User:
     """Create the account. No email verification: the account is usable right away."""
-    email_normalized = normalize_email(email)
+    email_normalized = _normalize_email(email)
     password_hash = hash_password(password)
 
     async with pool.acquire() as conn:
@@ -51,35 +47,36 @@ async def register(pool: asyncpg.Pool, *, name: str, email: str, password: str) 
         except asyncpg.UniqueViolationError as exc:
             raise EmailAlreadyRegisteredError() from exc
 
-    return _to_user_public(user)
+    return user
 
 
-async def login(pool: asyncpg.Pool, *, email: str, password: str) -> UserPublic:
-    email_normalized = normalize_email(email)
+async def login(pool: asyncpg.Pool, *, email: str, password: str) -> User:
+    email_normalized = _normalize_email(email)
 
     async with pool.acquire() as conn:
         user = await repository.get_user_by_email(conn, email_normalized=email_normalized)
-        if user is None or not verify_password(password, user["password_hash"]):
+        if user is None or not verify_password(password, user.password_hash):
             raise InvalidCredentialsError()
 
-        return _to_user_public(user)
+        return User(id=user.id, name=user.name, email=user.email)
 
 
-async def create_session(pool: asyncpg.Pool, *, user_id: int) -> tuple[str, dt.datetime]:
-    """Issue a new session token and return it (plaintext) with its expiry."""
-    settings = get_settings()
+async def create_session(
+    pool: asyncpg.Pool, *, user_id: int, ttl: dt.timedelta
+) -> IssuedSession:
+    """Issue a new session token with an explicitly supplied lifetime."""
     token = generate_session_token()
-    expires_at = dt.datetime.now(dt.UTC) + dt.timedelta(days=settings.auth_session_ttl_days)
+    expires_at = dt.datetime.now(dt.UTC) + ttl
 
     async with pool.acquire() as conn:
         await repository.create_session(
             conn, user_id=user_id, token_hash=hash_session_token(token), expires_at=expires_at
         )
 
-    return token, expires_at
+    return IssuedSession(token=token, expires_at=expires_at)
 
 
-async def get_current_user(pool: asyncpg.Pool, *, session_token: str | None) -> UserPublic:
+async def get_current_user(pool: asyncpg.Pool, *, session_token: str | None) -> User:
     if not session_token:
         raise NotAuthenticatedError()
 
@@ -89,7 +86,7 @@ async def get_current_user(pool: asyncpg.Pool, *, session_token: str | None) -> 
     if row is None:
         raise NotAuthenticatedError()
 
-    return _to_user_public(row)
+    return row
 
 
 async def logout(pool: asyncpg.Pool, *, session_token: str | None) -> None:

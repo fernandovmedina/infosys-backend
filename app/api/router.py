@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from fastapi import APIRouter
 
-from app.api.v1 import auth, fraud, runs
+from app.api.v1 import auth, casefile, fraud, runs
 
 api_router = APIRouter(prefix="/api/v1")
 api_router.include_router(auth.router)
 api_router.include_router(runs.router)
+api_router.include_router(casefile.router)
 api_router.include_router(fraud.router)

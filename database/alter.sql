@@ -239,3 +239,37 @@ COMMENT ON TABLE fraud_signal IS
 -- Drill-down: signals of one rule, or about one entity, within a run.
 CREATE INDEX IF NOT EXISTS fraud_signal_run_id_rule_id_idx ON fraud_signal (run_id, rule_id);
 CREATE INDEX IF NOT EXISTS fraud_signal_run_id_entity_id_idx ON fraud_signal (run_id, entity_id);
+
+
+-- 2026-09-13 — Investigation log (TASK #4). Every step of a run -- dataset load,
+-- each detector's result, findings, declined leads, validation, the outcome --
+-- is one ordered event. The frontend replays it as the live progress feed
+-- (SSE, resumable by `seq`), the full log and the "why?" search. A retry
+-- clears the previous attempt's events, so `seq` restarts at 1.
+CREATE TABLE IF NOT EXISTS run_event (
+    run_id   text        NOT NULL REFERENCES investigation_run (id) ON DELETE CASCADE,
+    seq      integer     NOT NULL,
+    ts       timestamptz NOT NULL DEFAULT now(),
+    type     text        NOT NULL,
+    role     text        NOT NULL,
+    -- The rest of the event (message, detail, result, entities, counters, error...).
+    payload  jsonb       NOT NULL,
+
+    PRIMARY KEY (run_id, seq),
+    CONSTRAINT run_event_type_check CHECK (type IN (
+        'step', 'detector_result', 'finding_draft', 'challenge', 'validation',
+        'lead_closed', 'warning', 'completed', 'failed'
+    )),
+    CONSTRAINT run_event_role_check CHECK (role IN (
+        'system', 'detector', 'investigator', 'challenger', 'validator'
+    ))
+);
+
+COMMENT ON TABLE run_event IS
+    'Ordered investigation log of a run: live progress (SSE), full log and search.';
+
+-- 2026-09-13 — The audited company of a completed run (TASK #4), identified the
+-- way the engine does it, so the run history can name it without reloading the
+-- dataset.
+ALTER TABLE investigation_run ADD COLUMN IF NOT EXISTS company_rfc text;
+ALTER TABLE investigation_run ADD COLUMN IF NOT EXISTS company_name text;

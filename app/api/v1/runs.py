@@ -4,7 +4,19 @@ from __future__ import annotations
 
 from typing import Annotated
 
-from fastapi import APIRouter, BackgroundTasks, Body, Depends, File, Response, UploadFile, status
+from fastapi import (
+    APIRouter,
+    BackgroundTasks,
+    Body,
+    Depends,
+    File,
+    Header,
+    Query,
+    Response,
+    UploadFile,
+    status,
+)
+from fastapi.responses import StreamingResponse
 
 from app.api.dependencies import CurrentUserDependency, PoolDependency
 from app.core.config import Settings, get_settings
@@ -13,8 +25,10 @@ from app.fraud.schemas import FraudAnalysis, StartRunRequest
 from app.runs import service
 from app.runs.ingest import UploadedFile
 from app.runs.schemas import (
+    AgentRole,
     CreateRunResponse,
     DeleteRunsResponse,
+    RunEvent,
     RunState,
     RunSummary,
     ValidationResult,
@@ -114,14 +128,59 @@ async def start_run(
 ) -> RunState:
     """Move the run to `running` and audit its dataset with the fraud engine.
 
-    Returns immediately; poll `GET /runs/{run_id}` until the status is
-    `completed` (read `GET /runs/{run_id}/result`) or `failed` (see `error`).
-    A failed run can be started again.
+    Returns immediately. Follow the investigation with `GET /runs/{run_id}/events`
+    (Server-Sent Events) or poll `GET /runs/{run_id}`; once `completed`, read the
+    case file from `GET /runs/{run_id}/report`. A failed run can be started again,
+    which clears its previous log.
     """
     state = await service.start_run(pool, run_id=run_id, user_id=user.id)
     seed = payload.seed if payload else 0
     background_tasks.add_task(service.execute_run, pool, run_id=run_id, seed=seed)
     return state
+
+
+@router.get(
+    "/{run_id}/log",
+    response_model=list[RunEvent],
+    summary="The run's investigation log, oldest first",
+)
+async def get_log(
+    run_id: str,
+    pool: Pool,
+    user: CurrentUser,
+    role: Annotated[AgentRole | None, Query()] = None,
+    entity: Annotated[str | None, Query(description="Prefixed entity id, e.g. RFC:...")] = None,
+) -> list[RunEvent]:
+    return await service.get_log(pool, run_id=run_id, user_id=user.id, role=role, entity=entity)
+
+
+@router.get(
+    "/{run_id}/events",
+    response_class=StreamingResponse,
+    summary="Live investigation events (Server-Sent Events)",
+    responses={200: {"content": {"text/event-stream": {}}}},
+)
+async def stream_events(
+    run_id: str,
+    pool: Pool,
+    user: CurrentUser,
+    last_event_id: Annotated[int | None, Query(ge=0)] = None,
+    last_event_id_header: Annotated[int | None, Header(alias="Last-Event-ID", ge=0)] = None,
+) -> StreamingResponse:
+    """Each frame is `id: <seq>`, `event: <type>` and `data: <RunEvent JSON>`.
+
+    Resumes after `Last-Event-ID` (sent by the browser on reconnect) or the
+    `last_event_id` query parameter, and closes after `completed` or `failed`.
+    """
+    last_seq = last_event_id_header if last_event_id_header is not None else last_event_id or 0
+    frames = await service.open_event_stream(
+        pool, run_id=run_id, user_id=user.id, last_seq=last_seq
+    )
+    return StreamingResponse(
+        frames,
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
 
 
 @router.get(

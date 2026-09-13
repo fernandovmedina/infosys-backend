@@ -116,6 +116,22 @@ class RunResultNotAvailableError(AppError):
     message = "La corrida todavía no tiene resultados de la investigación."
 
 
+class RecordNotFoundError(AppError):
+    """The run's dataset has no record with that table and id."""
+
+    status_code = status.HTTP_404_NOT_FOUND
+    code = "record_not_found"
+    message = "No encontramos ese registro en el dataset de la corrida."
+
+
+class EntityNotFoundError(AppError):
+    """The run's case file has no entity with that id."""
+
+    status_code = status.HTTP_404_NOT_FOUND
+    code = "entity_not_found"
+    message = "No encontramos esa entidad en la corrida."
+
+
 class FraudDatasetInvalidError(AppError):
     """The estate CSVs sent to the fraud engine do not match the estate schema.
 
